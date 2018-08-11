@@ -7,4 +7,9 @@ import android.app.Application;
  */
 
 public class MeAcodeMobileApplication extends Application {
+    private static final String URL = "https://5b6df97bd8f3430014e79762.mockapi.io/api/";
+
+    private void createServices(){
+
+    }
 }
