@@ -5,4 +5,11 @@ package br.com.meacodeapp.meacodemobile.model;
  */
 
 public class Content {
+    private int id;
+    private String title;
+    private String text;
+    private User user;
+    private Category category;
+    private String created_at;
+    private String updated_at;
 }
