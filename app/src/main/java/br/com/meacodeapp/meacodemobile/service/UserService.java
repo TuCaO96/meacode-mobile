@@ -1,5 +1,9 @@
 package br.com.meacodeapp.meacodemobile.service;
 
+import java.util.List;
+
+import br.com.meacodeapp.meacodemobile.model.User;
+import retrofit2.Call;
 import retrofit2.http.GET;
 
 /**
@@ -8,5 +12,6 @@ import retrofit2.http.GET;
 
 public interface UserService {
     @GET("users")
+    Call<List<User>> getUsers();
 
 }
