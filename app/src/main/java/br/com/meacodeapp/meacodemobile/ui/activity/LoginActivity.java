@@ -1,8 +1,15 @@
 package br.com.meacodeapp.meacodemobile.ui.activity;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.EditText;
+
+import com.facebook.CallbackManager;
+import com.facebook.FacebookCallback;
+import com.facebook.FacebookException;
+import com.facebook.login.LoginResult;
+import com.facebook.login.widget.LoginButton;
 
 import java.util.List;
 import br.com.meacodeapp.meacodemobile.R;
@@ -17,6 +24,8 @@ import retrofit2.Response;
 
 public class LoginActivity extends AppCompatActivity {
 
+    @BindView(R.id.facebook_sign_in_button)
+    LoginButton loginButton;
 
     @BindView(R.id.email)
     EditText email;
@@ -24,11 +33,32 @@ public class LoginActivity extends AppCompatActivity {
     @BindView(R.id.password)
     EditText password;
 
+    CallbackManager callbackManager;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         ButterKnife.bind(this);
+        callbackManager = CallbackManager.Factory.create();
+        loginButton.setReadPermissions("email");
+        // Callback registration
+        loginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
+            @Override
+            public void onSuccess(LoginResult loginResult) {
+                // App code
+            }
+
+            @Override
+            public void onCancel() {
+                // App code
+            }
+
+            @Override
+            public void onError(FacebookException exception) {
+                // App code
+            }
+        });
     }
 
     @OnClick(R.id.email_sign_in_button)
@@ -41,7 +71,7 @@ public class LoginActivity extends AppCompatActivity {
             .enqueue(new Callback<RestParameters>() {
                 @Override
                 public void onResponse(Call<RestParameters> call, Response<RestParameters> response) {
-                    if(response.code() == 200){
+                    if(response.code() == 201){
 
                     }
                 }
@@ -51,5 +81,10 @@ public class LoginActivity extends AppCompatActivity {
 
                 }
             });
+    }
+
+    @OnClick(R.id.facebook_sign_in_button)
+    public void facebookLogin(){
+
     }
 }
