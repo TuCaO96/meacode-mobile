@@ -61,7 +61,11 @@ public class RestService {
             }
         };
 
-        Gson gson = new GsonBuilder().setLenient().create();
+        Gson gson = new GsonBuilder()
+                .setLenient()
+                .registerTypeAdapter(RestParameters.class, serializer)
+                .registerTypeAdapter(RestParameters.class, deserializer)
+                .create();
 
         OkHttpClient.Builder okHttpClient = new OkHttpClient.Builder();
         HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
@@ -71,8 +75,7 @@ public class RestService {
         adapter = new Retrofit.Builder().
                 baseUrl(endPoint).
                 addConverterFactory(GsonConverterFactory.create(gson)).
-                addConverterFactory(ScalarsConverterFactory.create()).
-                client(okHttpClient.build()).
+                addConverterFactory(ScalarsConverterFactory.create()).client(okHttpClient.build()).
                 build();
 
     }

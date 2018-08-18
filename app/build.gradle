@@ -27,7 +27,7 @@ dependencies {
     implementation 'com.android.support:support-v4:26.0.0-alpha3'
 
     implementation 'com.afollestad.material-dialogs:core:0.9.6.0'
-    implementation 'com.android.support:design:26.1.0'
+    implementation 'com.android.support:design:27.1.0'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.7.1'
 
     implementation 'com.jakewharton:butterknife:8.8.1'

@@ -9,6 +9,7 @@ import br.com.meacodeapp.meacodemobile.R;
 import br.com.meacodeapp.meacodemobile.app.MeAcodeMobileApplication;
 import br.com.meacodeapp.meacodemobile.util.RestParameters;
 import butterknife.BindView;
+import butterknife.ButterKnife;
 import butterknife.OnClick;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -27,10 +28,11 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        ButterKnife.bind(this);
     }
 
     @OnClick(R.id.email_sign_in_button)
-    private void emailLogin(){
+    public void emailLogin(){
         RestParameters parameters = new RestParameters();
         parameters.setProperty("email", email.getText().toString());
         parameters.setProperty("password", password.getText().toString());
