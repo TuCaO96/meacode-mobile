@@ -1,10 +1,13 @@
 package br.com.meacodeapp.meacodemobile.ui.activity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.EditText;
 
+import com.afollestad.materialdialogs.MaterialDialog;
 import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
@@ -15,6 +18,13 @@ import com.facebook.GraphResponse;
 import com.facebook.appevents.AppEventsLogger;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.common.SignInButton;
+import com.google.android.gms.common.api.ApiException;
+import com.google.android.gms.tasks.Task;
 import com.google.gson.Gson;
 
 import org.json.JSONException;
@@ -36,6 +46,7 @@ public class LoginActivity extends AppCompatActivity {
     @BindView(R.id.facebook_sign_in_button)
     LoginButton loginButton;
 
+    private GoogleSignInClient mGoogleSignInClient;
     private AccessToken mAccessToken;
     private CallbackManager callbackManager = CallbackManager.Factory.create();
 
@@ -52,6 +63,22 @@ public class LoginActivity extends AppCompatActivity {
         ButterKnife.bind(this);
         FacebookSdk.sdkInitialize(getApplicationContext());
         AppEventsLogger.activateApp(this);
+
+        // Configure sign-in to request the user's ID, email address, and basic
+        // profile. ID and basic profile are included in DEFAULT_SIGN_IN.
+        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestEmail()
+                .build();
+
+        // Build a GoogleSignInClient with the options specified by gso.
+        mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
+        // Check for existing Google Sign In account, if the user is already signed in
+        // the GoogleSignInAccount will be non-null.
+        GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this);
+
+        // Set the dimensions of the sign-in button.
+        SignInButton signInButton = findViewById(R.id.google_sign_in_button);
+        signInButton.setSize(SignInButton.SIZE_STANDARD);
 
         loginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
             @Override
@@ -71,11 +98,21 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void getUserProfile(AccessToken currentAccessToken) {
+        final Context context = this;
         GraphRequest request = GraphRequest.newMeRequest(
                 currentAccessToken,
                 new GraphRequest.GraphJSONObjectCallback() {
                     @Override
                     public void onCompleted(JSONObject object, GraphResponse response) {
+                        try{
+                            String result = object.getString("id").toString();
+                            new MaterialDialog.Builder(context).title("Result")
+                                    .content(result).show();
+                        }
+                        catch (JSONException e){
+                            new MaterialDialog.Builder(context).title("Error")
+                                    .content(e.getMessage()).show();
+                        }
                         /*try {
                             Gson gson = new Gson();
                             object.getJSONObject(“picture”).
@@ -97,6 +134,20 @@ public class LoginActivity extends AppCompatActivity {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         callbackManager.onActivityResult(requestCode, resultCode,  data);
+
+        // Result returned from launching the Intent from GoogleSignInClient.getSignInIntent(...);
+        if(requestCode == 9001){
+            // The Task returned from this call is always completed, no need to attach
+            // a listener.
+            Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
+            handleSignInResult(task);
+        }
+    }
+
+    @OnClick(R.id.google_sign_in_button)
+    public void googleLogin(){
+        Intent signInIntent = mGoogleSignInClient.getSignInIntent();
+        startActivityForResult(signInIntent, 9001);
     }
 
     @OnClick(R.id.email_sign_in_button)
@@ -124,5 +175,18 @@ public class LoginActivity extends AppCompatActivity {
     @OnClick(R.id.facebook_sign_in_button)
     public void facebookLogin(){
 
+    }
+
+    private void handleSignInResult(Task<GoogleSignInAccount> completedTask) {
+        try {
+            GoogleSignInAccount account = completedTask.getResult(ApiException.class);
+            new MaterialDialog.Builder(this).title("Result").content(account.getEmail()).show();
+            // Signed in successfully, show authenticated UI.
+//            updateUI(account);
+        } catch (ApiException e) {
+            // The ApiException status code indicates the detailed failure reason.
+            // Please refer to the GoogleSignInStatusCodes class reference for more information.
+//            updateUI(null);
+        }
     }
 }
