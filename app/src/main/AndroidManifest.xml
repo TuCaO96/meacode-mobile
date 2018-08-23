@@ -36,7 +36,8 @@
 
         <activity
             android:name=".ui.activity.LoginActivity"
-            android:label="@string/title_activity_login">
+            android:label="@string/title_activity_login"
+            android:theme="@style/MeAcodeTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -45,7 +46,7 @@
         <activity
             android:name=".ui.activity.MainActivity"
             android:label="@string/title_activity_main"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/MeAcodeTheme" />
     </application>
 
 </manifest>
