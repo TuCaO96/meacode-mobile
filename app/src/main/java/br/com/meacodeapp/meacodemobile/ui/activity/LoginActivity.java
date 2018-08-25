@@ -2,13 +2,21 @@ package br.com.meacodeapp.meacodemobile.ui.activity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.util.TypedValue;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.facebook.AccessToken;
@@ -34,8 +42,11 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.List;
+import java.util.zip.Inflater;
+
 import br.com.meacodeapp.meacodemobile.R;
 import br.com.meacodeapp.meacodemobile.app.MeAcodeMobileApplication;
+import br.com.meacodeapp.meacodemobile.model.User;
 import br.com.meacodeapp.meacodemobile.util.RestParameters;
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -46,13 +57,11 @@ import retrofit2.Response;
 
 public class LoginActivity extends AppCompatActivity {
 
+    @BindView(R.id.tlbr_login_title)
+    TextView loginTitle;
+
     @BindView(R.id.facebook_sign_in_button)
     LoginButton loginButton;
-
-    private GoogleSignInClient mGoogleSignInClient;
-    private AccessToken mAccessToken;
-    private Toolbar toolbar;
-    private CallbackManager callbackManager = CallbackManager.Factory.create();
 
     @BindView(R.id.email)
     EditText email;
@@ -60,19 +69,77 @@ public class LoginActivity extends AppCompatActivity {
     @BindView(R.id.password)
     EditText password;
 
+    @BindView(R.id.email_sign_in_button)
+    Button emailSignInButton;
+
+    @BindView(R.id.google_sign_in_button)
+    SignInButton googleSignInButton;
+
+    @BindView(R.id.email_sign_up_button)
+    Button emailSignUpButton;
+
+    @BindView(R.id.email_forgot_button)
+    Button forgotButton;
+
+    private final Context context = this;
+
+    private GoogleSignInClient mGoogleSignInClient;
+    private AccessToken mAccessToken;
+    private Toolbar toolbar;
+    private CallbackManager callbackManager = CallbackManager.Factory.create();
+    private ActionBar ab;
+    private TextView tv;
+    private int actionBarTextSize = 24;
+    private int textViewTextSize = 21;
+
+
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-
         switch (item.getItemId()){
             case R.id.tlbr_zoom_in:
+                actionBarTextSize++;
+                textViewTextSize++;
+                setActionBarTextSizeSp(actionBarTextSize);
+                setTextViewTextSize(textViewTextSize);
                 return true;
             case R.id.tlbr_zoom_out:
+                actionBarTextSize--;
+                textViewTextSize--;
+                setActionBarTextSizeSp(actionBarTextSize);
+                setTextViewTextSize(textViewTextSize);
                 return true;
             case R.id.action_settings:
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    protected void setActionBarTextSizeSp(int size){
+        getSupportActionBar().setDisplayShowCustomEnabled(true);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
+
+        LayoutInflater inflator = LayoutInflater.from(this);
+        View v = inflator.inflate(R.layout.activity_login, null);
+
+        //if you need to customize anything else about the text, do it here.
+        //I'm using a custom TextView with a custom font in my layout xml so all I need to do is set title
+        ((TextView) v.findViewById(R.id.tlbr_login_title)).setText(this.getTitle());
+        ((TextView) v.findViewById(R.id.tlbr_login_title)).setTextSize(size);
+
+
+        //assign the view to the actionbar
+        this.getSupportActionBar().setCustomView(v);
+    }
+    protected void setTextViewTextSize(int size){
+        email.setTextSize(size);
+        password.setTextSize(size);
+        loginButton.setTextSize(size);
+        emailSignInButton.setTextSize(size);
+        emailSignUpButton.setTextSize(size);
+        forgotButton.setTextSize(size);
+//        googleSignInButton.setSize(size);
     }
 
     @Override
@@ -83,6 +150,11 @@ public class LoginActivity extends AppCompatActivity {
 
         toolbar = (Toolbar) findViewById(R.id.tlbr_login);
         setSupportActionBar(toolbar);
+
+        getSupportActionBar().setTitle("Test");
+
+        setActionBarTextSizeSp(actionBarTextSize);
+        setTextViewTextSize(textViewTextSize);
 
         FacebookSdk.sdkInitialize(getApplicationContext());
         AppEventsLogger.activateApp(this);
@@ -126,6 +198,57 @@ public class LoginActivity extends AppCompatActivity {
         return true;
     }
 
+    @OnClick(R.id.email_forgot_button)
+    public void forgotPassword(){
+        RestParameters parameters = new RestParameters();
+        parameters.setProperty("email", email.getText().toString());
+
+        MeAcodeMobileApplication.getInstance().getAuthService().postForgotPassword(parameters)
+                .enqueue(new Callback<User>() {
+                    @Override
+                    public void onResponse(Call<User> call, Response<User> response) {
+                        if(response.code() == 201){
+                            new MaterialDialog.Builder(context)
+                                    .title("Um email foi enviado à você")
+                                    .content("Abra o link do email para redefinir sua senha.").show();
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<User> call, Throwable t) {
+                        new MaterialDialog.Builder(context)
+                                .title("Erro")
+                                .content("Ocorreu um erro ao criar conta. Por favor, verifique" +
+                                        "se o email e senha são válidos.").show();
+                    }
+                });
+    }
+
+    @OnClick(R.id.email_sign_up_button)
+    public void signUp(){
+        RestParameters parameters = new RestParameters();
+        final Context context = getBaseContext();
+        parameters.setProperty("email", email.getText().toString());
+        parameters.setProperty("password", password.getText().toString());
+        MeAcodeMobileApplication.getInstance().getAuthService().postSignUp(parameters)
+                .enqueue(new Callback<User>() {
+                    @Override
+                    public void onResponse(Call<User> call, Response<User> response) {
+                        if (response.code() == 201){
+
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<User> call, Throwable t) {
+                        new MaterialDialog.Builder(context)
+                                .title("Erro")
+                                .content("Ocorreu um erro ao criar conta. Por favor, verifique" +
+                                        "se o email e senha são válidos.").show();
+                    }
+                });
+    }
+
     private void getUserProfile(AccessToken currentAccessToken) {
         final Context context = this;
         GraphRequest request = GraphRequest.newMeRequest(
@@ -134,9 +257,9 @@ public class LoginActivity extends AppCompatActivity {
                     @Override
                     public void onCompleted(JSONObject object, GraphResponse response) {
                         try{
-                            String result = object.getString("id").toString();
+                            String facebook_id = object.getString("id");
                             new MaterialDialog.Builder(context).title("Result")
-                                    .content(result).show();
+                                    .content(facebook_id).show();
                         }
                         catch (JSONException e){
                             new MaterialDialog.Builder(context).title("Error")
@@ -190,13 +313,18 @@ public class LoginActivity extends AppCompatActivity {
                 @Override
                 public void onResponse(Call<RestParameters> call, Response<RestParameters> response) {
                     if(response.code() == 201){
-
+                        Intent intent = new Intent(context, MainActivity.class);
+                        startActivity(intent);
+                        finish();
                     }
                 }
 
                 @Override
                 public void onFailure(Call<RestParameters> call, Throwable t) {
-
+                    new MaterialDialog.Builder(context)
+                            .title("Erro")
+                            .content("Ocorreu um erro ao autenticar sua conta. Por favor, verifique" +
+                                    "se o email e senha são válidos.").show();
                 }
             });
     }
