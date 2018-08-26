@@ -8,14 +8,14 @@ import android.view.ViewGroup;
 
 import br.com.meacodeapp.meacodemobile.R;
 
-public class SettingskFragment extends Fragment {
+public class SettingsFragment extends Fragment {
 
-    public SettingskFragment() {
+    public SettingsFragment() {
         // Required empty public constructor
     }
 
-    public static SettingskFragment newInstance() {
-        SettingskFragment fragment = new SettingskFragment();
+    public static SettingsFragment newInstance() {
+        SettingsFragment fragment = new SettingsFragment();
         return fragment;
     }
 
@@ -28,6 +28,6 @@ public class SettingskFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_settingsk, container, false);
+        return inflater.inflate(R.layout.fragment_settings, container, false);
     }
 }
