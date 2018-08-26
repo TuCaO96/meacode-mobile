@@ -13,6 +13,10 @@ import android.view.MenuItem;
 
 import br.com.meacodeapp.meacodemobile.R;
 import br.com.meacodeapp.meacodemobile.ui.fragment.HomeFragment;
+import br.com.meacodeapp.meacodemobile.ui.fragment.MyCoursesFragment;
+import br.com.meacodeapp.meacodemobile.ui.fragment.ProfileFragment;
+import br.com.meacodeapp.meacodemobile.ui.fragment.SearchFragment;
+import br.com.meacodeapp.meacodemobile.ui.fragment.SettingsFragment;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
@@ -31,16 +35,16 @@ public class MainActivity extends AppCompatActivity {
                     setFragment(HomeFragment.newInstance());
                     return true;
                 case R.id.navigation_search:
-                    setFragment(HomeFragment.newInstance());
+                    setFragment(SearchFragment.newInstance());
                     return true;
                 case R.id.navigation_my_courses:
-                    setFragment(HomeFragment.newInstance());
+                    setFragment(MyCoursesFragment.newInstance());
                     return true;
                 case R.id.navigation_my_profile:
-                    setFragment(HomeFragment.newInstance());
+                    setFragment(ProfileFragment.newInstance());
                     return true;
                 case R.id.navigation_settings:
-                    setFragment(HomeFragment.newInstance());
+                    setFragment(SettingsFragment.newInstance());
                     return true;
             }
             return false;

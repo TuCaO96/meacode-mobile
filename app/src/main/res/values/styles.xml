@@ -40,6 +40,16 @@
         <item name="itemIconTint">@color/colorText</item>
     </style>
 
+    <style name="MeAcodeTheme.ListItemTitle">
+        <item name="android:textColor">@color/colorPrimaryDark</item>
+        <item name="android:textSize">24sp</item>
+    </style>
+
+    <style name="MeAcodeTheme.ListItemDescription">
+        <item name="android:textColor">#000</item>
+        <item name="android:textSize">21sp</item>
+    </style>
+
     <style name="MeAcodeTheme.AppBarFontStyle" parent="MeAcodeTheme">
         <item name="android:textSize">21sp</item>
     </style>
