@@ -12,4 +12,20 @@ public class Attach {
     private String mime_type;
     private String created_at;
     private String updated_at;
+
+    public String getPath() {
+        return path;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getMime_type() {
+        return mime_type;
+    }
 }
