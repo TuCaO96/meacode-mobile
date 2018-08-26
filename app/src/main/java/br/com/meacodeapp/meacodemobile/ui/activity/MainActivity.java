@@ -1,33 +1,58 @@
 package br.com.meacodeapp.meacodemobile.ui.activity;
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.View;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 
 import br.com.meacodeapp.meacodemobile.R;
-import br.com.meacodeapp.meacodemobile.ui.fragment.MainActivityFragment;
+import br.com.meacodeapp.meacodemobile.ui.fragment.HomeFragment;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class MainActivity extends AppCompatActivity {
 
-    @BindView(R.id.main_bottom_navigation)
+    @BindView(R.id.main_navigation)
     BottomNavigationView bottomNavigationView;
+
+    private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
+            = new BottomNavigationView.OnNavigationItemSelectedListener() {
+
+        @Override
+        public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+            switch (item.getItemId()) {
+                case R.id.navigation_home:
+                    setFragment(HomeFragment.newInstance());
+                    return true;
+                case R.id.navigation_search:
+                    setFragment(HomeFragment.newInstance());
+                    return true;
+                case R.id.navigation_my_courses:
+                    setFragment(HomeFragment.newInstance());
+                    return true;
+                case R.id.navigation_my_profile:
+                    setFragment(HomeFragment.newInstance());
+                    return true;
+                case R.id.navigation_settings:
+                    setFragment(HomeFragment.newInstance());
+                    return true;
+            }
+            return false;
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+        setFragment(HomeFragment.newInstance());
         ButterKnife.bind(this);
-        setFragment(MainActivityFragment.newInstance());
     }
 
     public void setFragment(Fragment fragment){

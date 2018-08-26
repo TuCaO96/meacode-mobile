@@ -23,4 +23,12 @@
     <string name="action_zoom_in">Zoom In</string>
     <string name="action_zoom_out">Zoom Out</string>
     <string name="action_logout">Sair</string>
+    <string name="title_activity_detail">DetailActivity</string>
+    <string name="title_home">Início</string>
+    <string name="title_search">Procurar</string>
+    <string name="title_my_courses">Meus Cursos</string>
+    <string name="title_my_profile">Meu Perfil</string>
+    <string name="title_settings">Configurações</string>
+    <string name="title_new_content">Sugerir Conteúdo</string>
+    <string name="title_more">Mais</string>
 </resources>

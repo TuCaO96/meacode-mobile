@@ -6,34 +6,18 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.activity.MainActivity">
-
-    <android.support.design.widget.AppBarLayout
-            android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:theme="@style/AppTheme.AppBarOverlay">
-
-        <android.support.v7.widget.Toolbar
-            android:id="@+id/toolbar"
+        <android.support.design.widget.BottomNavigationView
+            android:id="@+id/main_navigation"
+            app:menu="@menu/menu_main"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:popupTheme="@style/AppTheme.PopupOverlay" />
+            android:layout_gravity="start|top"
+            style="@style/MeAcodeTheme.BottomNavigation"
+            />
 
-    </android.support.design.widget.AppBarLayout>
-
-    <FrameLayout
-        android:id="@+id/main_frame_layout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-    </FrameLayout>
-
-    <android.support.design.widget.BottomNavigationView
-        android:id="@+id/main_bottom_navigation"
-        app:menu="@menu/menu_main"
-        android:background="@color/colorPrimaryDark"
-        android:layout_gravity="bottom|end"
-        app:itemTextColor="@android:color/white"
-        app:itemIconTint="@android:color/white"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
-
+        <FrameLayout
+            android:id="@+id/main_frame_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+        </FrameLayout>
 </LinearLayout>

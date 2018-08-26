@@ -2,16 +2,34 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="br.com.meacodeapp.meacodemobile.ui.activity.MainActivity">
-    <item android:id="@+id/tlbr_zoom_in"
+    <item android:id="@+id/navigation_home"
         android:orderInCategory="100"
-        android:title="@string/action_zoom_in"
-        android:icon="@drawable/ic_zoom_in_white_24dp"
-        app:showAsAction="ifRoom"
+        android:title="@string/title_home"
+        android:icon="@drawable/ic_home_white_24dp"
+        app:showAsAction="always"
         />
-    <item android:id="@+id/tlbr_zoom_out"
+    <item android:id="@+id/navigation_search"
         android:orderInCategory="200"
-        android:title="@string/action_zoom_out"
-        android:icon="@drawable/ic_zoom_out_white_24dp"
-        app:showAsAction="ifRoom"
+        android:title="@string/title_search"
+        android:icon="@drawable/ic_search_white_24dp"
+        app:showAsAction="always"
+        />
+    <item android:id="@+id/navigation_my_courses"
+        android:orderInCategory="200"
+        android:title="@string/title_my_courses"
+        android:icon="@drawable/ic_list_white_24dp"
+        app:showAsAction="always"
+        />
+    <item android:id="@+id/navigation_my_profile"
+        android:orderInCategory="300"
+        android:title="@string/title_my_profile"
+        android:icon="@drawable/ic_account_circle_white_24dp"
+        app:showAsAction="always"
+        />
+    <item android:id="@+id/navigation_settings"
+        android:orderInCategory="400"
+        android:title="@string/title_settings"
+        android:icon="@drawable/ic_settings_white_24dp"
+        app:showAsAction="always"
         />
 </menu>

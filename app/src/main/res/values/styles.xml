@@ -34,6 +34,12 @@
         <item name="android:textColor">#FFFFFF</item>
     </style>
 
+    <style name="MeAcodeTheme.BottomNavigation" parent="AppTheme" >
+        <item name="android:background">@color/colorPrimary</item>
+        <item name="itemTextColor">@color/colorText</item>
+        <item name="itemIconTint">@color/colorText</item>
+    </style>
+
     <style name="MeAcodeTheme.AppBarFontStyle" parent="MeAcodeTheme">
         <item name="android:textSize">21sp</item>
     </style>

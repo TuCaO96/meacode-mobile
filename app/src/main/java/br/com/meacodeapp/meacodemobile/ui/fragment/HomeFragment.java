@@ -12,15 +12,15 @@ import butterknife.ButterKnife;
 /**
  * A placeholder fragment containing a simple view.
  */
-public class MainActivityFragment extends Fragment {
+public class HomeFragment extends Fragment {
 
-    public MainActivityFragment() {
+    public HomeFragment() {
     }
 
-    public static MainActivityFragment newInstance() {
+    public static HomeFragment newInstance() {
         Bundle args = new Bundle();
 
-        MainActivityFragment fragment = new MainActivityFragment();
+        HomeFragment fragment = new HomeFragment();
         fragment.setArguments(args);
         return fragment;
     }
@@ -28,7 +28,7 @@ public class MainActivityFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.content_main, container, false);
+        View view = inflater.inflate(R.layout.content_home, container, false);
         ButterKnife.bind(this, view);
 
         return view;
