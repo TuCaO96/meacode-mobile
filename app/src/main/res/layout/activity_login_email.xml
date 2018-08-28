@@ -8,7 +8,7 @@
     android:theme="@style/MeAcodeTheme"
     android:gravity="center_horizontal"
     android:orientation="vertical"
-    tools:context=".ui.activity.LoginActivity">
+    tools:context=".ui.activity.LoginEmailActivity">
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/tlbr_login"
@@ -43,8 +43,42 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <AutoCompleteTextView
+                    android:id="@+id/email"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/prompt_email"
+                    android:inputType="textEmailAddress"
+                    android:maxLines="1"
+                    android:singleLine="true" />
+
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <EditText
+                    android:id="@+id/password"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/prompt_password"
+                    android:imeActionId="6"
+                    android:imeActionLabel="@string/action_sign_in_short"
+                    android:imeOptions="actionUnspecified"
+                    android:inputType="textPassword"
+                    android:maxLines="1"
+                    android:singleLine="true" />
+
+            </android.support.design.widget.TextInputLayout>
+
             <Button
-                android:id="@+id/email_sign_in_button"
+                android:id="@+id/email_sign_in"
                 style="?android:textAppearanceSmall"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -52,19 +86,19 @@
                 android:text="@string/action_sign_in"
                 android:textStyle="bold" />
 
-            <com.facebook.login.widget.LoginButton
-                android:id="@+id/facebook_sign_in_button"
+            <Button
+                android:id="@+id/email_sign_up_button"
+                android:text="@string/action_sign_up"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:layout_gravity="center_horizontal"/>
-
-            <com.google.android.gms.common.SignInButton
-                android:id="@+id/google_sign_in_button"
-                android:layout_width="match_parent"
-                android:layout_marginTop="16dp"
                 android:layout_height="wrap_content" />
 
+            <Button
+                android:id="@+id/email_forgot_button"
+                android:textAllCaps="true"
+                android:text="Esqueci minha senha"
+                style="@style/PrimaryButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

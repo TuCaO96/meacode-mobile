@@ -63,23 +63,8 @@ public class LoginActivity extends AppCompatActivity {
     @BindView(R.id.facebook_sign_in_button)
     LoginButton loginButton;
 
-    @BindView(R.id.email)
-    EditText email;
-
-    @BindView(R.id.password)
-    EditText password;
-
-    @BindView(R.id.email_sign_in_button)
-    Button emailSignInButton;
-
     @BindView(R.id.google_sign_in_button)
     SignInButton googleSignInButton;
-
-    @BindView(R.id.email_sign_up_button)
-    Button emailSignUpButton;
-
-    @BindView(R.id.email_forgot_button)
-    Button forgotButton;
 
     private final Context context = this;
 
@@ -91,8 +76,6 @@ public class LoginActivity extends AppCompatActivity {
     private TextView tv;
     private int actionBarTextSize = 24;
     private int textViewTextSize = 21;
-
-
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -133,12 +116,7 @@ public class LoginActivity extends AppCompatActivity {
         this.getSupportActionBar().setCustomView(v);
     }
     protected void setTextViewTextSize(int size){
-        email.setTextSize(size);
-        password.setTextSize(size);
         loginButton.setTextSize(size);
-        emailSignInButton.setTextSize(size);
-        emailSignUpButton.setTextSize(size);
-        forgotButton.setTextSize(size);
 //        googleSignInButton.setSize(size);
     }
 
@@ -198,57 +176,6 @@ public class LoginActivity extends AppCompatActivity {
         return true;
     }
 
-    @OnClick(R.id.email_forgot_button)
-    public void forgotPassword(){
-        RestParameters parameters = new RestParameters();
-        parameters.setProperty("email", email.getText().toString());
-
-        MeAcodeMobileApplication.getInstance().getAuthService().postForgotPassword(parameters)
-                .enqueue(new Callback<User>() {
-                    @Override
-                    public void onResponse(Call<User> call, Response<User> response) {
-                        if(response.code() == 201){
-                            new MaterialDialog.Builder(context)
-                                    .title("Um email foi enviado à você")
-                                    .content("Abra o link do email para redefinir sua senha.").show();
-                        }
-                    }
-
-                    @Override
-                    public void onFailure(Call<User> call, Throwable t) {
-                        new MaterialDialog.Builder(context)
-                                .title("Erro")
-                                .content("Ocorreu um erro ao criar conta. Por favor, verifique" +
-                                        "se o email e senha são válidos.").show();
-                    }
-                });
-    }
-
-    @OnClick(R.id.email_sign_up_button)
-    public void signUp(){
-        RestParameters parameters = new RestParameters();
-        final Context context = getBaseContext();
-        parameters.setProperty("email", email.getText().toString());
-        parameters.setProperty("password", password.getText().toString());
-        MeAcodeMobileApplication.getInstance().getAuthService().postSignUp(parameters)
-                .enqueue(new Callback<User>() {
-                    @Override
-                    public void onResponse(Call<User> call, Response<User> response) {
-                        if (response.code() == 201){
-
-                        }
-                    }
-
-                    @Override
-                    public void onFailure(Call<User> call, Throwable t) {
-                        new MaterialDialog.Builder(context)
-                                .title("Erro")
-                                .content("Ocorreu um erro ao criar conta. Por favor, verifique" +
-                                        "se o email e senha são válidos.").show();
-                    }
-                });
-    }
-
     private void getUserProfile(AccessToken currentAccessToken) {
         final Context context = this;
         GraphRequest request = GraphRequest.newMeRequest(
@@ -304,29 +231,8 @@ public class LoginActivity extends AppCompatActivity {
 
     @OnClick(R.id.email_sign_in_button)
     public void emailLogin(){
-        RestParameters parameters = new RestParameters();
-        parameters.setProperty("email", email.getText().toString());
-        parameters.setProperty("password", password.getText().toString());
-
-        MeAcodeMobileApplication.getInstance().getAuthService().postSignIn(parameters)
-            .enqueue(new Callback<RestParameters>() {
-                @Override
-                public void onResponse(Call<RestParameters> call, Response<RestParameters> response) {
-                    if(response.code() == 201){
-                        Intent intent = new Intent(context, MainActivity.class);
-                        startActivity(intent);
-                        finish();
-                    }
-                }
-
-                @Override
-                public void onFailure(Call<RestParameters> call, Throwable t) {
-                    new MaterialDialog.Builder(context)
-                            .title("Erro")
-                            .content("Ocorreu um erro ao autenticar sua conta. Por favor, verifique" +
-                                    "se o email e senha são válidos.").show();
-                }
-            });
+        Intent emailSignInIntent = new Intent(this, LoginEmailActivity.class);
+        startActivity(emailSignInIntent);
     }
 
     @OnClick(R.id.facebook_sign_in_button)
