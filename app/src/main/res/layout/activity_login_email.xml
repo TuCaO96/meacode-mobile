@@ -11,7 +11,7 @@
     tools:context=".ui.activity.LoginEmailActivity">
 
     <android.support.v7.widget.Toolbar
-        android:id="@+id/tlbr_login"
+        android:id="@+id/tlbr_login_email"
         android:theme="@style/MeAcodeTheme"
         app:popupTheme="@style/MeAcodeTheme"
         android:layout_width="match_parent"

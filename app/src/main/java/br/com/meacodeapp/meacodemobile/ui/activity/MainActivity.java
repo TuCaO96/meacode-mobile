@@ -17,6 +17,7 @@ import br.com.meacodeapp.meacodemobile.ui.fragment.MyCoursesFragment;
 import br.com.meacodeapp.meacodemobile.ui.fragment.ProfileFragment;
 import br.com.meacodeapp.meacodemobile.ui.fragment.SearchFragment;
 import br.com.meacodeapp.meacodemobile.ui.fragment.SettingsFragment;
+import br.com.meacodeapp.meacodemobile.util.BottomNavigationViewHelper;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
@@ -57,6 +58,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         setFragment(HomeFragment.newInstance());
         ButterKnife.bind(this);
+        bottomNavigationView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+        BottomNavigationViewHelper.disableShiftMode(bottomNavigationView);
     }
 
     public void setFragment(Fragment fragment){

@@ -24,7 +24,7 @@ import retrofit2.Response;
 
 public class LoginEmailActivity extends AppCompatActivity {
 
-    @BindView(R.id.email_sign_in_button)
+    @BindView(R.id.email_sign_in)
     Button emailSignInButton;
 
     @BindView(R.id.email_sign_up_button)
@@ -111,7 +111,7 @@ public class LoginEmailActivity extends AppCompatActivity {
                 });
     }
 
-    @OnClick(R.id.email_sign_in_button)
+    @OnClick(R.id.email_sign_in)
     public void emailLogin(){
         RestParameters parameters = new RestParameters();
         parameters.setProperty("email", email.getText().toString());

@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">Me Acode Mobile</string>
     <string name="title_activity_login">Entrar</string>
+    <string name="title_activity_login_email">Entrar com email</string>
     <string name="facebook_app_id">525990551163753</string>
     <string name="fb_login_protocol_scheme">fb525990551163753</string>
 

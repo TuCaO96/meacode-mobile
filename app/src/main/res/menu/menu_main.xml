@@ -4,31 +4,31 @@
     tools:context="br.com.meacodeapp.meacodemobile.ui.activity.MainActivity">
     <item android:id="@+id/navigation_home"
         android:orderInCategory="100"
-        android:title="@string/title_home"
+        android:title=""
         android:icon="@drawable/ic_home_white_24dp"
         app:showAsAction="always"
         />
     <item android:id="@+id/navigation_search"
         android:orderInCategory="200"
-        android:title="@string/title_search"
+        android:title=""
         android:icon="@drawable/ic_search_white_24dp"
         app:showAsAction="always"
         />
     <item android:id="@+id/navigation_my_courses"
         android:orderInCategory="200"
-        android:title="@string/title_my_courses"
+        android:title=""
         android:icon="@drawable/ic_list_white_24dp"
         app:showAsAction="always"
         />
     <item android:id="@+id/navigation_my_profile"
         android:orderInCategory="300"
-        android:title="@string/title_my_profile"
+        android:title=""
         android:icon="@drawable/ic_account_circle_white_24dp"
         app:showAsAction="always"
         />
     <item android:id="@+id/navigation_settings"
         android:orderInCategory="400"
-        android:title="@string/title_settings"
+        android:title=""
         android:icon="@drawable/ic_settings_white_24dp"
         app:showAsAction="always"
         />
