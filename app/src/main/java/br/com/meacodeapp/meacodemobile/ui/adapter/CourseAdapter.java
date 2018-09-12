@@ -7,6 +7,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -15,9 +17,10 @@ import com.bumptech.glide.Glide;
 import java.util.List;
 
 import br.com.meacodeapp.meacodemobile.R;
+import br.com.meacodeapp.meacodemobile.model.Content;
 import br.com.meacodeapp.meacodemobile.model.Course;
 
-public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.CourseHolder> {
+public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.CourseHolder> implements Filterable {
 
     Context context;
     List<Course> courses;
@@ -43,6 +46,37 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.CourseHold
         public void onClick(View view) {
 
         }
+    }
+
+    @Override
+    public Filter getFilter() {
+        return new Filter() {
+            @Override
+            protected FilterResults performFiltering(CharSequence constraint) {
+                String query = constraint.toString();
+
+                List<Course> filteredCourses = courses;
+
+                if(!query.isEmpty()){
+                    for(Course course: courses){
+                        if(course.getName().toLowerCase().contains(query.toLowerCase())){
+                            filteredCourses.add(course);
+                        }
+                    }
+                }
+
+                FilterResults filteredResults = new FilterResults();
+                filteredResults.values = filteredCourses;
+
+                return filteredResults;
+
+            }
+
+            @Override
+            protected void publishResults(CharSequence constraint, FilterResults results) {
+
+            }
+        };
     }
 
     @Override
