@@ -6,7 +6,7 @@ import java.util.List;
 public class Course implements Serializable {
     private int id;
     private String name;
-    private Attach image;
+    private Category category;
     private List<Content> contents;
     private String created_at;
     private String updated_at;
@@ -15,8 +15,8 @@ public class Course implements Serializable {
         return name;
     }
 
-    public Attach getImage() {
-        return image;
+    public Category getCategory() {
+        return category;
     }
 
     public List<Content> getContents() {

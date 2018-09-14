@@ -6,12 +6,14 @@ package br.com.meacodeapp.meacodemobile.model;
 
 public class User {
     private int id;
-    private String first_name;
-    private String last_name;
+    private String username;
     private String email;
     private String password;
+    private String password_hash;
     private String type;
-    private String remember_token;
+    private String status;
+    private String password_reset_token;
+    private String auth_key;
     private String created_at;
     private String updated_at;
 }

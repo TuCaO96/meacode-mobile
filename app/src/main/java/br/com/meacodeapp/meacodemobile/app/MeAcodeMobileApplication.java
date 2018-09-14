@@ -11,7 +11,7 @@ import br.com.meacodeapp.meacodemobile.service.UserService;
  */
 
 public class MeAcodeMobileApplication extends Application {
-    private static final String URL = "https://5b6df97bd8f3430014e79762.mockapi.io/api/";
+    private static final String URL = "http://localhost/meacode-yii/api/web/";
 
     private static MeAcodeMobileApplication instance;
 
