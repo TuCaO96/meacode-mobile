@@ -227,7 +227,7 @@ public class LoginActivity extends AppCompatActivity {
     private void handleSignInResult(Task<GoogleSignInAccount> completedTask) {
         try {
             GoogleSignInAccount account = completedTask.getResult(ApiException.class);
-            socialLogin(account.getEmail(), account.getIdToken());
+            socialLogin(account.getEmail(), account.getId());
         } catch (ApiException e) {
             // The ApiException status code indicates the detailed failure reason.
             // Please refer to the GoogleSignInStatusCodes class reference for more information.
@@ -249,7 +249,7 @@ public class LoginActivity extends AppCompatActivity {
                 .enqueue(new Callback<RestParameters>() {
                     @Override
                     public void onResponse(Call<RestParameters> call, Response<RestParameters> response) {
-                        if(response.code() == 201){
+                        if(response.code() == 200){
                             Intent intent = new Intent(context, MainActivity.class);
                             startActivity(intent);
                             finish();

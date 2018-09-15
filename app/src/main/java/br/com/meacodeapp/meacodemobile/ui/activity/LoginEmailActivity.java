@@ -69,7 +69,7 @@ public class LoginEmailActivity extends AppCompatActivity {
                 .enqueue(new Callback<User>() {
                     @Override
                     public void onResponse(Call<User> call, Response<User> response) {
-                        if(response.code() == 201){
+                        if(response.code() == 200){
                             new MaterialDialog.Builder(context)
                                     .title("Um email foi enviado à você")
                                     .content("Abra o link do email para redefinir sua senha.").show();
