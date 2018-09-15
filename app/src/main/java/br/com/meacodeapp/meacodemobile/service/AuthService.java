@@ -8,15 +8,12 @@ import retrofit2.http.GET;
 import retrofit2.http.POST;
 
 public interface AuthService {
-    @POST("auth")
+    @POST("auth/login")
     Call<RestParameters> postSignIn(@Body RestParameters parameters);
 
-    @POST("auth/register")
+    @POST("auth/signup")
     Call<User> postSignUp(@Body RestParameters parameters);
 
     @POST("auth/forgot")
     Call<User> postForgotPassword(@Body RestParameters parameters);
-
-    @GET("auth")
-    Call<RestParameters> getValidate();
 }
