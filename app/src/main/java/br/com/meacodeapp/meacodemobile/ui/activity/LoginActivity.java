@@ -184,24 +184,13 @@ public class LoginActivity extends AppCompatActivity {
                     @Override
                     public void onCompleted(JSONObject object, GraphResponse response) {
                         try{
-                            String facebook_id = object.getString("id");
-                            new MaterialDialog.Builder(context).title("Result")
-                                    .content(facebook_id).show();
+                            socialLogin(object.getString("id"), object.getString("id"));
                         }
                         catch (JSONException e){
-                            new MaterialDialog.Builder(context).title("Error")
+                            new MaterialDialog.Builder(context).title("Erro ao buscar informações" +
+                                    "do Facebook. Por favor, tente novamente mais tarde")
                                     .content(e.getMessage()).show();
                         }
-                        /*try {
-                            Gson gson = new Gson();
-                            object.getJSONObject(“picture”).
-                            getJSONObject("data").getString("url");
-                            object.getString(“name”);
-                            object.getString(“email”));
-                            object.getString(“id”));
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }*/
                     }
                 });
         Bundle parameters = new Bundle();
@@ -235,21 +224,45 @@ public class LoginActivity extends AppCompatActivity {
         startActivity(emailSignInIntent);
     }
 
-    @OnClick(R.id.facebook_sign_in_button)
-    public void facebookLogin(){
-
-    }
-
     private void handleSignInResult(Task<GoogleSignInAccount> completedTask) {
         try {
             GoogleSignInAccount account = completedTask.getResult(ApiException.class);
-            new MaterialDialog.Builder(this).title("Result").content(account.getEmail()).show();
-            // Signed in successfully, show authenticated UI.
-//            updateUI(account);
+            socialLogin(account.getEmail(), account.getIdToken());
         } catch (ApiException e) {
             // The ApiException status code indicates the detailed failure reason.
             // Please refer to the GoogleSignInStatusCodes class reference for more information.
-//            updateUI(null);
+            new MaterialDialog.Builder(context)
+                    .title("Erro")
+                    .content("Ocorreu um erro ao buscar informações de sua conta." +
+                            "Por favor, tente novamente mais tarde.")
+                    .positiveText(R.string.action_ok).show();
         }
+    }
+
+    private void socialLogin(String user_id, String token){
+        RestParameters parameters = new RestParameters();
+        parameters.setProperty("user_id", user_id);
+        parameters.setProperty("token", token);
+        final Context context = this;
+
+        MeAcodeMobileApplication.getInstance().getAuthService().postSocialSignIn(parameters)
+                .enqueue(new Callback<RestParameters>() {
+                    @Override
+                    public void onResponse(Call<RestParameters> call, Response<RestParameters> response) {
+                        if(response.code() == 201){
+                            Intent intent = new Intent(context, MainActivity.class);
+                            startActivity(intent);
+                            finish();
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<RestParameters> call, Throwable t) {
+                        new MaterialDialog.Builder(context)
+                                .title("Erro")
+                                .content("Ocorreu um erro ao autenticar sua conta. Por favor, tente" +
+                                        "novamente mais tarde.").positiveText(R.string.action_ok).show();
+                    }
+                });
     }
 }
