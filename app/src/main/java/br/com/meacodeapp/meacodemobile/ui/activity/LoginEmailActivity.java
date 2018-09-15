@@ -96,8 +96,10 @@ public class LoginEmailActivity extends AppCompatActivity {
                 .enqueue(new Callback<User>() {
                     @Override
                     public void onResponse(Call<User> call, Response<User> response) {
-                        if (response.code() == 201){
-
+                        if (response.code() == 200){
+                            Intent intent = new Intent(context, MainActivity.class);
+                            startActivity(intent);
+                            finish();
                         }
                     }
 
@@ -122,7 +124,7 @@ public class LoginEmailActivity extends AppCompatActivity {
                 .enqueue(new Callback<RestParameters>() {
                     @Override
                     public void onResponse(Call<RestParameters> call, Response<RestParameters> response) {
-                        if(response.code() == 201){
+                        if(response.code() == 200){
                             Intent intent = new Intent(context, MainActivity.class);
                             startActivity(intent);
                             finish();

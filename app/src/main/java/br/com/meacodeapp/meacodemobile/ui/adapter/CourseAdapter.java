@@ -82,7 +82,7 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.CourseHold
     @Override
     public void onBindViewHolder(@NonNull CourseHolder holder, int position) {
         holder.name.setText(courses.get(position).getName());
-        Glide.with(context).load(courses.get(position).getImage().getUrl()).into(holder.image);
+//        Glide.with(context).load(courses.get(position).getImage().getUrl()).into(holder.image);
     }
 
     @Override
