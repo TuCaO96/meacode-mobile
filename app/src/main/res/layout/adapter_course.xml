@@ -14,23 +14,10 @@
         android:layout_toRightOf="@id/course_image"
         android:layout_toEndOf="@id/course_image"
         android:id="@+id/course_name"
-        android:text="Título"
-        android:layout_marginLeft="10dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginBottom="5dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="15dp"
         style="@style/MeAcodeTheme.ListItemTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
-    <TextView
-        android:id="@+id/course_description"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Descrição"
-        android:layout_marginLeft="10dp"
-        android:layout_marginStart="10dp"
-        android:layout_toRightOf="@id/course_image"
-        android:layout_toEndOf="@id/course_image"
-        android:layout_below="@id/course_name"
-        style="@style/MeAcodeTheme.ListItemDescription"
-        />
 </RelativeLayout>

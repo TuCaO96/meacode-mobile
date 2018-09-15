@@ -4,6 +4,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,13 +19,19 @@ import br.com.meacodeapp.meacodemobile.app.MeAcodeMobileApplication;
 import br.com.meacodeapp.meacodemobile.model.Content;
 import br.com.meacodeapp.meacodemobile.model.Course;
 import br.com.meacodeapp.meacodemobile.ui.activity.MainActivity;
+import br.com.meacodeapp.meacodemobile.ui.adapter.CourseAdapter;
 import br.com.meacodeapp.meacodemobile.util.RestParameters;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
 public class SearchFragment extends Fragment {
+
+    @BindView(R.id.rcv_search)
+    RecyclerView coursesRecyclerView;
+
     List<Course> courses;
 
     public SearchFragment() {
@@ -62,6 +70,10 @@ public class SearchFragment extends Fragment {
                     public void onResponse(Call<List<Course>> call, Response<List<Course>> response) {
                         if(response.code() == 200){
                             courses = response.body();
+                            CourseAdapter adapter = new CourseAdapter(getContext(), courses);
+                            RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
+                            coursesRecyclerView.setLayoutManager(layoutManager);
+                            coursesRecyclerView.setAdapter(adapter);
                         }
                     }
 
