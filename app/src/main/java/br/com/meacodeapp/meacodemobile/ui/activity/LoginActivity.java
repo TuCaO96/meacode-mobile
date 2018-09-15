@@ -2,6 +2,7 @@ package br.com.meacodeapp.meacodemobile.ui.activity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -250,6 +251,15 @@ public class LoginActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(Call<RestParameters> call, Response<RestParameters> response) {
                         if(response.code() == 200){
+                            final SharedPreferences sharedPreferences = MeAcodeMobileApplication
+                                    .getInstance()
+                                    .getSharedPreferences("session", Context.MODE_PRIVATE);
+                            final SharedPreferences.Editor edit = sharedPreferences.edit();
+
+                            edit.remove("token");
+                            edit.putString("token",response.body().getProperty("token"));
+                            edit.apply();
+
                             Intent intent = new Intent(context, MainActivity.class);
                             startActivity(intent);
                             finish();

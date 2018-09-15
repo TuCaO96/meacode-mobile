@@ -1,5 +1,7 @@
 package br.com.meacodeapp.meacodemobile.service;
 
+import android.content.SharedPreferences;
+
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonDeserializationContext;
@@ -11,12 +13,17 @@ import com.google.gson.JsonParser;
 import com.google.gson.JsonSerializationContext;
 import com.google.gson.JsonSerializer;
 
+import java.io.IOException;
 import java.lang.reflect.Type;
 import java.util.Map;
 
+import br.com.meacodeapp.meacodemobile.app.MeAcodeMobileApplication;
 import br.com.meacodeapp.meacodemobile.util.JsonConverter;
 import br.com.meacodeapp.meacodemobile.util.RestParameters;
+import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -67,7 +74,7 @@ public class RestService {
                 .registerTypeAdapter(RestParameters.class, deserializer)
                 .create();
 
-        OkHttpClient.Builder okHttpClient = new OkHttpClient.Builder();
+        OkHttpClient.Builder okHttpClient = interceptorHttp();
         HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
         logging.setLevel(HttpLoggingInterceptor.Level.BODY);
         okHttpClient.addInterceptor(logging);
@@ -78,6 +85,32 @@ public class RestService {
                 addConverterFactory(ScalarsConverterFactory.create()).client(okHttpClient.build()).
                 build();
 
+    }
+
+    private OkHttpClient.Builder interceptorHttp() {
+
+
+        OkHttpClient.Builder httpClient = new OkHttpClient.Builder();
+        SharedPreferences sharedPreferences = MeAcodeMobileApplication.getInstance()
+                .getSharedPreferences("session", MeAcodeMobileApplication.MODE_PRIVATE);
+        final String token = sharedPreferences.getString("token","");
+        if(!token.isEmpty()) {
+            httpClient.addInterceptor(new Interceptor() {
+                @Override
+                public Response intercept(Interceptor.Chain chain) throws IOException {
+                    String authorization = "Bearer " + token.toString();
+                    Request original = chain.request();
+                    Request request = original.newBuilder()
+                            .header("Authorization", authorization.replace("\"", ""))
+                            .method(original.method(), original.body()).build();
+                    return chain.proceed(request);
+                }
+            });
+        }
+        HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
+        logging.setLevel(HttpLoggingInterceptor.Level.BODY);
+        httpClient.addInterceptor(logging);
+        return httpClient;
     }
 
     public <T> T getService(Class<T> c){

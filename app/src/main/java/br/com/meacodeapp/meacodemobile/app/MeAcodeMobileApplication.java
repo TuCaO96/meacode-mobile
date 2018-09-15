@@ -3,7 +3,10 @@ package br.com.meacodeapp.meacodemobile.app;
 import android.app.Application;
 
 import br.com.meacodeapp.meacodemobile.service.AuthService;
+import br.com.meacodeapp.meacodemobile.service.ContentService;
+import br.com.meacodeapp.meacodemobile.service.CourseService;
 import br.com.meacodeapp.meacodemobile.service.RestService;
+import br.com.meacodeapp.meacodemobile.service.SuggestionService;
 import br.com.meacodeapp.meacodemobile.service.UserService;
 
 /**
@@ -17,6 +20,9 @@ public class MeAcodeMobileApplication extends Application {
 
     private UserService userService;
     private AuthService authService;
+    private CourseService courseService;
+    private ContentService contentService;
+    private SuggestionService suggestionService;
 
     @Override
     public void onCreate() {
@@ -28,6 +34,9 @@ public class MeAcodeMobileApplication extends Application {
     private void createServices(){
         userService = (new RestService(URL).getService(UserService.class));
         authService = (new RestService(URL).getService(AuthService.class));
+        courseService = (new RestService(URL).getService(CourseService.class));
+        contentService = (new RestService(URL).getService(ContentService.class));
+        suggestionService = (new RestService(URL).getService(SuggestionService.class));
     }
 
     public static MeAcodeMobileApplication getInstance() {
@@ -41,4 +50,10 @@ public class MeAcodeMobileApplication extends Application {
     public AuthService getAuthService() {
         return authService;
     }
+
+    public CourseService getCourseService() { return courseService; }
+
+    public ContentService getContentService() { return contentService; }
+
+    public SuggestionService getSuggestionService() { return suggestionService; }
 }

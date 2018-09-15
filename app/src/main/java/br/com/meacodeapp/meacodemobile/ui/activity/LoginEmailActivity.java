@@ -2,6 +2,7 @@ package br.com.meacodeapp.meacodemobile.ui.activity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -93,10 +94,19 @@ public class LoginEmailActivity extends AppCompatActivity {
         parameters.setProperty("email", email.getText().toString());
         parameters.setProperty("password", password.getText().toString());
         MeAcodeMobileApplication.getInstance().getAuthService().postSignUp(parameters)
-                .enqueue(new Callback<User>() {
+                .enqueue(new Callback<RestParameters>() {
                     @Override
-                    public void onResponse(Call<User> call, Response<User> response) {
+                    public void onResponse(Call<RestParameters> call, Response<RestParameters> response) {
                         if (response.code() == 200){
+                            final SharedPreferences sharedPreferences = MeAcodeMobileApplication
+                                    .getInstance()
+                                    .getSharedPreferences("session", Context.MODE_PRIVATE);
+                            final SharedPreferences.Editor edit = sharedPreferences.edit();
+
+                            edit.remove("token");
+                            edit.putString("token",response.body().getProperty("token"));
+                            edit.apply();
+
                             Intent intent = new Intent(context, MainActivity.class);
                             startActivity(intent);
                             finish();
@@ -104,7 +114,7 @@ public class LoginEmailActivity extends AppCompatActivity {
                     }
 
                     @Override
-                    public void onFailure(Call<User> call, Throwable t) {
+                    public void onFailure(Call<RestParameters> call, Throwable t) {
                         new MaterialDialog.Builder(context)
                                 .title("Erro")
                                 .content("Ocorreu um erro ao criar conta. Por favor, verifique" +
@@ -125,6 +135,15 @@ public class LoginEmailActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(Call<RestParameters> call, Response<RestParameters> response) {
                         if(response.code() == 200){
+                            final SharedPreferences sharedPreferences = MeAcodeMobileApplication
+                                    .getInstance()
+                                    .getSharedPreferences("session", Context.MODE_PRIVATE);
+                            final SharedPreferences.Editor edit = sharedPreferences.edit();
+
+                            edit.remove("token");
+                            edit.putString("token",response.body().getProperty("token"));
+                            edit.apply();
+
                             Intent intent = new Intent(context, MainActivity.class);
                             startActivity(intent);
                             finish();

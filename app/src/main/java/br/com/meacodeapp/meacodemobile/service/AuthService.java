@@ -15,7 +15,7 @@ public interface AuthService {
     Call<RestParameters> postSocialSignIn(@Body RestParameters parameters);
 
     @POST("auth/signup")
-    Call<User> postSignUp(@Body RestParameters parameters);
+    Call<RestParameters> postSignUp(@Body RestParameters parameters);
 
     @POST("auth/forgot")
     Call<User> postForgotPassword(@Body RestParameters parameters);

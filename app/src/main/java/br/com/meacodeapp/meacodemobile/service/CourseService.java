@@ -14,7 +14,7 @@ import retrofit2.http.Path;
 
 public interface CourseService {
     @GET("courses")
-    Call<List<Course>> getCourse();
+    Call<List<Course>> getCourses();
 
     @GET("courses/{course}")
     Call<Course> getCourse(@Path("course") int id);
