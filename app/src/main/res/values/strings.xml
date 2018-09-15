@@ -6,6 +6,10 @@
     <string name="fb_login_protocol_scheme">fb525990551163753</string>
 
     <!-- Strings related to login -->
+    <string name="prompt_suggestion_title">Título da Sugestão</string>
+    <string name="prompt_suggestion_text">Texto</string>
+    <string name="action_ok">OK</string>
+    <string name="action_send">Enviar</string>
     <string name="prompt_email">Email</string>
     <string name="prompt_password">Senha</string>
     <string name="action_sign_in">Entrar com email e senha</string>
