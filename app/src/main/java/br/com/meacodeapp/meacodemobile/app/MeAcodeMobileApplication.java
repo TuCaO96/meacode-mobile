@@ -14,7 +14,8 @@ import br.com.meacodeapp.meacodemobile.service.UserService;
  */
 
 public class MeAcodeMobileApplication extends Application {
-    private static final String URL = "http://192.168.0.19/meacode-yii/api/web/";
+    private static final String URL = "http://172.16.212.70/meacode-yii/api/web/";
+//    private static final String URL = "http://192.168.0.19/meacode-yii/api/web/";
 
     private static MeAcodeMobileApplication instance;
 

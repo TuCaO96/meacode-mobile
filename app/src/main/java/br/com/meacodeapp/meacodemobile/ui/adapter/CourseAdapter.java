@@ -1,6 +1,8 @@
 package br.com.meacodeapp.meacodemobile.ui.adapter;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -19,6 +21,7 @@ import java.util.List;
 import br.com.meacodeapp.meacodemobile.R;
 import br.com.meacodeapp.meacodemobile.model.Content;
 import br.com.meacodeapp.meacodemobile.model.Course;
+import br.com.meacodeapp.meacodemobile.ui.activity.CourseActivity;
 
 public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.CourseHolder> implements Filterable {
 
@@ -33,18 +36,19 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.CourseHold
     public static class CourseHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         TextView name;
         ImageView image;
+        Context context;
 
-        public CourseHolder(View itemView){
+        public CourseHolder(View itemView, Context context){
             super(itemView);
             name = (TextView) itemView.findViewById(R.id.course_name);
             image = (ImageView) itemView.findViewById(R.id.course_image);
             itemView.setOnClickListener(this);
-
         }
 
         @Override
         public void onClick(View view) {
-
+            Intent intent = new Intent(context, CourseActivity.class);
+            context.startActivity(intent);
         }
     }
 
@@ -94,6 +98,6 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.CourseHold
     @Override
     public CourseHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.adapter_course, parent, false);
-        return new CourseHolder(view);
+        return new CourseHolder(view, parent.getContext());
     }
 }
