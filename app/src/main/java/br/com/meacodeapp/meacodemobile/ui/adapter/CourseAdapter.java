@@ -47,8 +47,8 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.CourseHold
 
         @Override
         public void onClick(View view) {
-            Intent intent = new Intent(context, CourseActivity.class);
-            context.startActivity(intent);
+            Intent intent = new Intent(view.getContext(), CourseActivity.class);
+            view.getContext().startActivity(intent);
         }
     }
 
