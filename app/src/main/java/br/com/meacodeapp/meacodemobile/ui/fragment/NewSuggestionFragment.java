@@ -1,18 +1,38 @@
 package br.com.meacodeapp.meacodemobile.ui.fragment;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
+
+import com.afollestad.materialdialogs.MaterialDialog;
 
 import br.com.meacodeapp.meacodemobile.R;
+import br.com.meacodeapp.meacodemobile.app.MeAcodeMobileApplication;
+import br.com.meacodeapp.meacodemobile.model.Suggestion;
+import br.com.meacodeapp.meacodemobile.model.User;
+import br.com.meacodeapp.meacodemobile.service.RestService;
+import br.com.meacodeapp.meacodemobile.util.JsonConverter;
+import br.com.meacodeapp.meacodemobile.util.RestParameters;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class NewSuggestionFragment extends Fragment {
+
+    @BindView(R.id.suggestion_title)
+    TextView title;
+
+    @BindView(R.id.suggestion_text)
+    TextView text;
 
     public NewSuggestionFragment() {
         // Required empty public constructor
@@ -39,6 +59,45 @@ public class NewSuggestionFragment extends Fragment {
 
     @OnClick(R.id.suggestion_send)
     public void sendSuggestionClick(){
+        final SharedPreferences sharedPreferences = MeAcodeMobileApplication
+                .getInstance()
+                .getSharedPreferences("session", Context.MODE_PRIVATE);
 
+        User user = JsonConverter.fromJson(sharedPreferences.getString("user", null), User.class);
+
+        RestParameters parameters = new RestParameters();
+        parameters.setProperty("title", title.getText().toString());
+        parameters.setProperty("text", text.getText().toString());
+        parameters.setProperty("user_id", Integer.toString(user.getId()));
+
+        final Context context = getContext();
+
+        MeAcodeMobileApplication.getInstance().getSuggestionService().postSuggestion(parameters)
+                .enqueue(new Callback<Suggestion>() {
+                    @Override
+                    public void onResponse(Call<Suggestion> call, Response<Suggestion> response) {
+                        if(response.code() == 201){
+                            new MaterialDialog.Builder(context)
+                                    .title("Sucesso")
+                                    .content("Sua sugestão foi enviada aos devidos responsáveis." +
+                                            " Caso seja aprovada, o curso será disponibilizado em " +
+                                            "nossa plataforma! :)").show();
+                        }
+                        else{
+                            new MaterialDialog.Builder(context)
+                                    .title("Erro")
+                                    .content("Ocorreu um erro ao enviar sua sugestão. Por favor, tente" +
+                                            " novamente mais tarde.").show();
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<Suggestion> call, Throwable t) {
+                        new MaterialDialog.Builder(context)
+                                .title("Erro")
+                                .content("Ocorreu um erro ao enviar sua sugestão. Por favor, tente" +
+                                        " novamente mais tarde.").show();
+                    }
+                });
     }
 }

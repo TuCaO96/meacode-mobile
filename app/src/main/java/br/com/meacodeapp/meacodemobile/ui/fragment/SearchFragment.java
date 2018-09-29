@@ -81,8 +81,8 @@ public class SearchFragment extends Fragment {
                     public void onFailure(Call<List<Course>> call, Throwable t) {
                         new MaterialDialog.Builder(context)
                                 .title("Erro")
-                                .content("Ocorreu um erro ao autenticar sua conta. Por favor, verifique" +
-                                        "se o email e senha são válidos.").show();
+                                .content("Ocorreu um erro ao buscar cursos. Por favor, tente" +
+                                        " novamente mais tarde").show();
                     }
                 });
     }
