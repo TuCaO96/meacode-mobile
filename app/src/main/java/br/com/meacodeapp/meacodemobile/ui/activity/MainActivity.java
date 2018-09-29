@@ -1,5 +1,8 @@
 package br.com.meacodeapp.meacodemobile.ui.activity;
 
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
@@ -12,6 +15,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 
 import br.com.meacodeapp.meacodemobile.R;
+import br.com.meacodeapp.meacodemobile.app.MeAcodeMobileApplication;
 import br.com.meacodeapp.meacodemobile.ui.fragment.HomeFragment;
 import br.com.meacodeapp.meacodemobile.ui.fragment.MyCoursesFragment;
 import br.com.meacodeapp.meacodemobile.ui.fragment.ProfileFragment;
@@ -60,6 +64,16 @@ public class MainActivity extends AppCompatActivity {
         ButterKnife.bind(this);
         bottomNavigationView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
         BottomNavigationViewHelper.disableShiftMode(bottomNavigationView);
+    }
+
+    public void logout(){
+        SharedPreferences sharedPreferences = MeAcodeMobileApplication.getInstance()
+                .getSharedPreferences("session", Context.MODE_PRIVATE);
+        sharedPreferences.edit().clear().apply();
+
+        Intent intent = new Intent(this, LoginActivity.class);
+        startActivity(intent);
+        finish();
     }
 
     public void setFragment(Fragment fragment){

@@ -257,7 +257,9 @@ public class LoginActivity extends AppCompatActivity {
                             final SharedPreferences.Editor edit = sharedPreferences.edit();
 
                             edit.remove("token");
+                            edit.remove("user");
                             edit.putString("token",response.body().getProperty("token"));
+                            edit.putString("user",response.body().getProperty("user"));
                             edit.apply();
 
                             Intent intent = new Intent(context, MainActivity.class);

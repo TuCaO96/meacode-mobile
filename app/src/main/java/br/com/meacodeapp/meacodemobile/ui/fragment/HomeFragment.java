@@ -1,10 +1,14 @@
 package br.com.meacodeapp.meacodemobile.ui.fragment;
 
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.afollestad.materialdialogs.DialogAction;
+import com.afollestad.materialdialogs.MaterialDialog;
 
 import br.com.meacodeapp.meacodemobile.R;
 import br.com.meacodeapp.meacodemobile.ui.activity.MainActivity;
@@ -62,7 +66,27 @@ public class HomeFragment extends Fragment {
 
     @OnClick(R.id.logout_card)
     public void logoutClick(){
-        //TODO: Logout user
+        final MaterialDialog materialDialog = new MaterialDialog.Builder(getContext())
+                .title("Atenção")
+                .content("Tem certeza que deseja sair de sua conta do aplicativo?")
+                .positiveText("SIM")
+                .negativeText("NÃO")
+                .negativeColor(getResources().getColor(R.color.colorPrimaryDark))
+                .onPositive(new MaterialDialog.SingleButtonCallback() {
+                    @Override
+                    public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                        MainActivity activity = (MainActivity) getActivity();
+                        dialog.dismiss();
+                        activity.logout();
+                    }
+                })
+                .onNegative(new MaterialDialog.SingleButtonCallback() {
+                    @Override
+                    public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                        dialog.dismiss();
+                    }
+                })
+                .show();
     }
 
     @OnClick(R.id.new_content_card)
