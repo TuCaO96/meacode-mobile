@@ -22,6 +22,7 @@ import br.com.meacodeapp.meacodemobile.R;
 import br.com.meacodeapp.meacodemobile.model.Content;
 import br.com.meacodeapp.meacodemobile.model.Course;
 import br.com.meacodeapp.meacodemobile.ui.activity.CourseActivity;
+import br.com.meacodeapp.meacodemobile.util.JsonConverter;
 
 public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.CourseHolder> implements Filterable {
 
@@ -36,6 +37,7 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.CourseHold
     public static class CourseHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         TextView name;
         ImageView image;
+        Course course;
         Context context;
 
         public CourseHolder(View itemView, Context context){
@@ -48,6 +50,7 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.CourseHold
         @Override
         public void onClick(View view) {
             Intent intent = new Intent(view.getContext(), CourseActivity.class);
+            intent.putExtra("course", JsonConverter.toJson(course));
             view.getContext().startActivity(intent);
         }
     }
@@ -86,6 +89,7 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.CourseHold
     @Override
     public void onBindViewHolder(@NonNull CourseHolder holder, int position) {
         holder.name.setText(courses.get(position).getName());
+        holder.course = courses.get(position);
 //        Glide.with(context).load(courses.get(position).getImage().getUrl()).into(holder.image);
     }
 

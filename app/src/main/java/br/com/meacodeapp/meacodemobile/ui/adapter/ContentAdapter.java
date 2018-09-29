@@ -15,32 +15,34 @@ import android.widget.TextView;
 import java.util.List;
 
 import br.com.meacodeapp.meacodemobile.R;
+import br.com.meacodeapp.meacodemobile.model.Content;
 import br.com.meacodeapp.meacodemobile.model.Course;
+import br.com.meacodeapp.meacodemobile.ui.activity.ContentActivity;
 import br.com.meacodeapp.meacodemobile.ui.activity.CourseActivity;
+import br.com.meacodeapp.meacodemobile.util.JsonConverter;
 
 public class ContentAdapter extends RecyclerView.Adapter<ContentAdapter.ContentHolder> implements Filterable {
 
-    Context context;
-    List<Course> courses;
+    List<Content> contents;
 
-    public ContentAdapter(Context context, List<Course> courses){
-        this.context = context;
-        this.courses = courses;
+    public ContentAdapter(List<Content> contents){
+        this.contents = contents;
     }
 
     public static class ContentHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         TextView name;
-        Context context;
+        Content content;
 
-        public ContentHolder(View itemView, Context context){
+        public ContentHolder(View itemView){
             super(itemView);
-            name = (TextView) itemView.findViewById(R.id.course_name);
+            name = itemView.findViewById(R.id.course_name);
             itemView.setOnClickListener(this);
         }
 
         @Override
         public void onClick(View view) {
-            Intent intent = new Intent(view.getContext(), CourseActivity.class);
+            Intent intent = new Intent(view.getContext(), ContentActivity.class);
+            intent.putExtra("content", JsonConverter.toJson(content));
             view.getContext().startActivity(intent);
         }
     }
@@ -52,18 +54,18 @@ public class ContentAdapter extends RecyclerView.Adapter<ContentAdapter.ContentH
             protected FilterResults performFiltering(CharSequence constraint) {
                 String query = constraint.toString();
 
-                List<Course> filteredCourses = courses;
+                List<Content> filteredContents = contents;
 
                 if(!query.isEmpty()){
-                    for(Course course: courses){
-                        if(course.getName().toLowerCase().contains(query.toLowerCase())){
-                            filteredCourses.add(course);
+                    for(Content content: contents){
+                        if(content.getTitle().toLowerCase().contains(query.toLowerCase())){
+                            filteredContents.add(content);
                         }
                     }
                 }
 
                 FilterResults filteredResults = new FilterResults();
-                filteredResults.values = filteredCourses;
+                filteredResults.values = filteredContents;
 
                 return filteredResults;
 
@@ -78,18 +80,19 @@ public class ContentAdapter extends RecyclerView.Adapter<ContentAdapter.ContentH
 
     @Override
     public void onBindViewHolder(@NonNull ContentHolder holder, int position) {
-        holder.name.setText(courses.get(position).getName());
+        holder.name.setText(contents.get(position).getTitle());
+        holder.content = contents.get(position);
     }
 
     @Override
     public int getItemCount() {
-        return courses.size();
+        return contents.size();
     }
 
     @NonNull
     @Override
     public ContentHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.adapter_course, parent, false);
-        return new ContentHolder(view, parent.getContext());
+        return new ContentHolder(view);
     }
 }
