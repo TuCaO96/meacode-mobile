@@ -51,9 +51,11 @@
             android:label="@string/title_activity_main"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".ui.activity.CourseActivity" />
-        <activity android:name=".ui.activity.LoginEmailActivity"
+        <activity
+            android:name=".ui.activity.LoginEmailActivity"
             android:label="@string/title_activity_login"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".ui.activity.ContentActivity"></activity>
     </application>
 
 </manifest>
