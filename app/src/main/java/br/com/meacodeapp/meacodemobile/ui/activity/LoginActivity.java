@@ -67,9 +67,9 @@ public class LoginActivity extends AppCompatActivity {
     @BindView(R.id.facebook_sign_in_button)
     LoginButton facebookLoginButton;
 
-    @BindView(R.id.google_sign_in_button)
+    /*@BindView(R.id.google_sign_in_button)
     SignInButton googleSignInButton;
-
+*/
     private final Context context = this;
 
     private GoogleSignInClient mGoogleSignInClient;
@@ -182,8 +182,8 @@ public class LoginActivity extends AppCompatActivity {
         GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this);
 
         // Set the dimensions of the sign-in button.
-        SignInButton signInButton = findViewById(R.id.google_sign_in_button);
-        signInButton.setSize(SignInButton.SIZE_STANDARD);
+//        SignInButton signInButton = findViewById(R.id.google_sign_in_button);
+//        signInButton.setSize(SignInButton.SIZE_STANDARD);
 
         facebookLoginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
             @Override
@@ -244,11 +244,11 @@ public class LoginActivity extends AppCompatActivity {
         }
     }
 
-    @OnClick(R.id.google_sign_in_button)
+    /*@OnClick(R.id.google_sign_in_button)
     public void googleLogin(){
         Intent signInIntent = mGoogleSignInClient.getSignInIntent();
         startActivityForResult(signInIntent, 9001);
-    }
+    }*/
 
     @OnClick(R.id.email_sign_in_button)
     public void emailLogin(){
