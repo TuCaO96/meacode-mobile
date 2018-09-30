@@ -83,11 +83,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
+                android:inputType="text"
                 android:text="@string/action_sign_in"
                 android:textStyle="bold" />
 
             <Button
                 android:id="@+id/email_sign_up_button"
+                android:inputType="text"
                 android:text="@string/action_sign_up"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
@@ -95,6 +97,7 @@
             <Button
                 android:id="@+id/email_forgot_button"
                 android:textAllCaps="true"
+                android:inputType="text"
                 android:text="Esqueci minha senha"
                 style="@style/PrimaryButton"
                 android:layout_width="match_parent"

@@ -61,7 +61,12 @@ public class LoginEmailActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_email);
         ButterKnife.bind(this);
-
+        toolbar_title.setTextSize(24);
+        email.setTextSize(21);
+        password.setTextSize(21);
+        emailSignInButton.setTextSize(21);
+        forgotButton.setTextSize(21);
+        emailSignUpButton.setTextSize(21);
         toolbar_title.setText("Entrar com email e senha");
     }
 
