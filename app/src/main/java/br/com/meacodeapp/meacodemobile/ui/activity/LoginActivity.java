@@ -61,8 +61,11 @@ public class LoginActivity extends AppCompatActivity {
     @BindView(R.id.tlbr_login_title)
     TextView loginTitle;
 
+    @BindView(R.id.email_sign_in_button)
+    Button loginButton;
+
     @BindView(R.id.facebook_sign_in_button)
-    LoginButton loginButton;
+    LoginButton facebookLoginButton;
 
     @BindView(R.id.google_sign_in_button)
     SignInButton googleSignInButton;
@@ -76,18 +79,38 @@ public class LoginActivity extends AppCompatActivity {
     private ActionBar ab;
     private TextView tv;
     private int actionBarTextSize = 24;
+    private int currentIncrease = 0;
+    private int maxIncrease = 2;
+    private int minIncrease = 0;
     private int textViewTextSize = 21;
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()){
             case R.id.tlbr_zoom_in:
+                if(currentIncrease == maxIncrease){
+                    new MaterialDialog.Builder(context)
+                            .title("Atenção")
+                            .content("Tamanho máximo para textos atingido :(")
+                            .positiveText(R.string.action_ok).show();
+                    return true;
+                }
+
+                currentIncrease++;
                 actionBarTextSize++;
                 textViewTextSize++;
                 setActionBarTextSizeSp(actionBarTextSize);
                 setTextViewTextSize(textViewTextSize);
                 return true;
             case R.id.tlbr_zoom_out:
+                if(currentIncrease == minIncrease){
+                    new MaterialDialog.Builder(context)
+                            .title("Atenção")
+                            .content("Tamanho mínimo para textos atingido :(")
+                            .positiveText(R.string.action_ok).show();
+                    return true;
+                }
+
                 actionBarTextSize--;
                 textViewTextSize--;
                 setActionBarTextSizeSp(actionBarTextSize);
@@ -117,6 +140,7 @@ public class LoginActivity extends AppCompatActivity {
         this.getSupportActionBar().setCustomView(v);
     }
     protected void setTextViewTextSize(int size){
+        facebookLoginButton.setTextSize(size);
         loginButton.setTextSize(size);
 //        googleSignInButton.setSize(size);
     }
@@ -160,7 +184,7 @@ public class LoginActivity extends AppCompatActivity {
         SignInButton signInButton = findViewById(R.id.google_sign_in_button);
         signInButton.setSize(SignInButton.SIZE_STANDARD);
 
-        loginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
+        facebookLoginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
             @Override
             public void onSuccess(LoginResult loginResult) {
                 mAccessToken = loginResult.getAccessToken();
