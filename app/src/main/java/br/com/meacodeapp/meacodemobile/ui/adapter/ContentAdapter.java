@@ -80,7 +80,7 @@ public class ContentAdapter extends RecyclerView.Adapter<ContentAdapter.ContentH
 
     @Override
     public void onBindViewHolder(@NonNull ContentHolder holder, int position) {
-        holder.name.setText(contents.get(position).getTitle());
+        holder.name.setText((position + 1) + " - " + contents.get(position).getTitle());
         holder.content = contents.get(position);
     }
 

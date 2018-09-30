@@ -29,6 +29,7 @@ public class ContentActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         content_text.setText(content.getText());
+        content_text.setTextSize(24);
     }
 
     @Override
