@@ -127,10 +127,16 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
         ButterKnife.bind(this);
 
+        SharedPreferences sharedPreferences = MeAcodeMobileApplication.getInstance().getSharedPreferences("session", Context.MODE_PRIVATE);
+
+        if(sharedPreferences.contains("token") && sharedPreferences.contains("user")){
+            Intent intent = new Intent(context, MainActivity.class);
+            startActivity(intent);
+            finish();
+        }
+
         toolbar = (Toolbar) findViewById(R.id.tlbr_login);
         setSupportActionBar(toolbar);
-
-        getSupportActionBar().setTitle("Test");
 
         setActionBarTextSizeSp(actionBarTextSize);
         setTextViewTextSize(textViewTextSize);
@@ -246,10 +252,17 @@ public class LoginActivity extends AppCompatActivity {
         parameters.setProperty("token", token);
         final Context context = this;
 
+        final MaterialDialog materialDialog = new MaterialDialog.Builder(this)
+                .title("Carregando")
+                .content("Aguarde mais alguns instantes...")
+                .progress(true,0,false)
+                .show();
+
         MeAcodeMobileApplication.getInstance().getAuthService().postSocialSignIn(parameters)
                 .enqueue(new Callback<RestParameters>() {
                     @Override
                     public void onResponse(Call<RestParameters> call, Response<RestParameters> response) {
+                        materialDialog.dismiss();
                         if(response.code() == 200){
                             final SharedPreferences sharedPreferences = MeAcodeMobileApplication
                                     .getInstance()
@@ -262,6 +275,7 @@ public class LoginActivity extends AppCompatActivity {
                             edit.putString("user",response.body().getProperty("user"));
                             edit.apply();
 
+
                             Intent intent = new Intent(context, MainActivity.class);
                             startActivity(intent);
                             finish();
@@ -270,6 +284,8 @@ public class LoginActivity extends AppCompatActivity {
 
                     @Override
                     public void onFailure(Call<RestParameters> call, Throwable t) {
+                        materialDialog.dismiss();
+
                         new MaterialDialog.Builder(context)
                                 .title("Erro")
                                 .content("Ocorreu um erro ao autenticar sua conta. Por favor, tente" +

@@ -34,6 +34,9 @@ public class LoginEmailActivity extends AppCompatActivity {
     @BindView(R.id.email_forgot_button)
     Button forgotButton;
 
+    @BindView(R.id.tlbr_login_title)
+    TextView toolbar_title;
+
     @BindView(R.id.email)
     EditText email;
 
@@ -58,6 +61,8 @@ public class LoginEmailActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_email);
         ButterKnife.bind(this);
+
+        toolbar_title.setText("Entrar com email e senha");
     }
 
     @OnClick(R.id.email_forgot_button)
@@ -93,10 +98,19 @@ public class LoginEmailActivity extends AppCompatActivity {
         final Context context = this;
         parameters.setProperty("email", email.getText().toString());
         parameters.setProperty("password", password.getText().toString());
+
+        final MaterialDialog materialDialog = new MaterialDialog.Builder(this)
+                .title("Carregando")
+                .content("Aguarde mais alguns instantes...")
+                .progress(true,0,false)
+                .show();
+
         MeAcodeMobileApplication.getInstance().getAuthService().postSignUp(parameters)
                 .enqueue(new Callback<RestParameters>() {
                     @Override
                     public void onResponse(Call<RestParameters> call, Response<RestParameters> response) {
+                        materialDialog.dismiss();
+
                         if (response.code() == 200){
                             final SharedPreferences sharedPreferences = MeAcodeMobileApplication
                                     .getInstance()
@@ -115,6 +129,8 @@ public class LoginEmailActivity extends AppCompatActivity {
 
                     @Override
                     public void onFailure(Call<RestParameters> call, Throwable t) {
+                        materialDialog.dismiss();
+
                         new MaterialDialog.Builder(context)
                                 .title("Erro")
                                 .content("Ocorreu um erro ao criar conta. Por favor, verifique" +
@@ -130,10 +146,18 @@ public class LoginEmailActivity extends AppCompatActivity {
         parameters.setProperty("password", password.getText().toString());
         final Context context = this;
 
+        final MaterialDialog materialDialog = new MaterialDialog.Builder(this)
+                .title("Carregando")
+                .content("Aguarde mais alguns instantes...")
+                .progress(true,0,false)
+                .show();
+
         MeAcodeMobileApplication.getInstance().getAuthService().postSignIn(parameters)
                 .enqueue(new Callback<RestParameters>() {
                     @Override
                     public void onResponse(Call<RestParameters> call, Response<RestParameters> response) {
+                        materialDialog.dismiss();
+
                         if(response.code() == 200){
                             final SharedPreferences sharedPreferences = MeAcodeMobileApplication
                                     .getInstance()
@@ -154,6 +178,8 @@ public class LoginEmailActivity extends AppCompatActivity {
 
                     @Override
                     public void onFailure(Call<RestParameters> call, Throwable t) {
+                        materialDialog.dismiss();
+
                         new MaterialDialog.Builder(context)
                                 .title("Erro")
                                 .content("Ocorreu um erro ao autenticar sua conta. Por favor, verifique" +

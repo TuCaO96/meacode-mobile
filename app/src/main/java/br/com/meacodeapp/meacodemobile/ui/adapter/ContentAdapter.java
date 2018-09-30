@@ -35,7 +35,7 @@ public class ContentAdapter extends RecyclerView.Adapter<ContentAdapter.ContentH
 
         public ContentHolder(View itemView){
             super(itemView);
-            name = itemView.findViewById(R.id.course_name);
+            name = itemView.findViewById(R.id.content_adapter_name);
             itemView.setOnClickListener(this);
         }
 
@@ -92,7 +92,7 @@ public class ContentAdapter extends RecyclerView.Adapter<ContentAdapter.ContentH
     @NonNull
     @Override
     public ContentHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.adapter_course, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.adapter_content, parent, false);
         return new ContentHolder(view);
     }
 }

@@ -64,10 +64,19 @@ public class SearchFragment extends Fragment {
     public void searchCourses(){
 
         final Context context = getContext();
+
+        final MaterialDialog materialDialog = new MaterialDialog.Builder(getActivity())
+                .title("Carregando")
+                .content("Aguarde mais alguns instantes...")
+                .progress(true,0,false)
+                .show();
+
         MeAcodeMobileApplication.getInstance().getCourseService().getCourses()
                 .enqueue(new Callback<List<Course>>() {
                     @Override
                     public void onResponse(Call<List<Course>> call, Response<List<Course>> response) {
+                        materialDialog.dismiss();
+
                         if(response.code() == 200){
                             courses = response.body();
                             CourseAdapter adapter = new CourseAdapter(getContext(), courses);
@@ -79,6 +88,8 @@ public class SearchFragment extends Fragment {
 
                     @Override
                     public void onFailure(Call<List<Course>> call, Throwable t) {
+                        materialDialog.dismiss();
+
                         new MaterialDialog.Builder(context)
                                 .title("Erro")
                                 .content("Ocorreu um erro ao buscar cursos. Por favor, tente" +

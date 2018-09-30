@@ -4,6 +4,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -35,10 +36,22 @@ public class CourseActivity extends AppCompatActivity {
         course = JsonConverter.fromJson(bundle.getString("course"), Course.class);
         ButterKnife.bind(this);
         name.setText(course.getName());
-
+        getSupportActionBar().setTitle(course.getName());
         ContentAdapter contentAdapter = new ContentAdapter(course.getContents());
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         contents.setLayoutManager(layoutManager);
         contents.setAdapter(contentAdapter);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // handle arrow click here
+        if (item.getItemId() == android.R.id.home) {
+            finish(); // close this activity and return to preview activity (if there is any)
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 }
