@@ -111,6 +111,7 @@ public class LoginActivity extends AppCompatActivity {
                     return true;
                 }
 
+                currentIncrease--;
                 actionBarTextSize--;
                 textViewTextSize--;
                 setActionBarTextSizeSp(actionBarTextSize);
