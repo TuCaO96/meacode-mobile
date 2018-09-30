@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
 
 import java.util.List;
@@ -65,17 +66,23 @@ public class SearchFragment extends Fragment {
 
         final Context context = getContext();
 
-        final MaterialDialog materialDialog = new MaterialDialog.Builder(getActivity())
+        final MaterialDialog.Builder materialDialog = new MaterialDialog.Builder(getActivity())
                 .title("Carregando")
                 .content("Aguarde mais alguns instantes...")
-                .progress(true,0,false)
-                .show();
+                .progress(true,0,false);
+
+        final MaterialDialog dialog = materialDialog.build();
+        dialog.getTitleView().setTextSize(24);
+        dialog.getContentView().setTextSize(21);
+        dialog.getActionButton(DialogAction.NEGATIVE).setTextSize(21);
+        dialog.getActionButton(DialogAction.POSITIVE).setTextSize(21);
+        dialog.show();
 
         MeAcodeMobileApplication.getInstance().getCourseService().getCourses()
                 .enqueue(new Callback<List<Course>>() {
                     @Override
                     public void onResponse(Call<List<Course>> call, Response<List<Course>> response) {
-                        materialDialog.dismiss();
+                        dialog.dismiss();
 
                         if(response.code() == 200){
                             courses = response.body();
@@ -88,12 +95,19 @@ public class SearchFragment extends Fragment {
 
                     @Override
                     public void onFailure(Call<List<Course>> call, Throwable t) {
-                        materialDialog.dismiss();
+                        dialog.dismiss();
 
-                        new MaterialDialog.Builder(context)
+                        MaterialDialog.Builder dialog1 = new MaterialDialog.Builder(context)
                                 .title("Erro")
                                 .content("Ocorreu um erro ao buscar cursos. Por favor, tente" +
-                                        " novamente mais tarde").show();
+                                        " novamente mais tarde");
+
+                        final MaterialDialog dialog = dialog1.build();
+                        dialog.getTitleView().setTextSize(24);
+                        dialog.getContentView().setTextSize(21);
+                        dialog.getActionButton(DialogAction.NEGATIVE).setTextSize(21);
+                        dialog.getActionButton(DialogAction.POSITIVE).setTextSize(21);
+                        dialog.show();
                     }
                 });
     }

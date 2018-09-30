@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
 
 import br.com.meacodeapp.meacodemobile.R;
@@ -83,26 +84,47 @@ public class NewSuggestionFragment extends Fragment {
                     @Override
                     public void onResponse(Call<Suggestion> call, Response<Suggestion> response) {
                         if(response.code() == 201){
-                            new MaterialDialog.Builder(context)
+                            MaterialDialog.Builder materialDialog = new MaterialDialog.Builder(context)
                                     .title("Sucesso")
                                     .content("Sua sugestão foi enviada aos devidos responsáveis." +
                                             " Caso seja aprovada, o curso será disponibilizado em " +
-                                            "nossa plataforma! :)").show();
+                                            "nossa plataforma! :)");
+
+                            final MaterialDialog dialog = materialDialog.build();
+                            dialog.getTitleView().setTextSize(24);
+                            dialog.getContentView().setTextSize(21);
+                            dialog.getActionButton(DialogAction.NEGATIVE).setTextSize(21);
+                            dialog.getActionButton(DialogAction.POSITIVE).setTextSize(21);
+                            dialog.show();
                         }
                         else{
-                            new MaterialDialog.Builder(context)
+                            MaterialDialog.Builder materialDialog = new MaterialDialog.Builder(context)
                                     .title("Erro")
                                     .content("Ocorreu um erro ao enviar sua sugestão. Por favor, tente" +
-                                            " novamente mais tarde.").show();
+                                            " novamente mais tarde.");
+
+                            final MaterialDialog dialog = materialDialog.build();
+                            dialog.getTitleView().setTextSize(24);
+                            dialog.getContentView().setTextSize(21);
+                            dialog.getActionButton(DialogAction.NEGATIVE).setTextSize(21);
+                            dialog.getActionButton(DialogAction.POSITIVE).setTextSize(21);
+                            dialog.show();
                         }
                     }
 
                     @Override
                     public void onFailure(Call<Suggestion> call, Throwable t) {
-                        new MaterialDialog.Builder(context)
+                        MaterialDialog.Builder materialDialog = new MaterialDialog.Builder(context)
                                 .title("Erro")
                                 .content("Ocorreu um erro ao enviar sua sugestão. Por favor, tente" +
-                                        " novamente mais tarde.").show();
+                                        " novamente mais tarde.");
+
+                        final MaterialDialog dialog = materialDialog.build();
+                        dialog.getTitleView().setTextSize(24);
+                        dialog.getContentView().setTextSize(21);
+                        dialog.getActionButton(DialogAction.NEGATIVE).setTextSize(21);
+                        dialog.getActionButton(DialogAction.POSITIVE).setTextSize(21);
+                        dialog.show();
                     }
                 });
     }

@@ -94,7 +94,7 @@ public class HomeFragment extends Fragment {
 
     @OnClick(R.id.logout_card)
     public void logoutClick(){
-        final MaterialDialog materialDialog = new MaterialDialog.Builder(getContext())
+        final MaterialDialog.Builder materialDialog = new MaterialDialog.Builder(getContext())
                 .title("Atenção")
                 .content("Tem certeza que deseja sair de sua conta do aplicativo?")
                 .positiveText("SIM")
@@ -113,8 +113,13 @@ public class HomeFragment extends Fragment {
                     public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
                         dialog.dismiss();
                     }
-                })
-                .show();
+                });
+        final MaterialDialog dialog = materialDialog.build();
+        dialog.getTitleView().setTextSize(24);
+        dialog.getContentView().setTextSize(21);
+        dialog.getActionButton(DialogAction.NEGATIVE).setTextSize(21);
+        dialog.getActionButton(DialogAction.POSITIVE).setTextSize(21);
+        dialog.show();
     }
 
     @OnClick(R.id.new_content_card)

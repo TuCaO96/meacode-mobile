@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
 
 import br.com.meacodeapp.meacodemobile.R;
@@ -81,18 +82,32 @@ public class LoginEmailActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(Call<User> call, Response<User> response) {
                         if(response.code() == 200){
-                            new MaterialDialog.Builder(context)
+                            MaterialDialog.Builder materialDialog = new MaterialDialog.Builder(context)
                                     .title("Um email foi enviado à você")
-                                    .content("Abra o link do email para redefinir sua senha.").show();
+                                    .content("Abra o link do email para redefinir sua senha.");
+
+                            final MaterialDialog dialog = materialDialog.build();
+                            dialog.getTitleView().setTextSize(24);
+                            dialog.getContentView().setTextSize(21);
+                            dialog.getActionButton(DialogAction.NEGATIVE).setTextSize(21);
+                            dialog.getActionButton(DialogAction.POSITIVE).setTextSize(21);
+                            dialog.show();
                         }
                     }
 
                     @Override
                     public void onFailure(Call<User> call, Throwable t) {
-                        new MaterialDialog.Builder(context)
+                        MaterialDialog.Builder materialDialog = new MaterialDialog.Builder(context)
                                 .title("Erro")
                                 .content("Ocorreu um erro ao criar conta. Por favor, verifique" +
-                                        "se o email e senha são válidos.").show();
+                                        "se o email e senha são válidos.");
+
+                        final MaterialDialog dialog = materialDialog.build();
+                        dialog.getTitleView().setTextSize(24);
+                        dialog.getContentView().setTextSize(21);
+                        dialog.getActionButton(DialogAction.NEGATIVE).setTextSize(21);
+                        dialog.getActionButton(DialogAction.POSITIVE).setTextSize(21);
+                        dialog.show();
                     }
                 });
     }
@@ -136,10 +151,17 @@ public class LoginEmailActivity extends AppCompatActivity {
                     public void onFailure(Call<RestParameters> call, Throwable t) {
                         materialDialog.dismiss();
 
-                        new MaterialDialog.Builder(context)
+                        MaterialDialog.Builder materialDialog1 = new MaterialDialog.Builder(context)
                                 .title("Erro")
                                 .content("Ocorreu um erro ao criar conta. Por favor, verifique" +
-                                        "se o email e senha são válidos.").show();
+                                        "se o email e senha são válidos.");
+
+                        final MaterialDialog dialog = materialDialog1.build();
+                        dialog.getTitleView().setTextSize(24);
+                        dialog.getContentView().setTextSize(21);
+                        dialog.getActionButton(DialogAction.NEGATIVE).setTextSize(21);
+                        dialog.getActionButton(DialogAction.POSITIVE).setTextSize(21);
+                        dialog.show();
                     }
                 });
     }
@@ -151,17 +173,23 @@ public class LoginEmailActivity extends AppCompatActivity {
         parameters.setProperty("password", password.getText().toString());
         final Context context = this;
 
-        final MaterialDialog materialDialog = new MaterialDialog.Builder(this)
+        final MaterialDialog.Builder materialDialog = new MaterialDialog.Builder(this)
                 .title("Carregando")
                 .content("Aguarde mais alguns instantes...")
-                .progress(true,0,false)
-                .show();
+                .progress(true,0,false);
+
+        final MaterialDialog dialog = materialDialog.build();
+        dialog.getTitleView().setTextSize(24);
+        dialog.getContentView().setTextSize(21);
+        dialog.getActionButton(DialogAction.NEGATIVE).setTextSize(21);
+        dialog.getActionButton(DialogAction.POSITIVE).setTextSize(21);
+        dialog.show();
 
         MeAcodeMobileApplication.getInstance().getAuthService().postSignIn(parameters)
                 .enqueue(new Callback<RestParameters>() {
                     @Override
                     public void onResponse(Call<RestParameters> call, Response<RestParameters> response) {
-                        materialDialog.dismiss();
+                        dialog.dismiss();
 
                         if(response.code() == 200){
                             final SharedPreferences sharedPreferences = MeAcodeMobileApplication
@@ -183,12 +211,19 @@ public class LoginEmailActivity extends AppCompatActivity {
 
                     @Override
                     public void onFailure(Call<RestParameters> call, Throwable t) {
-                        materialDialog.dismiss();
+                        dialog.dismiss();
 
-                        new MaterialDialog.Builder(context)
+                        MaterialDialog.Builder materialDialog1 = new MaterialDialog.Builder(context)
                                 .title("Erro")
                                 .content("Ocorreu um erro ao autenticar sua conta. Por favor, verifique" +
-                                        "se o email e senha são válidos.").show();
+                                        "se o email e senha são válidos.");
+
+                        final MaterialDialog dialog = materialDialog1.build();
+                        dialog.getTitleView().setTextSize(24);
+                        dialog.getContentView().setTextSize(21);
+                        dialog.getActionButton(DialogAction.NEGATIVE).setTextSize(21);
+                        dialog.getActionButton(DialogAction.POSITIVE).setTextSize(21);
+                        dialog.show();
                     }
                 });
     }

@@ -19,6 +19,7 @@ import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
@@ -263,11 +264,18 @@ public class LoginActivity extends AppCompatActivity {
         } catch (ApiException e) {
             // The ApiException status code indicates the detailed failure reason.
             // Please refer to the GoogleSignInStatusCodes class reference for more information.
-            new MaterialDialog.Builder(context)
+            MaterialDialog.Builder materialDialog = new MaterialDialog.Builder(context)
                     .title("Erro")
                     .content("Ocorreu um erro ao buscar informações de sua conta." +
                             "Por favor, tente novamente mais tarde.")
-                    .positiveText(R.string.action_ok).show();
+                    .positiveText(R.string.action_ok);
+
+            final MaterialDialog dialog = materialDialog.build();
+            dialog.getTitleView().setTextSize(24);
+            dialog.getContentView().setTextSize(21);
+            dialog.getActionButton(DialogAction.NEGATIVE).setTextSize(21);
+            dialog.getActionButton(DialogAction.POSITIVE).setTextSize(21);
+            dialog.show();
         }
     }
 
@@ -277,17 +285,23 @@ public class LoginActivity extends AppCompatActivity {
         parameters.setProperty("token", token);
         final Context context = this;
 
-        final MaterialDialog materialDialog = new MaterialDialog.Builder(this)
+        final MaterialDialog.Builder materialDialog = new MaterialDialog.Builder(this)
                 .title("Carregando")
                 .content("Aguarde mais alguns instantes...")
-                .progress(true,0,false)
-                .show();
+                .progress(true,0,false);
+
+        final MaterialDialog dialog = materialDialog.build();
+        dialog.getTitleView().setTextSize(24);
+        dialog.getContentView().setTextSize(21);
+        dialog.getActionButton(DialogAction.NEGATIVE).setTextSize(21);
+        dialog.getActionButton(DialogAction.POSITIVE).setTextSize(21);
+        dialog.show();
 
         MeAcodeMobileApplication.getInstance().getAuthService().postSocialSignIn(parameters)
                 .enqueue(new Callback<RestParameters>() {
                     @Override
                     public void onResponse(Call<RestParameters> call, Response<RestParameters> response) {
-                        materialDialog.dismiss();
+                        dialog.dismiss();
                         if(response.code() == 200){
                             final SharedPreferences sharedPreferences = MeAcodeMobileApplication
                                     .getInstance()
@@ -309,12 +323,19 @@ public class LoginActivity extends AppCompatActivity {
 
                     @Override
                     public void onFailure(Call<RestParameters> call, Throwable t) {
-                        materialDialog.dismiss();
+                        dialog.dismiss();
 
-                        new MaterialDialog.Builder(context)
+                        MaterialDialog.Builder materialDialog1 = new MaterialDialog.Builder(context)
                                 .title("Erro")
                                 .content("Ocorreu um erro ao autenticar sua conta. Por favor, tente" +
-                                        "novamente mais tarde.").positiveText(R.string.action_ok).show();
+                                        "novamente mais tarde.").positiveText(R.string.action_ok);
+
+                        final MaterialDialog dialog = materialDialog1.build();
+                        dialog.getTitleView().setTextSize(24);
+                        dialog.getContentView().setTextSize(21);
+                        dialog.getActionButton(DialogAction.NEGATIVE).setTextSize(21);
+                        dialog.getActionButton(DialogAction.POSITIVE).setTextSize(21);
+                        dialog.show();
                     }
                 });
     }
