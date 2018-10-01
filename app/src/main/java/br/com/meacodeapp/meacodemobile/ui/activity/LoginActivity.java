@@ -4,18 +4,24 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
+import android.support.design.internal.BottomNavigationMenuView;
+import android.support.design.internal.NavigationMenuView;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.view.menu.MenuView;
 import android.support.v7.widget.Toolbar;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -162,8 +168,14 @@ public class LoginActivity extends AppCompatActivity {
         }
 
         toolbar = (Toolbar) findViewById(R.id.tlbr_login);
-        setSupportActionBar(toolbar);
+        for (int i = 0; i < toolbar.getChildCount(); i++) {
+            if(toolbar.getChildAt(i) instanceof ImageButton){
+                toolbar.getChildAt(i).setScaleX(1.5f);
+                toolbar.getChildAt(i).setScaleY(1.5f);
+            }
+        }
 
+        setSupportActionBar(toolbar);
         setActionBarTextSizeSp(actionBarTextSize);
         setTextViewTextSize(textViewTextSize);
 

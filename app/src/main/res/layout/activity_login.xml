@@ -12,8 +12,8 @@
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/tlbr_login"
-        android:theme="@style/MeAcodeTheme"
-        app:popupTheme="@style/MeAcodeTheme"
+        android:theme="@style/MeAcodeTheme.Toolbar"
+        app:popupTheme="@style/MeAcodeTheme.Toolbar"
         android:layout_width="match_parent"
         android:layout_height="@dimen/app_bar_height"
         android:background="@color/colorPrimary"
