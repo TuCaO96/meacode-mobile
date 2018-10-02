@@ -72,6 +72,18 @@ public class NewSuggestionFragment extends Fragment {
 
         User user = JsonConverter.fromJson(sharedPreferences.getString("user", null), User.class);
 
+        final MaterialDialog.Builder materialDialog = new MaterialDialog.Builder(getActivity())
+                .title("Carregando")
+                .content("Aguarde mais alguns instantes...")
+                .progress(true,0,false);
+
+        final MaterialDialog dialog = materialDialog.build();
+        dialog.getTitleView().setTextSize(24);
+        dialog.getContentView().setTextSize(21);
+        dialog.getActionButton(DialogAction.NEGATIVE).setTextSize(21);
+        dialog.getActionButton(DialogAction.POSITIVE).setTextSize(21);
+        dialog.show();
+
         RestParameters parameters = new RestParameters();
         parameters.setProperty("title", title.getText().toString());
         parameters.setProperty("text", text.getText().toString());
@@ -83,12 +95,14 @@ public class NewSuggestionFragment extends Fragment {
                 .enqueue(new Callback<Suggestion>() {
                     @Override
                     public void onResponse(Call<Suggestion> call, Response<Suggestion> response) {
+                        dialog.dismiss();
                         if(response.code() == 201){
                             MaterialDialog.Builder materialDialog = new MaterialDialog.Builder(context)
                                     .title("Sucesso")
                                     .content("Sua sugestão foi enviada aos devidos responsáveis." +
                                             " Caso seja aprovada, o curso será disponibilizado em " +
-                                            "nossa plataforma! :)");
+                                            "nossa plataforma! :)")
+                                    .positiveText("OK");
 
                             final MaterialDialog dialog = materialDialog.build();
                             dialog.getTitleView().setTextSize(24);
@@ -101,7 +115,8 @@ public class NewSuggestionFragment extends Fragment {
                             MaterialDialog.Builder materialDialog = new MaterialDialog.Builder(context)
                                     .title("Erro")
                                     .content("Ocorreu um erro ao enviar sua sugestão. Por favor, tente" +
-                                            " novamente mais tarde.");
+                                            " novamente mais tarde.")
+                                    .positiveText("OK");
 
                             final MaterialDialog dialog = materialDialog.build();
                             dialog.getTitleView().setTextSize(24);
@@ -114,6 +129,7 @@ public class NewSuggestionFragment extends Fragment {
 
                     @Override
                     public void onFailure(Call<Suggestion> call, Throwable t) {
+                        dialog.dismiss();
                         MaterialDialog.Builder materialDialog = new MaterialDialog.Builder(context)
                                 .title("Erro")
                                 .content("Ocorreu um erro ao enviar sua sugestão. Por favor, tente" +

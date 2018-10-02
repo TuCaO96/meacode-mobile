@@ -100,7 +100,8 @@ public class SearchFragment extends Fragment {
                         MaterialDialog.Builder dialog1 = new MaterialDialog.Builder(context)
                                 .title("Erro")
                                 .content("Ocorreu um erro ao buscar cursos. Por favor, tente" +
-                                        " novamente mais tarde");
+                                        " novamente mais tarde")
+                                .positiveText("OK");
 
                         final MaterialDialog dialog = dialog1.build();
                         dialog.getTitleView().setTextSize(24);
