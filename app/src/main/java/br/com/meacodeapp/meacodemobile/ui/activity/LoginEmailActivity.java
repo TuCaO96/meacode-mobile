@@ -84,7 +84,8 @@ public class LoginEmailActivity extends AppCompatActivity {
                         if(response.code() == 200){
                             MaterialDialog.Builder materialDialog = new MaterialDialog.Builder(context)
                                     .title("Um email foi enviado à você")
-                                    .content("Abra o link do email para redefinir sua senha.");
+                                    .content("Abra o link do email para redefinir sua senha.")
+                                    .positiveText("OK");
 
                             final MaterialDialog dialog = materialDialog.build();
                             dialog.getTitleView().setTextSize(24);
@@ -100,7 +101,8 @@ public class LoginEmailActivity extends AppCompatActivity {
                         MaterialDialog.Builder materialDialog = new MaterialDialog.Builder(context)
                                 .title("Erro")
                                 .content("Ocorreu um erro ao criar conta. Por favor, verifique" +
-                                        "se o email e senha são válidos.");
+                                        "se o email e senha são válidos.")
+                                .positiveText("OK");
 
                         final MaterialDialog dialog = materialDialog.build();
                         dialog.getTitleView().setTextSize(24);
@@ -154,7 +156,8 @@ public class LoginEmailActivity extends AppCompatActivity {
                         MaterialDialog.Builder materialDialog1 = new MaterialDialog.Builder(context)
                                 .title("Erro")
                                 .content("Ocorreu um erro ao criar conta. Por favor, verifique" +
-                                        "se o email e senha são válidos.");
+                                        "se o email e senha são válidos.")
+                                .positiveText("OK");
 
                         final MaterialDialog dialog = materialDialog1.build();
                         dialog.getTitleView().setTextSize(24);
@@ -216,7 +219,8 @@ public class LoginEmailActivity extends AppCompatActivity {
                         MaterialDialog.Builder materialDialog1 = new MaterialDialog.Builder(context)
                                 .title("Erro")
                                 .content("Ocorreu um erro ao autenticar sua conta. Por favor, verifique" +
-                                        "se o email e senha são válidos.");
+                                        "se o email e senha são válidos.")
+                                .positiveText("OK");
 
                         final MaterialDialog dialog = materialDialog1.build();
                         dialog.getTitleView().setTextSize(24);

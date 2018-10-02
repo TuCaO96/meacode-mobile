@@ -234,7 +234,7 @@ public class LoginActivity extends AppCompatActivity {
                         catch (JSONException e){
                             new MaterialDialog.Builder(context).title("Erro ao buscar informações" +
                                     "do Facebook. Por favor, tente novamente mais tarde")
-                                    .content(e.getMessage()).show();
+                                    .content(e.getMessage()).positiveText("OK").show();
                         }
                     }
                 });
