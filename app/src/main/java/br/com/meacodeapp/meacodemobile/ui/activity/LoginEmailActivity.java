@@ -29,9 +29,6 @@ public class LoginEmailActivity extends AppCompatActivity {
     @BindView(R.id.email_sign_in)
     Button emailSignInButton;
 
-    @BindView(R.id.email_sign_up_button)
-    Button emailSignUpButton;
-
     @BindView(R.id.email_forgot_button)
     Button forgotButton;
 
@@ -53,7 +50,6 @@ public class LoginEmailActivity extends AppCompatActivity {
         email.setTextSize(size);
         password.setTextSize(size);
         emailSignInButton.setTextSize(size);
-        emailSignUpButton.setTextSize(size);
         forgotButton.setTextSize(size);
     }
 
@@ -67,8 +63,7 @@ public class LoginEmailActivity extends AppCompatActivity {
         password.setTextSize(21);
         emailSignInButton.setTextSize(21);
         forgotButton.setTextSize(21);
-        emailSignUpButton.setTextSize(21);
-        toolbar_title.setText("Entrar com email e senha");
+        toolbar_title.setText(R.string.title_login_email);
     }
 
     @OnClick(R.id.email_forgot_button)
@@ -114,24 +109,29 @@ public class LoginEmailActivity extends AppCompatActivity {
                 });
     }
 
-    @OnClick(R.id.email_sign_up_button)
     public void signUp(){
         RestParameters parameters = new RestParameters();
         final Context context = this;
         parameters.setProperty("email", email.getText().toString());
         parameters.setProperty("password", password.getText().toString());
 
-        final MaterialDialog materialDialog = new MaterialDialog.Builder(this)
+        final MaterialDialog.Builder materialDialog = new MaterialDialog.Builder(this)
                 .title("Carregando")
                 .content("Aguarde mais alguns instantes...")
-                .progress(true,0,false)
-                .show();
+                .progress(true,0,false);
+
+        final MaterialDialog dialog = materialDialog.build();
+        dialog.getTitleView().setTextSize(24);
+        dialog.getContentView().setTextSize(21);
+        dialog.getActionButton(DialogAction.NEGATIVE).setTextSize(21);
+        dialog.getActionButton(DialogAction.POSITIVE).setTextSize(21);
+        dialog.show();
 
         MeAcodeMobileApplication.getInstance().getAuthService().postSignUp(parameters)
                 .enqueue(new Callback<RestParameters>() {
                     @Override
                     public void onResponse(Call<RestParameters> call, Response<RestParameters> response) {
-                        materialDialog.dismiss();
+                        dialog.dismiss();
 
                         if (response.code() == 200){
                             final SharedPreferences sharedPreferences = MeAcodeMobileApplication
@@ -151,7 +151,7 @@ public class LoginEmailActivity extends AppCompatActivity {
 
                     @Override
                     public void onFailure(Call<RestParameters> call, Throwable t) {
-                        materialDialog.dismiss();
+                        dialog.dismiss();
 
                         MaterialDialog.Builder materialDialog1 = new MaterialDialog.Builder(context)
                                 .title("Erro")
@@ -209,6 +209,9 @@ public class LoginEmailActivity extends AppCompatActivity {
                             Intent intent = new Intent(context, MainActivity.class);
                             startActivity(intent);
                             finish();
+                        }
+                        else{
+                            signUp();
                         }
                     }
 
