@@ -6,6 +6,7 @@
     <string name="fb_login_protocol_scheme">fb525990551163753</string>
 
     <!-- Strings related to login -->
+    <string name="title_new_suggestion">Nova Sugestão</string>
     <string name="prompt_suggestion_title">Título da Sugestão</string>
     <string name="prompt_suggestion_text">Texto</string>
     <string name="action_ok">OK</string>
