@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
+import com.bumptech.glide.Glide;
 
 import br.com.meacodeapp.meacodemobile.R;
 import br.com.meacodeapp.meacodemobile.app.MeAcodeMobileApplication;
@@ -75,6 +76,9 @@ public class ProfileFragment extends Fragment {
                     public void onResponse(Call<User> call, Response<User> response) {
                         nome.setText(response.body().getUsername());
                         email.setText(response.body().getEmail());
+                        if(!response.body().getImage_url().isEmpty()){
+                            Glide.with(getContext()).load(response.body().getImage_url()).into(imagem);
+                        }
                     }
 
                     @Override

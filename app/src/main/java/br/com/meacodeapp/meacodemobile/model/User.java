@@ -7,6 +7,7 @@ package br.com.meacodeapp.meacodemobile.model;
 public class User {
     private int id;
     private String username;
+    private String image_url;
     private String email;
     private String type;
     private String status;
@@ -39,5 +40,13 @@ public class User {
 
     public String getUpdated_at() {
         return updated_at;
+    }
+
+    public String getImage_url() {
+        return image_url;
+    }
+
+    public void setImage_url(String image_url) {
+        this.image_url = image_url;
     }
 }
