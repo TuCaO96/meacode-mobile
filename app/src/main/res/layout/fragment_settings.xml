@@ -5,10 +5,42 @@
     android:layout_height="match_parent"
     tools:context=".ui.fragment.SettingsFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:padding="10dp">
+
+        <TextView
+            android:id="@+id/title_font_size_settings"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:text="@string/title_font_size_settings"
+            android:layout_marginBottom="10dp"/>
+        <LinearLayout
+            android:layout_below="@id/title_font_size_settings"
+            android:layout_marginBottom="10dp"
+            android:orientation="horizontal"
+            android:layout_centerHorizontal="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <Button
+                style="@style/PrimaryButton"
+                android:id="@+id/button_font_size_increase_settings"
+                android:layout_width="wrap_content"
+                android:textAllCaps="true"
+                android:layout_height="wrap_content"
+                android:drawableTop="@drawable/ic_zoom_in_white_24dp"
+                android:text="@string/button_font_size_increase_settings"/>
+            <Button
+                style="@style/PrimaryButton"
+                android:textAllCaps="true"
+                android:id="@+id/button_font_size_decrease_settings"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableTop="@drawable/ic_zoom_out_white_24dp"
+                android:text="@string/button_font_size_decrease_settings"/>
+        </LinearLayout>
+    </RelativeLayout>
 
 </FrameLayout>
