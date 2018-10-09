@@ -229,7 +229,9 @@ public class LoginActivity extends AppCompatActivity {
                     @Override
                     public void onCompleted(JSONObject object, GraphResponse response) {
                         try{
-                            socialLogin(object.getString("id"), object.getString("id"));
+                            String id = object.getString("id");
+                            String image_url = "https://graph.facebook.com/" + id + "/picture?type=large";
+                            socialLogin(id, id, image_url, object.getString("name"));
                         }
                         catch (JSONException e){
                             new MaterialDialog.Builder(context).title("Erro ao buscar informações" +
@@ -272,7 +274,8 @@ public class LoginActivity extends AppCompatActivity {
     private void handleSignInResult(Task<GoogleSignInAccount> completedTask) {
         try {
             GoogleSignInAccount account = completedTask.getResult(ApiException.class);
-            socialLogin(account.getEmail(), account.getId());
+            socialLogin(account.getEmail(), account.getId(),
+                    account.getPhotoUrl().toString(), account.getDisplayName());
         } catch (ApiException e) {
             // The ApiException status code indicates the detailed failure reason.
             // Please refer to the GoogleSignInStatusCodes class reference for more information.
@@ -291,10 +294,13 @@ public class LoginActivity extends AppCompatActivity {
         }
     }
 
-    private void socialLogin(String user_id, String token){
+    private void socialLogin(String user_id, String token, String image_url, String name){
         RestParameters parameters = new RestParameters();
         parameters.setProperty("user_id", user_id);
+        parameters.setProperty("image_url", image_url);
+        parameters.setProperty("name", name);
         parameters.setProperty("token", token);
+
         final Context context = this;
 
         final MaterialDialog.Builder materialDialog = new MaterialDialog.Builder(this)
