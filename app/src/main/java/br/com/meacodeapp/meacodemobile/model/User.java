@@ -6,6 +6,8 @@ package br.com.meacodeapp.meacodemobile.model;
 
 public class User {
     private int id;
+    private String first_name;
+    private String last_name;
     private String username;
     private String image_url;
     private String email;
@@ -46,7 +48,15 @@ public class User {
         return image_url;
     }
 
-    public void setImage_url(String image_url) {
-        this.image_url = image_url;
+    public String getFirst_name() {
+        return first_name;
+    }
+
+    public String getLast_name() {
+        return last_name;
+    }
+
+    public String getFullName(){
+        return first_name + " " + last_name;
     }
 }

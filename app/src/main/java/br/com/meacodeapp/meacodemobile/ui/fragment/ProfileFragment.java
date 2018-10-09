@@ -74,7 +74,7 @@ public class ProfileFragment extends Fragment {
                 .enqueue(new Callback<User>() {
                     @Override
                     public void onResponse(Call<User> call, Response<User> response) {
-                        nome.setText(response.body().getUsername());
+                        nome.setText(response.body().getFullName());
                         email.setText(response.body().getEmail());
                         if(!response.body().getImage_url().isEmpty()){
                             Glide.with(getContext()).load(response.body().getImage_url()).into(imagem);
