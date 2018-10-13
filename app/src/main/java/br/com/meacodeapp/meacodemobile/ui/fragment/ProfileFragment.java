@@ -2,7 +2,9 @@ package br.com.meacodeapp.meacodemobile.ui.fragment;
 
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,10 +15,12 @@ import android.widget.TextView;
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.bumptech.glide.Glide;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 
 import br.com.meacodeapp.meacodemobile.R;
 import br.com.meacodeapp.meacodemobile.app.MeAcodeMobileApplication;
 import br.com.meacodeapp.meacodemobile.model.User;
+import br.com.meacodeapp.meacodemobile.ui.activity.MainActivity;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import retrofit2.Call;
@@ -39,6 +43,8 @@ public class ProfileFragment extends Fragment {
     @BindView(R.id.profile_image)
     ImageView imagem;
 
+    private GoogleSignInClient mGoogleSignInClient;
+
     public ProfileFragment() {
         // Required empty public constructor
     }
@@ -58,10 +64,21 @@ public class ProfileFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_search, container, false);
+        View view = inflater.inflate(R.layout.fragment_profile, container, false);
         ButterKnife.bind(this, view);
+        getUserProfile();
 
         return view;
+    }
+
+    public void goHome(){
+        MainActivity activity = (MainActivity) getActivity();
+        activity.setFragment(HomeFragment.newInstance());
+    }
+
+    public void googleAuth(){
+        MainActivity activity = (MainActivity) getActivity();
+        activity.googleAuth();
     }
 
     public void getUserProfile(){
@@ -70,14 +87,50 @@ public class ProfileFragment extends Fragment {
                 .getSharedPreferences("session", Context.MODE_PRIVATE)
                 .getString("token", null);
 
+        token = token.replace("\"", "");
+
+        if(token == null || token.length() < 1){
+            MaterialDialog.Builder dialog1 = new MaterialDialog.Builder(getContext())
+                    .title("Ops...")
+                    .content("Para acessar essa opção, você precisa de criar uma conta." +
+                            "Deseja entrar com sua conta do Google?")
+                    .positiveText(R.string.action_ok)
+                    .negativeText(R.string.action_cancel)
+                    .onPositive(new MaterialDialog.SingleButtonCallback() {
+                        @Override
+                        public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                            googleAuth();
+                        }
+                    })
+                    .onNegative(new MaterialDialog.SingleButtonCallback() {
+                        @Override
+                        public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                            goHome();
+                        }
+                    })
+                    .positiveColor(getResources().getColor(R.color.colorAccent))
+                    .negativeColor(getResources().getColor(R.color.colorPrimaryDark));
+
+            final MaterialDialog dialog = dialog1.build();
+            dialog.getTitleView().setTextSize(24);
+            dialog.getContentView().setTextSize(21);
+            dialog.getActionButton(DialogAction.NEGATIVE).setTextSize(21);
+            dialog.getActionButton(DialogAction.POSITIVE).setTextSize(21);
+            dialog.show();
+
+            return;
+        }
+
         MeAcodeMobileApplication.getInstance().getUserService().getUserByToken(token)
                 .enqueue(new Callback<User>() {
                     @Override
                     public void onResponse(Call<User> call, Response<User> response) {
-                        nome.setText(response.body().getFullName());
-                        email.setText(response.body().getEmail());
-                        if(!response.body().getImage_url().isEmpty()){
-                            Glide.with(getContext()).load(response.body().getImage_url()).into(imagem);
+                        if(response.code() == 200){
+                            nome.setText(response.body().getFullName());
+                            email.setText(response.body().getEmail());
+                            if(response.body().getImage_url() == null || response.body().getImage_url().length() > 0){
+                                Glide.with(getContext()).load(response.body().getImage_url()).into(imagem);
+                            }
                         }
                     }
 
