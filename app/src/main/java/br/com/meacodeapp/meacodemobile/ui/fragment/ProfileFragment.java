@@ -21,6 +21,7 @@ import br.com.meacodeapp.meacodemobile.R;
 import br.com.meacodeapp.meacodemobile.app.MeAcodeMobileApplication;
 import br.com.meacodeapp.meacodemobile.model.User;
 import br.com.meacodeapp.meacodemobile.ui.activity.MainActivity;
+import br.com.meacodeapp.meacodemobile.util.FontSizeConfigurator;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import retrofit2.Call;
@@ -143,10 +144,10 @@ public class ProfileFragment extends Fragment {
                                 .positiveText(R.string.action_ok);
 
                         final MaterialDialog dialog = dialog1.build();
-                        dialog.getTitleView().setTextSize(24);
-                        dialog.getContentView().setTextSize(21);
-                        dialog.getActionButton(DialogAction.NEGATIVE).setTextSize(21);
-                        dialog.getActionButton(DialogAction.POSITIVE).setTextSize(21);
+                        dialog.getTitleView().setTextSize(FontSizeConfigurator.getTitleTextSize());
+                        dialog.getContentView().setTextSize(FontSizeConfigurator.getBodyTextSize());
+                        dialog.getActionButton(DialogAction.NEGATIVE).setTextSize(FontSizeConfigurator.getBodyTextSize());
+                        dialog.getActionButton(DialogAction.POSITIVE).setTextSize(FontSizeConfigurator.getBodyTextSize());
                         dialog.show();
                     }
                 });
