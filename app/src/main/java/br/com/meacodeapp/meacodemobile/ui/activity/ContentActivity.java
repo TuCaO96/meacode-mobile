@@ -3,7 +3,7 @@ package br.com.meacodeapp.meacodemobile.ui.activity;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
-import android.widget.TextView;
+import android.webkit.WebView;
 
 import br.com.meacodeapp.meacodemobile.R;
 import br.com.meacodeapp.meacodemobile.model.Content;
@@ -15,8 +15,8 @@ public class ContentActivity extends AppCompatActivity {
 
     Content content;
 
-    @BindView(R.id.single_content_text)
-    TextView content_text;
+    @BindView(R.id.content_webview)
+    WebView content_webview;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,8 +28,8 @@ public class ContentActivity extends AppCompatActivity {
         getSupportActionBar().setTitle(content.getTitle());
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        content_text.setText(content.getText());
-        content_text.setTextSize(24);
+        content_webview.loadDataWithBaseURL("http://192.168.43.157", content.getText(), "text/html", "utf8", null);
+
     }
 
     @Override

@@ -6,8 +6,8 @@
     android:layout_height="match_parent"
     tools:context=".ui.activity.ContentActivity"
     android:padding="15dp">
-        <TextView
-            android:id="@+id/single_content_text"
-            android:layout_width="wrap_content"
+        <WebView
+            android:id="@+id/content_webview"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 </ScrollView>
