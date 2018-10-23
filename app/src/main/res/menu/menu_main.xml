@@ -2,12 +2,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="br.com.meacodeapp.meacodemobile.ui.activity.MainActivity">
-    <item android:id="@+id/navigation_home"
-        android:orderInCategory="100"
-        android:title=""
-        android:icon="@drawable/ic_home_white_24dp"
-        app:showAsAction="always"
-        />
     <item android:id="@+id/navigation_search"
         android:orderInCategory="200"
         android:title=""

@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.internal.BottomNavigationMenuView;
 import android.support.design.widget.BottomNavigationView;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
@@ -22,6 +23,7 @@ import android.view.ViewGroup;
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.facebook.CallbackManager;
+import com.github.clans.fab.FloatingActionMenu;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
@@ -33,6 +35,7 @@ import br.com.meacodeapp.meacodemobile.R;
 import br.com.meacodeapp.meacodemobile.app.MeAcodeMobileApplication;
 import br.com.meacodeapp.meacodemobile.ui.fragment.HomeFragment;
 import br.com.meacodeapp.meacodemobile.ui.fragment.MyCoursesFragment;
+import br.com.meacodeapp.meacodemobile.ui.fragment.NewSuggestionFragment;
 import br.com.meacodeapp.meacodemobile.ui.fragment.ProfileFragment;
 import br.com.meacodeapp.meacodemobile.ui.fragment.SearchFragment;
 import br.com.meacodeapp.meacodemobile.ui.fragment.SettingsFragment;
@@ -47,36 +50,17 @@ import retrofit2.Response;
 public class MainActivity extends AppCompatActivity {
 
     @BindView(R.id.main_navigation)
-    BottomNavigationView bottomNavigationView;
+    FloatingActionMenu floatingActionMenu;
+
+    @BindView(R.id.search_option)
+    com.github.clans.fab.FloatingActionButton searchMenu;
+    @BindView(R.id.suggestion_option)
+    com.github.clans.fab.FloatingActionButton suggestionMenu;
+    @BindView(R.id.settings_option)
+    com.github.clans.fab.FloatingActionButton optionsMenu;
 
     private CallbackManager callbackManager = CallbackManager.Factory.create();
     private GoogleSignInClient mGoogleSignInClient;
-
-    private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
-            = new BottomNavigationView.OnNavigationItemSelectedListener() {
-
-        @Override
-        public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-            switch (item.getItemId()) {
-                case R.id.navigation_home:
-                    setFragment(HomeFragment.newInstance());
-                    return true;
-                case R.id.navigation_search:
-                    setFragment(SearchFragment.newInstance());
-                    return true;
-                case R.id.navigation_my_courses:
-                    setFragment(MyCoursesFragment.newInstance());
-                    return true;
-                case R.id.navigation_my_profile:
-                    setFragment(ProfileFragment.newInstance());
-                    return true;
-                case R.id.navigation_settings:
-                    setFragment(SettingsFragment.newInstance());
-                    return true;
-            }
-            return false;
-        }
-    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -90,21 +74,33 @@ public class MainActivity extends AppCompatActivity {
 
         // Build a GoogleSignInClient with the options specified by gso.
         mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
-
         setContentView(R.layout.activity_main);
-        setFragment(HomeFragment.newInstance());
+        setFragment(SearchFragment.newInstance());
         ButterKnife.bind(this);
-        bottomNavigationView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
-        BottomNavigationViewHelper.disableShiftMode(bottomNavigationView);
-        BottomNavigationMenuView menuView = (BottomNavigationMenuView) bottomNavigationView.getChildAt(0);
-        for (int i = 0; i < menuView.getChildCount(); i++) {
-            final View iconView = menuView.getChildAt(i).findViewById(android.support.design.R.id.icon);
-            final ViewGroup.LayoutParams layoutParams = iconView.getLayoutParams();
-            final DisplayMetrics displayMetrics = getResources().getDisplayMetrics();
-            layoutParams.height = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 32, displayMetrics);
-            layoutParams.width = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 32, displayMetrics);
-            iconView.setLayoutParams(layoutParams);
-        }
+
+        optionsMenu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                setFragment(SettingsFragment.newInstance());
+                floatingActionMenu.close(true);
+            }
+        });
+
+        searchMenu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                setFragment(SearchFragment.newInstance());
+                floatingActionMenu.close(true);
+            }
+        });
+
+        suggestionMenu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                setFragment(NewSuggestionFragment.newInstance());
+                floatingActionMenu.close(true);
+            }
+        });
     }
 
     public void logout(){
