@@ -7,6 +7,7 @@ import br.com.meacodeapp.meacodemobile.service.ContentService;
 import br.com.meacodeapp.meacodemobile.service.CourseService;
 import br.com.meacodeapp.meacodemobile.service.RestService;
 import br.com.meacodeapp.meacodemobile.service.SuggestionService;
+import br.com.meacodeapp.meacodemobile.service.UserSearchService;
 import br.com.meacodeapp.meacodemobile.service.UserService;
 
 /**
@@ -25,6 +26,7 @@ public class MeAcodeMobileApplication extends Application {
     private CourseService courseService;
     private ContentService contentService;
     private SuggestionService suggestionService;
+    private UserSearchService userSearchService;
 
     @Override
     public void onCreate() {
@@ -39,6 +41,7 @@ public class MeAcodeMobileApplication extends Application {
         courseService = (new RestService(URL).getService(CourseService.class));
         contentService = (new RestService(URL).getService(ContentService.class));
         suggestionService = (new RestService(URL).getService(SuggestionService.class));
+        userSearchService = (new RestService(URL).getService(UserSearchService.class));
     }
 
     public static MeAcodeMobileApplication getInstance() {
@@ -57,5 +60,8 @@ public class MeAcodeMobileApplication extends Application {
 
     public ContentService getContentService() { return contentService; }
 
+    public UserSearchService getUserSearchService() {
+        return userSearchService;
+    }
     public SuggestionService getSuggestionService() { return suggestionService; }
 }

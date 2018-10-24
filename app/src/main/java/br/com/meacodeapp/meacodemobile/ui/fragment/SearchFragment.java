@@ -2,10 +2,12 @@ package br.com.meacodeapp.meacodemobile.ui.fragment;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SearchView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,8 +21,12 @@ import br.com.meacodeapp.meacodemobile.R;
 import br.com.meacodeapp.meacodemobile.app.MeAcodeMobileApplication;
 import br.com.meacodeapp.meacodemobile.model.Content;
 import br.com.meacodeapp.meacodemobile.model.Course;
+import br.com.meacodeapp.meacodemobile.model.SearchResult;
+import br.com.meacodeapp.meacodemobile.model.User;
+import br.com.meacodeapp.meacodemobile.service.RestService;
 import br.com.meacodeapp.meacodemobile.ui.activity.MainActivity;
 import br.com.meacodeapp.meacodemobile.ui.adapter.CourseAdapter;
+import br.com.meacodeapp.meacodemobile.util.JsonConverter;
 import br.com.meacodeapp.meacodemobile.util.RestParameters;
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -33,6 +39,9 @@ public class SearchFragment extends Fragment {
     @BindView(R.id.rcv_search)
     RecyclerView coursesRecyclerView;
 
+    @BindView(R.id.sv_search)
+    SearchView searchView;
+
     List<Course> courses;
 
     public SearchFragment() {
@@ -42,27 +51,41 @@ public class SearchFragment extends Fragment {
     public static SearchFragment newInstance() {
         return new SearchFragment();
     }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-//            mParam1 = getArguments().getString(ARG_PARAM1);
-        }
-    }
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_search, container, false);
         ButterKnife.bind(this, view);
-        searchCourses();
+
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                SharedPreferences sharedPreferences = MeAcodeMobileApplication.getInstance()
+                        .getSharedPreferences("session", Context.MODE_PRIVATE);
+
+                if(sharedPreferences.contains("user") && sharedPreferences.getString("user", null) != null){
+                    User user = JsonConverter.fromJson(sharedPreferences.getString("user", null), User.class);
+                    search(user.getId(), query);
+                }
+                else{
+                    search(-1, query);
+                }
+
+
+                return true;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                return false;
+            }
+        });
 
         return view;
     }
 
-    public void searchCourses(){
+    public void search(int user_id, String query){
 
         final Context context = getContext();
 
@@ -78,14 +101,18 @@ public class SearchFragment extends Fragment {
         dialog.getActionButton(DialogAction.POSITIVE).setTextSize(21);
         dialog.show();
 
-        MeAcodeMobileApplication.getInstance().getCourseService().getCourses()
-                .enqueue(new Callback<List<Course>>() {
+        RestParameters parameters = new RestParameters();
+        parameters.setProperty("user_id", Integer.toString(user_id));
+        parameters.setProperty("query", query);
+
+        MeAcodeMobileApplication.getInstance().getUserSearchService().postUserSearch(parameters)
+                .enqueue(new Callback<SearchResult>() {
                     @Override
-                    public void onResponse(Call<List<Course>> call, Response<List<Course>> response) {
+                    public void onResponse(Call<SearchResult> call, Response<SearchResult> response) {
                         dialog.dismiss();
 
                         if(response.code() == 200){
-                            courses = response.body();
+                            courses = response.body().getCourses();
                             CourseAdapter adapter = new CourseAdapter(getContext(), courses);
                             RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
                             coursesRecyclerView.setLayoutManager(layoutManager);
@@ -94,7 +121,7 @@ public class SearchFragment extends Fragment {
                     }
 
                     @Override
-                    public void onFailure(Call<List<Course>> call, Throwable t) {
+                    public void onFailure(Call<SearchResult> call, Throwable t) {
                         dialog.dismiss();
 
                         MaterialDialog.Builder dialog1 = new MaterialDialog.Builder(context)
