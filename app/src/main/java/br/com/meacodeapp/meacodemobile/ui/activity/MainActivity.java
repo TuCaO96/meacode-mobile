@@ -33,6 +33,7 @@ import com.google.android.gms.tasks.Task;
 
 import br.com.meacodeapp.meacodemobile.R;
 import br.com.meacodeapp.meacodemobile.app.MeAcodeMobileApplication;
+import br.com.meacodeapp.meacodemobile.model.Content;
 import br.com.meacodeapp.meacodemobile.ui.fragment.HomeFragment;
 import br.com.meacodeapp.meacodemobile.ui.fragment.MyCoursesFragment;
 import br.com.meacodeapp.meacodemobile.ui.fragment.NewSuggestionFragment;
@@ -78,10 +79,28 @@ public class MainActivity extends AppCompatActivity {
         setFragment(SearchFragment.newInstance());
         ButterKnife.bind(this);
 
+        final Context context = this;
+
         optionsMenu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                setFragment(SettingsFragment.newInstance());
+                final MaterialDialog.Builder materialDialog = new MaterialDialog.Builder(context)
+                        .title(R.string.title_size_option)
+                        .items(R.array.options_font_size)
+                        .itemsCallbackSingleChoice(1, new MaterialDialog.ListCallbackSingleChoice() {
+                            @Override
+                            public boolean onSelection(MaterialDialog dialog, View itemView, int which, CharSequence text) {
+                                return true;
+                            }
+                        });
+
+                final MaterialDialog dialog = materialDialog.build();
+                dialog.getTitleView().setTextSize(24);
+                dialog.getContentView().setTextSize(21);
+                dialog.getActionButton(DialogAction.NEGATIVE).setTextSize(21);
+                dialog.getActionButton(DialogAction.POSITIVE).setTextSize(21);
+                dialog.show();
+
                 floatingActionMenu.close(true);
             }
         });

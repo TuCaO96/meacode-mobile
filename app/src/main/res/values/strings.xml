@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Me Acode Mobile</string>
+    <string name="app_name">Me Acode</string>
     <string name="title_activity_login">Entrar</string>
     <string name="title_activity_login_email">Entrar com email</string>
     <string name="facebook_app_id">525990551163753</string>
@@ -29,7 +29,7 @@
     <string name="button_font_size_increase_settings">Aumentar</string>
     <string name="button_font_size_decrease_settings">Diminuir</string>
     <string name="title_activity_main">MainActivity</string>
-    <string name="action_settings">Configurações</string>
+    <string name="action_settings">Ajustar tamanho de fonte</string>
     <string name="action_forgot">Esqueci a senha</string>
     <string name="action_zoom_in">Zoom In</string>
     <string name="action_zoom_out">Zoom Out</string>
@@ -42,6 +42,13 @@
     <string name="title_settings">Configurações</string>
     <string name="title_new_content">Sugerir Conteúdo</string>
     <string name="title_more">Mais</string>
+
+    <string name="title_size_option">Ajustar tamanho das letras</string>
+    <string-array name="options_font_size">
+        <item>Pequeno</item>
+        <item>Normal</item>
+        <item>Grande</item>
+    </string-array>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
