@@ -122,19 +122,13 @@ public class MainActivity extends AppCompatActivity {
                             }
                         })
                         .positiveColor(getResources().getColor(R.color.colorAccent))
-                        .positiveText("Fechar")
-                        .onPositive(new MaterialDialog.SingleButtonCallback() {
-                            @Override
-                            public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
-
-                            }
-                        });
+                        .positiveText("Fechar");
 
                 final MaterialDialog dialog = materialDialog.build();
-                dialog.getTitleView().setTextSize(24);
-                dialog.getContentView().setTextSize(21);
-                dialog.getActionButton(DialogAction.NEGATIVE).setTextSize(21);
-                dialog.getActionButton(DialogAction.POSITIVE).setTextSize(21);
+                dialog.getTitleView().setTextSize(preferences.getInt("text_size", 21));
+                dialog.getContentView().setTextSize(preferences.getInt("font_size", 18));
+                dialog.getActionButton(DialogAction.NEGATIVE).setTextSize(preferences.getInt("font_size", 18));
+                dialog.getActionButton(DialogAction.POSITIVE).setTextSize(preferences.getInt("font_size", 18));
                 dialog.show();
 
                 floatingActionMenu.close(true);
@@ -203,10 +197,10 @@ public class MainActivity extends AppCompatActivity {
                     .positiveText(R.string.action_ok);
 
             final MaterialDialog dialog = materialDialog.build();
-            dialog.getTitleView().setTextSize(24);
-            dialog.getContentView().setTextSize(21);
-            dialog.getActionButton(DialogAction.NEGATIVE).setTextSize(21);
-            dialog.getActionButton(DialogAction.POSITIVE).setTextSize(21);
+            dialog.getTitleView().setTextSize(preferences.getInt("title_size", 21));
+            dialog.getContentView().setTextSize(preferences.getInt("font_size", 18));
+            dialog.getActionButton(DialogAction.NEGATIVE).setTextSize(preferences.getInt("font_size", 18));
+            dialog.getActionButton(DialogAction.POSITIVE).setTextSize(preferences.getInt("font_size", 18));
             dialog.show();
         }
     }
@@ -226,10 +220,10 @@ public class MainActivity extends AppCompatActivity {
                 .progress(true,0,false);
 
         final MaterialDialog dialog = materialDialog.build();
-        dialog.getTitleView().setTextSize(24);
-        dialog.getContentView().setTextSize(21);
-        dialog.getActionButton(DialogAction.NEGATIVE).setTextSize(21);
-        dialog.getActionButton(DialogAction.POSITIVE).setTextSize(21);
+        dialog.getTitleView().setTextSize(preferences.getInt("title_size", 21));
+        dialog.getContentView().setTextSize(preferences.getInt("font_size", 18));
+        dialog.getActionButton(DialogAction.NEGATIVE).setTextSize(preferences.getInt("font_size", 18));
+        dialog.getActionButton(DialogAction.POSITIVE).setTextSize(preferences.getInt("font_size", 18));
         dialog.show();
 
         MeAcodeMobileApplication.getInstance().getAuthService().postSocialSignIn(parameters)
@@ -261,10 +255,10 @@ public class MainActivity extends AppCompatActivity {
                                         "novamente mais tarde.").positiveText(R.string.action_ok);
 
                         final MaterialDialog dialog = materialDialog1.build();
-                        dialog.getTitleView().setTextSize(24);
-                        dialog.getContentView().setTextSize(21);
-                        dialog.getActionButton(DialogAction.NEGATIVE).setTextSize(21);
-                        dialog.getActionButton(DialogAction.POSITIVE).setTextSize(21);
+                        dialog.getTitleView().setTextSize(preferences.getInt("title_size", 21));
+                        dialog.getContentView().setTextSize(preferences.getInt("font_size", 18));
+                        dialog.getActionButton(DialogAction.NEGATIVE).setTextSize(preferences.getInt("font_size", 18));
+                        dialog.getActionButton(DialogAction.POSITIVE).setTextSize(preferences.getInt("font_size", 18));
                         dialog.show();
                     }
                 });
