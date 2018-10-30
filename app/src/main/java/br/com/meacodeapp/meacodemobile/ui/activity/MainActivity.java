@@ -50,6 +50,8 @@ import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity {
 
+    SharedPreferences preferences;
+
     @BindView(R.id.main_navigation)
     FloatingActionMenu floatingActionMenu;
 
@@ -66,6 +68,13 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        preferences = MeAcodeMobileApplication.getInstance().getSharedPreferences("session", Context.MODE_PRIVATE);
+
+        SharedPreferences.Editor edit = preferences.edit();
+        edit.putInt("title_size", 24);
+        edit.putInt("font_size", 21);
+        edit.apply();
 
         // Configure sign-in to request the user's ID, email address, and basic
         // profile. ID and basic profile are included in DEFAULT_SIGN_IN.
@@ -90,7 +99,34 @@ public class MainActivity extends AppCompatActivity {
                         .itemsCallbackSingleChoice(1, new MaterialDialog.ListCallbackSingleChoice() {
                             @Override
                             public boolean onSelection(MaterialDialog dialog, View itemView, int which, CharSequence text) {
-                                return true;
+                                SharedPreferences.Editor edit = preferences.edit();
+
+                                switch (which){
+                                    case 0:
+                                        edit.remove("title_size");
+                                        edit.remove("font_size");
+                                        edit.putInt("title_size", 21);
+                                        edit.putInt("font_size", 18);
+                                        break;
+                                    case 1:
+                                        edit.remove("title_size");
+                                        edit.remove("font_size");
+                                        edit.putInt("title_size", 24);
+                                        edit.putInt("font_size", 21);
+                                        break;
+                                }
+
+                                edit.apply();
+
+                                return false;
+                            }
+                        })
+                        .positiveColor(getResources().getColor(R.color.colorAccent))
+                        .positiveText("Fechar")
+                        .onPositive(new MaterialDialog.SingleButtonCallback() {
+                            @Override
+                            public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+
                             }
                         });
 

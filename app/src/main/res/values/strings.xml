@@ -45,7 +45,6 @@
 
     <string name="title_size_option">Ajustar tamanho das letras</string>
     <string-array name="options_font_size">
-        <item>Pequeno</item>
         <item>Normal</item>
         <item>Grande</item>
     </string-array>
