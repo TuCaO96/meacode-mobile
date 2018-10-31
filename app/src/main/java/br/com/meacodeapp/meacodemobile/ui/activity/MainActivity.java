@@ -72,6 +72,7 @@ public class MainActivity extends AppCompatActivity {
         preferences = MeAcodeMobileApplication.getInstance().getSharedPreferences("session", Context.MODE_PRIVATE);
 
         SharedPreferences.Editor edit = preferences.edit();
+        edit.putInt("size_selected_index", 0);
         edit.putInt("title_size", 24);
         edit.putInt("font_size", 21);
         edit.apply();
@@ -96,21 +97,25 @@ public class MainActivity extends AppCompatActivity {
                 final MaterialDialog.Builder materialDialog = new MaterialDialog.Builder(context)
                         .title(R.string.title_size_option)
                         .items(R.array.options_font_size)
-                        .itemsCallbackSingleChoice(1, new MaterialDialog.ListCallbackSingleChoice() {
+                        .itemsCallbackSingleChoice(preferences.getInt("size_selected_index", 0), new MaterialDialog.ListCallbackSingleChoice() {
                             @Override
                             public boolean onSelection(MaterialDialog dialog, View itemView, int which, CharSequence text) {
                                 SharedPreferences.Editor edit = preferences.edit();
 
                                 switch (which){
                                     case 0:
+                                        edit.remove("size_selected_index");
                                         edit.remove("title_size");
                                         edit.remove("font_size");
+                                        edit.putInt("size_selected_index", 0);
                                         edit.putInt("title_size", 21);
                                         edit.putInt("font_size", 18);
                                         break;
                                     case 1:
+                                        edit.remove("size_selected_index");
                                         edit.remove("title_size");
                                         edit.remove("font_size");
+                                        edit.putInt("size_selected_index", 1);
                                         edit.putInt("title_size", 24);
                                         edit.putInt("font_size", 21);
                                         break;
@@ -122,10 +127,10 @@ public class MainActivity extends AppCompatActivity {
                             }
                         })
                         .positiveColor(getResources().getColor(R.color.colorAccent))
-                        .positiveText("Fechar");
+                        .positiveText("APLICAR");
 
                 final MaterialDialog dialog = materialDialog.build();
-                dialog.getTitleView().setTextSize(preferences.getInt("text_size", 21));
+                dialog.getTitleView().setTextSize(preferences.getInt("title_size", 21));
                 dialog.getContentView().setTextSize(preferences.getInt("font_size", 18));
                 dialog.getActionButton(DialogAction.NEGATIVE).setTextSize(preferences.getInt("font_size", 18));
                 dialog.getActionButton(DialogAction.POSITIVE).setTextSize(preferences.getInt("font_size", 18));
