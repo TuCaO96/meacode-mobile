@@ -7,32 +7,34 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.PagerAdapter;
 import android.view.View;
+import android.widget.Button;
+import android.widget.ImageButton;
 
-public class IntroStepsAdapter extends FragmentPagerAdapter {
+import br.com.meacodeapp.meacodemobile.R;
+import br.com.meacodeapp.meacodemobile.ui.fragment.intro.StepOneFragment;
+import br.com.meacodeapp.meacodemobile.ui.fragment.intro.StepTwoFragment;
+import butterknife.BindView;
 
-    private Fragment[] steps;
-    private int currentStep = 0;
+public class IntroStepsAdapter extends FragmentStatePagerAdapter {
 
-    public IntroStepsAdapter(FragmentManager fm, Fragment[] steps) {
+    public IntroStepsAdapter(FragmentManager fm) {
         super(fm);
-        this.steps = steps;
-    }
-
-    public Fragment getNextStep() {
-        return currentStep + 1 > steps.length ? null : steps[++currentStep];
-    }
-
-    public Fragment getLastStep() {
-        return currentStep - 1 > steps.length ? null : steps[--currentStep];
     }
 
     @Override
     public Fragment getItem(int position) {
-        return steps[currentStep];
+        switch (position){
+            case 0:
+                return StepOneFragment.newInstance();
+            case 1:
+                return StepTwoFragment.newInstance();
+            default:
+                return StepOneFragment.newInstance();
+        }
     }
 
     @Override
     public int getCount() {
-        return 0;
+        return 7;
     }
 }

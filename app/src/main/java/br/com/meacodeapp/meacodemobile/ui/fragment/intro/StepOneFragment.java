@@ -19,13 +19,6 @@ public class StepOneFragment extends Fragment {
         // Required empty public constructor
     }
 
-
-    @OnClick(R.id.step_one_next)
-    public void nextStepClick(){
-        IntroActivity activity = (IntroActivity) getActivity();
-        Fragment next_fragment = activity.getPagerAdapter().getNextStep();
-    }
-
     public static StepOneFragment newInstance() {
         return new StepOneFragment();
     }

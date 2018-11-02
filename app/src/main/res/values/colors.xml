@@ -10,4 +10,5 @@
 <color name="colorSecondaryLight">#ffe54c</color>
 <color name="colorAccent">#d1b97d</color>
 <color name="colorText">#FFFFFF</color>
+<color name="transparent">#00ffffff</color>
 </resources>

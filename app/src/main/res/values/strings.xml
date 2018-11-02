@@ -34,6 +34,7 @@
     <string name="action_zoom_in">Zoom In</string>
     <string name="action_zoom_out">Zoom Out</string>
     <string name="action_logout">Sair</string>
+    <string name="action_skip">Pular</string>
     <string name="title_activity_detail">DetailActivity</string>
     <string name="title_home">Início</string>
     <string name="title_search">Procurar</string>
@@ -48,6 +49,10 @@
         <item>Normal</item>
         <item>Grande</item>
     </string-array>
+
+    <string name="step1_title">Olá!</string>
+    <string name="step1_text">Seja bem vindo ao Me Acode, seu centro de conteúdos para todas as horas.
+        Deslize para a esquerda para continuar esta introdução.</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
