@@ -72,13 +72,52 @@ public class SearchFragment extends Fragment {
                     search(-1, query);
                 }
 
-
                 return true;
             }
 
             @Override
             public boolean onQueryTextChange(String newText) {
                 return false;
+            }
+        });
+
+        final MaterialDialog.Builder materialDialog = new MaterialDialog.Builder(getActivity())
+                .title("Carregando")
+                .content("Aguarde mais alguns instantes...")
+                .progress(true,0,false);
+
+        final MaterialDialog dialog = materialDialog.build();
+        dialog.getTitleView().setTextSize(24);
+        dialog.getContentView().setTextSize(21);
+        dialog.getActionButton(DialogAction.NEGATIVE).setTextSize(21);
+        dialog.getActionButton(DialogAction.POSITIVE).setTextSize(21);
+        dialog.show();
+
+        final Context context = getContext();
+
+        MeAcodeMobileApplication.getInstance().getCourseService().getCourses().enqueue(new Callback<List<Course>>() {
+            @Override
+            public void onResponse(Call<List<Course>> call, Response<List<Course>> response) {
+                courses = response.body();
+            }
+
+            @Override
+            public void onFailure(Call<List<Course>> call, Throwable t) {
+                dialog.dismiss();
+
+                MaterialDialog.Builder dialog1 = new MaterialDialog.Builder(context)
+                        .title("Erro")
+                        .content("Ocorreu um erro ao buscar cursos. Por favor, tente" +
+                                " novamente mais tarde")
+                        .positiveText("OK");
+
+                final MaterialDialog dialog = dialog1.build();
+                dialog.getTitleView().setTextSize(24);
+                dialog.getContentView().setTextSize(21);
+                dialog.getActionButton(DialogAction.NEGATIVE).setTextSize(21);
+                dialog.getActionButton(DialogAction.POSITIVE).setTextSize(21);
+                dialog.show();
+
             }
         });
 
