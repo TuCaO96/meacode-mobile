@@ -6,6 +6,7 @@ import android.view.MenuItem;
 import android.webkit.WebView;
 
 import br.com.meacodeapp.meacodemobile.R;
+import br.com.meacodeapp.meacodemobile.app.MeAcodeMobileApplication;
 import br.com.meacodeapp.meacodemobile.model.Content;
 import br.com.meacodeapp.meacodemobile.util.JsonConverter;
 import butterknife.BindView;
@@ -28,7 +29,7 @@ public class ContentActivity extends AppCompatActivity {
         getSupportActionBar().setTitle(content.getTitle());
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        content_webview.loadDataWithBaseURL("http://192.168.43.157", content.getText(), "text/html", "utf8", null);
+        content_webview.loadDataWithBaseURL(MeAcodeMobileApplication.getURL(), content.getText(), "text/html", "utf8", null);
 
     }
 

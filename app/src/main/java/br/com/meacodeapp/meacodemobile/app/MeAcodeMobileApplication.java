@@ -52,6 +52,10 @@ public class MeAcodeMobileApplication extends Application {
         return userService;
     }
 
+    public static String getURL() {
+        return URL;
+    }
+
     public AuthService getAuthService() {
         return authService;
     }
