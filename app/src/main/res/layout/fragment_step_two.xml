@@ -5,10 +5,10 @@
     android:layout_height="match_parent"
     tools:context=".ui.fragment.intro.StepTwoFragment">
 
-    <TextView
+    <ImageView
+        android:scaleType="fitXY"
+        android:foreground="@drawable/overlay_black_50"
+        android:src="@drawable/step_two"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="@color/colorText"
-        android:text="@string/action_sign_in_short"/>
-
+        android:layout_height="wrap_content" />
 </FrameLayout>
