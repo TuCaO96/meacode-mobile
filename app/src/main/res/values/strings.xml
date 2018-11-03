@@ -43,12 +43,16 @@
     <string name="title_settings">Configurações</string>
     <string name="title_new_content">Sugerir Conteúdo</string>
     <string name="title_more">Mais</string>
+    <string name="action_apply">APLICAR</string>
 
     <string name="title_size_option">Ajustar tamanho das letras</string>
     <string-array name="options_font_size">
         <item>Normal</item>
         <item>Grande</item>
     </string-array>
+
+    <string name="title_size_normal">Normal</string>
+    <string name="title_size_big">Grande</string>
 
     <string name="step1_title">Olá!</string>
     <string name="step1_text">Seja bem vindo ao Me Acode, seu centro de conteúdos para todas as horas.

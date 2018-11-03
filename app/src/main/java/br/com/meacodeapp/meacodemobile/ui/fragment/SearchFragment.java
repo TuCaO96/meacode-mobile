@@ -11,6 +11,8 @@ import android.support.v7.widget.SearchView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AutoCompleteTextView;
+import android.widget.LinearLayout;
 
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
@@ -44,6 +46,8 @@ public class SearchFragment extends Fragment {
 
     List<Course> courses;
 
+    SharedPreferences preferences = MeAcodeMobileApplication.getInstance().getSharedPreferences("session", Context.MODE_PRIVATE);
+
     public SearchFragment() {
         // Required empty public constructor
     }
@@ -57,6 +61,12 @@ public class SearchFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_search, container, false);
         ButterKnife.bind(this, view);
+
+        LinearLayout linearLayout1 = (LinearLayout) searchView.getChildAt(0);
+        LinearLayout linearLayout2 = (LinearLayout) linearLayout1.getChildAt(2);
+        LinearLayout linearLayout3 = (LinearLayout) linearLayout2.getChildAt(1);
+        AutoCompleteTextView autoComplete = (AutoCompleteTextView) linearLayout3.getChildAt(0);
+        autoComplete.setTextSize(preferences.getInt("font_size", 18));
 
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
@@ -87,10 +97,10 @@ public class SearchFragment extends Fragment {
                 .progress(true,0,false);
 
         final MaterialDialog dialog = materialDialog.build();
-        dialog.getTitleView().setTextSize(24);
-        dialog.getContentView().setTextSize(21);
-        dialog.getActionButton(DialogAction.NEGATIVE).setTextSize(21);
-        dialog.getActionButton(DialogAction.POSITIVE).setTextSize(21);
+        dialog.getTitleView().setTextSize(preferences.getInt("title_size", 21));
+        dialog.getContentView().setTextSize(preferences.getInt("font_size", 18));
+        dialog.getActionButton(DialogAction.NEGATIVE).setTextSize(preferences.getInt("font_size", 18));
+        dialog.getActionButton(DialogAction.POSITIVE).setTextSize(preferences.getInt("font_size", 18));
         dialog.show();
 
         final Context context = getContext();
@@ -117,10 +127,10 @@ public class SearchFragment extends Fragment {
                         .positiveText("OK");
 
                 final MaterialDialog dialog = dialog1.build();
-                dialog.getTitleView().setTextSize(24);
-                dialog.getContentView().setTextSize(21);
-                dialog.getActionButton(DialogAction.NEGATIVE).setTextSize(21);
-                dialog.getActionButton(DialogAction.POSITIVE).setTextSize(21);
+                dialog.getTitleView().setTextSize(preferences.getInt("title_size", 21));
+                dialog.getContentView().setTextSize(preferences.getInt("font_size", 18));
+                dialog.getActionButton(DialogAction.NEGATIVE).setTextSize(preferences.getInt("font_size", 18));
+                dialog.getActionButton(DialogAction.POSITIVE).setTextSize(preferences.getInt("font_size", 18));
                 dialog.show();
 
             }
@@ -139,10 +149,10 @@ public class SearchFragment extends Fragment {
                 .progress(true,0,false);
 
         final MaterialDialog dialog = materialDialog.build();
-        dialog.getTitleView().setTextSize(24);
-        dialog.getContentView().setTextSize(21);
-        dialog.getActionButton(DialogAction.NEGATIVE).setTextSize(21);
-        dialog.getActionButton(DialogAction.POSITIVE).setTextSize(21);
+        dialog.getTitleView().setTextSize(preferences.getInt("title_size", 21));
+        dialog.getContentView().setTextSize(preferences.getInt("font_size", 18));
+        dialog.getActionButton(DialogAction.NEGATIVE).setTextSize(preferences.getInt("font_size", 18));
+        dialog.getActionButton(DialogAction.POSITIVE).setTextSize(preferences.getInt("font_size", 18));
         dialog.show();
 
         RestParameters parameters = new RestParameters();
@@ -175,10 +185,10 @@ public class SearchFragment extends Fragment {
                                 .positiveText("OK");
 
                         final MaterialDialog dialog = dialog1.build();
-                        dialog.getTitleView().setTextSize(24);
-                        dialog.getContentView().setTextSize(21);
-                        dialog.getActionButton(DialogAction.NEGATIVE).setTextSize(21);
-                        dialog.getActionButton(DialogAction.POSITIVE).setTextSize(21);
+                        dialog.getTitleView().setTextSize(preferences.getInt("title_size", 21));
+                        dialog.getContentView().setTextSize(preferences.getInt("font_size", 18));
+                        dialog.getActionButton(DialogAction.NEGATIVE).setTextSize(preferences.getInt("font_size", 18));
+                        dialog.getActionButton(DialogAction.POSITIVE).setTextSize(preferences.getInt("font_size", 18));
                         dialog.show();
                     }
                 });

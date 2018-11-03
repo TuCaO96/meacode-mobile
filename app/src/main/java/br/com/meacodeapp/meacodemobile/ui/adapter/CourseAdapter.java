@@ -3,6 +3,7 @@ package br.com.meacodeapp.meacodemobile.ui.adapter;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -19,6 +20,7 @@ import com.bumptech.glide.Glide;
 import java.util.List;
 
 import br.com.meacodeapp.meacodemobile.R;
+import br.com.meacodeapp.meacodemobile.app.MeAcodeMobileApplication;
 import br.com.meacodeapp.meacodemobile.model.Content;
 import br.com.meacodeapp.meacodemobile.model.Course;
 import br.com.meacodeapp.meacodemobile.ui.activity.CourseActivity;
@@ -28,6 +30,7 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.CourseHold
 
     Context context;
     List<Course> courses;
+    SharedPreferences preferences;
 
     public CourseAdapter(Context context, List<Course> courses){
         this.context = context;
@@ -39,10 +42,12 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.CourseHold
         ImageView image;
         Course course;
         Context context;
+        SharedPreferences preferences = MeAcodeMobileApplication.getInstance().getSharedPreferences("session", Context.MODE_PRIVATE);
 
         public CourseHolder(View itemView, Context context){
             super(itemView);
             name = (TextView) itemView.findViewById(R.id.course_name);
+            name.setTextSize(preferences.getInt("font_size", 18));
             image = (ImageView) itemView.findViewById(R.id.course_image);
             itemView.setOnClickListener(this);
         }

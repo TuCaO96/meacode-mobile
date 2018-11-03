@@ -19,6 +19,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RadioGroup;
 
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
@@ -71,11 +72,13 @@ public class MainActivity extends AppCompatActivity {
 
         preferences = MeAcodeMobileApplication.getInstance().getSharedPreferences("session", Context.MODE_PRIVATE);
 
-        SharedPreferences.Editor edit = preferences.edit();
-        edit.putInt("size_selected_index", 0);
-        edit.putInt("title_size", 24);
-        edit.putInt("font_size", 21);
-        edit.apply();
+        if(!preferences.contains("font_size")){
+            SharedPreferences.Editor edit = preferences.edit();
+            edit.putInt("size_selected_index", 0);
+            edit.putInt("title_size", 21);
+            edit.putInt("font_size", 18);
+            edit.apply();
+        }
 
         // Configure sign-in to request the user's ID, email address, and basic
         // profile. ID and basic profile are included in DEFAULT_SIGN_IN.
@@ -96,45 +99,52 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 final MaterialDialog.Builder materialDialog = new MaterialDialog.Builder(context)
                         .title(R.string.title_size_option)
-                        .items(R.array.options_font_size)
-                        .itemsCallbackSingleChoice(preferences.getInt("size_selected_index", 0), new MaterialDialog.ListCallbackSingleChoice() {
-                            @Override
-                            public boolean onSelection(MaterialDialog dialog, View itemView, int which, CharSequence text) {
-                                SharedPreferences.Editor edit = preferences.edit();
-
-                                switch (which){
-                                    case 0:
-                                        edit.remove("size_selected_index");
-                                        edit.remove("title_size");
-                                        edit.remove("font_size");
-                                        edit.putInt("size_selected_index", 0);
-                                        edit.putInt("title_size", 21);
-                                        edit.putInt("font_size", 18);
-                                        break;
-                                    case 1:
-                                        edit.remove("size_selected_index");
-                                        edit.remove("title_size");
-                                        edit.remove("font_size");
-                                        edit.putInt("size_selected_index", 1);
-                                        edit.putInt("title_size", 24);
-                                        edit.putInt("font_size", 21);
-                                        break;
-                                }
-
-                                edit.apply();
-
-                                return false;
-                            }
-                        })
+                        .customView(R.layout.dialog_single_choice_view, false)
                         .positiveColor(getResources().getColor(R.color.colorAccent))
-                        .positiveText("APLICAR");
+                        .positiveText(R.string.action_apply)
+                        .onPositive(new MaterialDialog.SingleButtonCallback() {
+                            @Override
+                            public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                                recreate();
+                            }
+                        });
 
                 final MaterialDialog dialog = materialDialog.build();
                 dialog.getTitleView().setTextSize(preferences.getInt("title_size", 21));
-                dialog.getContentView().setTextSize(preferences.getInt("font_size", 18));
                 dialog.getActionButton(DialogAction.NEGATIVE).setTextSize(preferences.getInt("font_size", 18));
                 dialog.getActionButton(DialogAction.POSITIVE).setTextSize(preferences.getInt("font_size", 18));
                 dialog.show();
+
+                RadioGroup dialog_selected = dialog.getCustomView().findViewById(R.id.option_size_group);
+                int font_size  = preferences.getInt("title_size", 21);
+                dialog_selected.check(font_size == 21 ? R.id.option_size_normal : R.id.option_size_big);
+                dialog_selected.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+                    @Override
+                    public void onCheckedChanged(RadioGroup group, int checkedId) {
+                        SharedPreferences.Editor edit = preferences.edit();
+
+                        switch (checkedId){
+                            case R.id.option_size_normal:
+                                edit.remove("size_selected_index");
+                                edit.remove("title_size");
+                                edit.remove("font_size");
+                                edit.putInt("size_selected_index", 0);
+                                edit.putInt("title_size", 21);
+                                edit.putInt("font_size", 18);
+                                break;
+                            case R.id.option_size_big:
+                                edit.remove("size_selected_index");
+                                edit.remove("title_size");
+                                edit.remove("font_size");
+                                edit.putInt("size_selected_index", 1);
+                                edit.putInt("title_size", 24);
+                                edit.putInt("font_size", 21);
+                                break;
+                        }
+
+                        edit.apply();
+                    }
+                });
 
                 floatingActionMenu.close(true);
             }
