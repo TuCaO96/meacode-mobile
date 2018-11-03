@@ -98,7 +98,12 @@ public class SearchFragment extends Fragment {
         MeAcodeMobileApplication.getInstance().getCourseService().getCourses().enqueue(new Callback<List<Course>>() {
             @Override
             public void onResponse(Call<List<Course>> call, Response<List<Course>> response) {
+                dialog.dismiss();
                 courses = response.body();
+                CourseAdapter adapter = new CourseAdapter(getContext(), courses);
+                RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
+                coursesRecyclerView.setLayoutManager(layoutManager);
+                coursesRecyclerView.setAdapter(adapter);
             }
 
             @Override
