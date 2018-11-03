@@ -41,15 +41,13 @@
                 android:layout_height="wrap_content"
                 android:hint="@string/prompt_suggestion_text"
                 android:inputType="textEmailAddress"
-                android:maxLines="4"
-                android:singleLine="true" />
+                android:singleLine="false" />
         </android.support.design.widget.TextInputLayout>
 
         <Button
             android:id="@+id/suggestion_send"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="text"
             android:text="@string/action_send"/>
     </LinearLayout>
 
