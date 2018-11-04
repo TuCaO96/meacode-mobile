@@ -2,6 +2,7 @@ package br.com.meacodeapp.meacodemobile.ui.adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -15,6 +16,7 @@ import android.widget.TextView;
 import java.util.List;
 
 import br.com.meacodeapp.meacodemobile.R;
+import br.com.meacodeapp.meacodemobile.app.MeAcodeMobileApplication;
 import br.com.meacodeapp.meacodemobile.model.Content;
 import br.com.meacodeapp.meacodemobile.model.Course;
 import br.com.meacodeapp.meacodemobile.ui.activity.ContentActivity;
@@ -32,10 +34,13 @@ public class ContentAdapter extends RecyclerView.Adapter<ContentAdapter.ContentH
     public static class ContentHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         TextView name;
         Content content;
+        SharedPreferences preferences = MeAcodeMobileApplication.getInstance().getSharedPreferences("session", Context.MODE_PRIVATE);
+
 
         public ContentHolder(View itemView){
             super(itemView);
             name = itemView.findViewById(R.id.content_adapter_name);
+            name.setTextSize(preferences.getInt("font_size", 18));
             itemView.setOnClickListener(this);
         }
 

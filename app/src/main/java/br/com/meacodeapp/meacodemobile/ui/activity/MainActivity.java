@@ -167,6 +167,10 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    public void setActionBarTitle(String title) {
+        getSupportActionBar().setTitle(title);
+    }
+
     public void logout(){
         SharedPreferences sharedPreferences = MeAcodeMobileApplication.getInstance()
                 .getSharedPreferences("session", Context.MODE_PRIVATE);

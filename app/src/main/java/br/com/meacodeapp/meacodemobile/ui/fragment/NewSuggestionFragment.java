@@ -19,6 +19,7 @@ import br.com.meacodeapp.meacodemobile.app.MeAcodeMobileApplication;
 import br.com.meacodeapp.meacodemobile.model.Suggestion;
 import br.com.meacodeapp.meacodemobile.model.User;
 import br.com.meacodeapp.meacodemobile.service.RestService;
+import br.com.meacodeapp.meacodemobile.ui.activity.MainActivity;
 import br.com.meacodeapp.meacodemobile.util.JsonConverter;
 import br.com.meacodeapp.meacodemobile.util.RestParameters;
 import butterknife.BindView;
@@ -39,6 +40,8 @@ public class NewSuggestionFragment extends Fragment {
     @BindView(R.id.suggestion_send)
     Button send_button;
 
+    SharedPreferences preferences = MeAcodeMobileApplication.getInstance().getSharedPreferences("session", Context.MODE_PRIVATE);
+
     public NewSuggestionFragment() {
         // Required empty public constructor
     }
@@ -58,9 +61,10 @@ public class NewSuggestionFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_new_suggestion, container, false);
         ButterKnife.bind(this, view);
-        send_button.setTextSize(21);
-        title.setTextSize(21);
-        text.setTextSize(21);
+        ((MainActivity)getActivity()).setActionBarTitle("Nova sugestão");
+        send_button.setTextSize(preferences.getInt("font_size", 18));
+        title.setTextSize(preferences.getInt("font_size", 18));
+        text.setTextSize(preferences.getInt("font_size", 18));
         return view;
     }
 
