@@ -4,8 +4,26 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.fragment.NewSuggestionFragment">
-
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:gravity="top|start|left">
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/suggestion_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginTop="10dp"
+                    android:text="@string/title_new_suggestion"
+                    android:textColor="@color/colorText"
+                    android:textSize="21sp" />
+        </android.support.v7.widget.Toolbar>
+    </android.support.design.widget.AppBarLayout>
     <LinearLayout
+        android:layout_marginTop="60dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:paddingHorizontal="10dp"

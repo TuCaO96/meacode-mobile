@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,6 +31,9 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class NewSuggestionFragment extends Fragment {
+
+    @BindView(R.id.suggestion_toolbar)
+    Toolbar toolbar;
 
     @BindView(R.id.suggestion_title)
     TextView title;
@@ -61,7 +65,7 @@ public class NewSuggestionFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_new_suggestion, container, false);
         ButterKnife.bind(this, view);
-        ((MainActivity)getActivity()).setActionBarTitle("Nova sugestão");
+        ((MainActivity)getActivity()).setSupportActionBar(toolbar);
         send_button.setTextSize(preferences.getInt("font_size", 18));
         title.setTextSize(preferences.getInt("font_size", 18));
         text.setTextSize(preferences.getInt("font_size", 18));
