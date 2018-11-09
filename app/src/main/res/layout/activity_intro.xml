@@ -36,22 +36,4 @@
         android:background="@color/colorAccent"
         android:src="@drawable/ic_arrow_forward_white_24dp"
         android:visibility="gone" />
-
-    <com.rd.PageIndicatorView
-        android:id="@+id/pageIndicatorView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="62dp"
-        android:layout_marginLeft="29dp"
-        android:padding="1dp"
-        app:piv_animationType="fill"
-        app:piv_dynamicCount="true"
-        app:piv_interactiveAnimation="true"
-        app:piv_selectedColor="@color/colorPrimaryLight"
-        app:piv_unselectedColor="@color/colorPrimaryLight"
-        app:piv_viewPager="@id/fragment_view_pager"
-        attrs:piv_radius="4dp" />
-
-
 </RelativeLayout>

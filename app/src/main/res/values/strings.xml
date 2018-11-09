@@ -58,6 +58,9 @@
     <string name="step1_text">Seja bem vindo ao Me Acode, seu centro de conteúdos para todas as horas.
         Deslize para a esquerda para continuar esta introdução.</string>
 
+    <string name="step_final_title">Agora você está pronto para começar!</string>
+    <string name="step_final_text">Clique no botão abaixo para fechar o passo a passo</string>
+
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

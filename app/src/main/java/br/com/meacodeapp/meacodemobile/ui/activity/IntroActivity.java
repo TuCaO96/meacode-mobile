@@ -65,7 +65,7 @@ public class IntroActivity extends AppCompatActivity {
 
             @Override
             public void onPageSelected(int position) {
-                if(position == 1){
+                if(position == 7){
                     button_finish.setVisibility(View.VISIBLE);
                     button_skip.setVisibility(View.INVISIBLE);
                 }

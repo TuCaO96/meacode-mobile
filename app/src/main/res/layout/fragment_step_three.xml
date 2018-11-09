@@ -8,7 +8,7 @@
     <ImageView
         android:scaleType="fitXY"
         android:foreground="@drawable/overlay_black_50"
-        android:src="@drawable/step1"
+        android:src="@drawable/step2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 </FrameLayout>
