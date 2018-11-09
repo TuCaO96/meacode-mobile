@@ -95,7 +95,7 @@ public class NewSuggestionFragment extends Fragment {
         RestParameters parameters = new RestParameters();
         parameters.setProperty("title", title.getText().toString());
         parameters.setProperty("text", text.getText().toString());
-        parameters.setProperty("user_id", Integer.toString(user.getId()));
+//        parameters.setProperty("user_id", Integer.toString(user.getId()));
 
         final Context context = getContext();
 
