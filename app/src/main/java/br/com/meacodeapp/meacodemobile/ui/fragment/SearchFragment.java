@@ -156,7 +156,6 @@ public class SearchFragment extends Fragment {
         dialog.show();
 
         RestParameters parameters = new RestParameters();
-        parameters.setProperty("user_id", Integer.toString(user_id));
         parameters.setProperty("query", query);
 
         MeAcodeMobileApplication.getInstance().getUserSearchService().postUserSearch(parameters)
