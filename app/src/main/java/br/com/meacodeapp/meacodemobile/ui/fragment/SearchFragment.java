@@ -30,6 +30,7 @@ import br.com.meacodeapp.meacodemobile.ui.activity.MainActivity;
 import br.com.meacodeapp.meacodemobile.ui.adapter.CourseAdapter;
 import br.com.meacodeapp.meacodemobile.util.JsonConverter;
 import br.com.meacodeapp.meacodemobile.util.RestParameters;
+import br.com.meacodeapp.meacodemobile.util.SimpleDividerItemDecoration;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import retrofit2.Call;
@@ -113,6 +114,7 @@ public class SearchFragment extends Fragment {
                 CourseAdapter adapter = new CourseAdapter(getContext(), courses);
                 RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
                 coursesRecyclerView.setLayoutManager(layoutManager);
+                coursesRecyclerView.addItemDecoration(new SimpleDividerItemDecoration(getContext()));
                 coursesRecyclerView.setAdapter(adapter);
             }
 
@@ -166,10 +168,11 @@ public class SearchFragment extends Fragment {
 
                         if(response.code() == 200){
                             courses = response.body().getCourses();
-                            CourseAdapter adapter = new CourseAdapter(getContext(), courses);
+                            CourseAdapter adapter = new CourseAdapter(context, courses);
                             RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
                             coursesRecyclerView.setLayoutManager(layoutManager);
                             coursesRecyclerView.setAdapter(adapter);
+                            coursesRecyclerView.addItemDecoration(new SimpleDividerItemDecoration(context));
                         }
                     }
 

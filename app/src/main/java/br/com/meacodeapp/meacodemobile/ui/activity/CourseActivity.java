@@ -12,6 +12,7 @@ import br.com.meacodeapp.meacodemobile.R;
 import br.com.meacodeapp.meacodemobile.model.Course;
 import br.com.meacodeapp.meacodemobile.ui.adapter.ContentAdapter;
 import br.com.meacodeapp.meacodemobile.util.JsonConverter;
+import br.com.meacodeapp.meacodemobile.util.SimpleDividerItemDecoration;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
@@ -42,6 +43,7 @@ public class CourseActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         contents.setLayoutManager(layoutManager);
+        contents.addItemDecoration(new SimpleDividerItemDecoration(this));
         contents.setAdapter(contentAdapter);
     }
 
