@@ -89,6 +89,10 @@ public class IntroActivity extends AppCompatActivity {
         }
     }
 
+    public void nextStep(){
+        viewPager.setCurrentItem(viewPager.getCurrentItem() + 1);
+    }
+
     public IntroStepsAdapter getPagerAdapter() {
         return pagerAdapter;
     }

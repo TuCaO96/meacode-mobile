@@ -9,14 +9,14 @@ import android.view.ViewGroup;
 import br.com.meacodeapp.meacodemobile.R;
 import butterknife.ButterKnife;
 
-public class StepEightFragment extends Fragment {
+public class StepTenFragment extends Fragment {
 
-    public StepEightFragment() {
+    public StepTenFragment() {
         // Required empty public constructor
     }
 
-    public static StepEightFragment newInstance() {
-        return new StepEightFragment();
+    public static StepTenFragment newInstance() {
+        return new StepTenFragment();
     }
 
     @Override

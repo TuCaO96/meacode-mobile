@@ -5,7 +5,6 @@
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
     </style>
 
     <style name="AppTheme.NoActionBar">
@@ -19,8 +18,8 @@
 /
     <style name="PrimaryButton" parent="Theme.AppCompat">
         <item name="android:backgroundTint">@color/colorPrimary</item>
-        <item name="colorControlHighlight">@color/colorAccent</item>
-        <item name="android:textColor">#FFFFFF</item>
+        <item name="colorControlHighlight">@color/colorPrimaryDark</item>
+        <item name="android:textColor">@color/colorPrimaryText</item>
     </style>
 
     <style name="MeAcodeTheme" parent="AppTheme" >
@@ -46,7 +45,7 @@
     </style>
 
     <style name="MeAcodeTheme.BottomNavigation" parent="AppTheme" >
-        <item name="android:background">@color/colorPrimary</item>
+        <item name="android:background">@color/colorPrimaryDark</item>
         <item name="itemTextColor">@color/colorText</item>
         <item name="itemIconTint">@color/colorText</item>
     </style>
