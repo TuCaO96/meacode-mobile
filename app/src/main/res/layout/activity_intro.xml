@@ -36,7 +36,10 @@
         android:layout_alignParentRight="true"
         android:layout_marginBottom="34dp"
         android:layout_marginRight="15dp"
-        android:background="@color/colorSecondaryDark"
+        app:fab_colorNormal="@color/secondaryDarkColor"
+        app:fab_colorPressed="@color/colorSecondary"
+        app:fab_colorRipple="@color/colorSecondary"
+        app:fab_colorDisabled="@color/colorSecondaryLight"
         android:src="@drawable/ic_arrow_forward_white_24dp"
         android:visibility="gone" />
 </RelativeLayout>
