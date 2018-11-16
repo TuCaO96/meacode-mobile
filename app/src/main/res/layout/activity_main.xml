@@ -18,6 +18,9 @@
         android:layout_height="wrap_content"
         android:layout_marginRight="8dp"
         android:layout_marginBottom="8dp"
+        app:menu_colorNormal="@color/colorSecondaryDark"
+        app:menu_colorPressed="@color/colorSecondary"
+        app:menu_labels_colorRipple="@color/colorSecondaryLight"
         app:layout_anchor="@id/main_frame_layout"
         app:layout_anchorGravity="right|bottom|end"
         app:menu_fab_label="Fechar">
@@ -26,17 +29,26 @@
             android:src="@drawable/ic_search_white_24dp"
             android:layout_width="wrap_content"
             app:fab_label="@string/title_search"
+            app:fab_colorNormal="@color/colorSecondaryDark"
+            app:fab_colorPressed="@color/colorSecondary"
+            app:fab_colorRipple="@color/colorSecondaryLight"
             android:layout_height="wrap_content" />
         <com.github.clans.fab.FloatingActionButton
             android:id="@+id/suggestion_option"
             android:src="@drawable/ic_info_outline_white_24dp"
             android:layout_width="wrap_content"
             app:fab_label="@string/title_new_suggestion"
+            app:fab_colorNormal="@color/colorSecondaryDark"
+            app:fab_colorPressed="@color/colorSecondary"
+            app:fab_colorRipple="@color/colorSecondaryLight"
             android:layout_height="wrap_content" />
         <com.github.clans.fab.FloatingActionButton
             android:id="@+id/settings_option"
             android:src="@drawable/ic_format_size_white_24dp"
             android:layout_width="wrap_content"
+            app:fab_colorNormal="@color/colorSecondaryDark"
+            app:fab_colorPressed="@color/colorSecondary"
+            app:fab_colorRipple="@color/colorSecondaryLight"
             app:fab_label="@string/action_settings"
             android:layout_height="wrap_content" />
     </com.github.clans.fab.FloatingActionMenu>
