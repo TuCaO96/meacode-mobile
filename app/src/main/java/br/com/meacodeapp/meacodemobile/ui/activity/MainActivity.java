@@ -8,6 +8,7 @@ import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.RadioGroup;
 
@@ -73,8 +74,9 @@ public class MainActivity extends AppCompatActivity {
         // Build a GoogleSignInClient with the options specified by gso.
         mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
         setContentView(R.layout.activity_main);
-        setFragment(SearchFragment.newInstance());
         ButterKnife.bind(this);
+
+        setFragment(SearchFragment.newInstance());
 
         final Context context = this;
 

@@ -32,9 +32,6 @@ import retrofit2.Response;
 
 public class NewSuggestionFragment extends Fragment {
 
-    @BindView(R.id.suggestion_toolbar)
-    Toolbar toolbar;
-
     @BindView(R.id.suggestion_title)
     TextView title;
 
@@ -62,10 +59,13 @@ public class NewSuggestionFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
+        ((MainActivity)getActivity()).getSupportActionBar().show();
+        ((MainActivity)getActivity()).getSupportActionBar().setTitle(R.string.title_new_content);
+
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_new_suggestion, container, false);
         ButterKnife.bind(this, view);
-        ((MainActivity)getActivity()).setSupportActionBar(toolbar);
         send_button.setTextSize(preferences.getInt("font_size", 18));
         title.setTextSize(preferences.getInt("font_size", 18));
         text.setTextSize(preferences.getInt("font_size", 18));
