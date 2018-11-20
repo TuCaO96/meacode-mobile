@@ -19,7 +19,8 @@ public class MeAcodeMobileApplication extends Application {
 //    private static final String URL = "http://192.168.137.1/meacode-yii/api/web/";
 //    private static final String URL = "http://192.168.0.19/meacode-yii/api/web/";
 //    private static final String URL = "http://192.168.0.24/meacode-yii/api/web/";
-    private static final String URL = "http://10.0.2.2/meacode-yii/api/web/";
+    private static final String URL = "http://meacodeapp.com.br/api/web/";
+//    private static final String URL = "http://10.0.2.2/meacode-yii/api/web/";
 
     private static MeAcodeMobileApplication instance;
 
