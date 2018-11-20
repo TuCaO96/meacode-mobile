@@ -10,6 +10,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
 import com.afollestad.materialdialogs.DialogAction;
@@ -102,6 +103,10 @@ public class MainActivity extends AppCompatActivity {
                 dialog.show();
 
                 RadioGroup dialog_selected = dialog.getCustomView().findViewById(R.id.option_size_group);
+                RadioButton big = dialog.getCustomView().findViewById(R.id.option_size_big);
+                RadioButton normal = dialog.getCustomView().findViewById(R.id.option_size_normal);
+                big.setTextSize(preferences.getInt("font_size", 18));
+                normal.setTextSize(preferences.getInt("font_size", 18));
                 int font_size  = preferences.getInt("title_size", 21);
                 dialog_selected.check(font_size == 21 ? R.id.option_size_normal : R.id.option_size_big);
                 dialog_selected.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
