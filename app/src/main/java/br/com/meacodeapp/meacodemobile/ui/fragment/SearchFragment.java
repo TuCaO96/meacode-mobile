@@ -175,6 +175,22 @@ public class SearchFragment extends Fragment {
                             coursesRecyclerView.setLayoutManager(layoutManager);
                             coursesRecyclerView.setAdapter(adapter);
                             coursesRecyclerView.addItemDecoration(new SimpleDividerItemDecoration(context));
+
+                            if(response.body().getCourses().size() < 1){
+                                final MaterialDialog.Builder errorMessageBuilder = new MaterialDialog.Builder(getActivity())
+                                        .title("Isso é constrangedor...")
+                                        .content("Não encontramos nenhum curso que bata com seus termos de pesquisa")
+                                        .positiveColor(getResources().getColor(R.color.colorPrimaryDark))
+                                        .positiveText(R.string.action_ok);
+
+                                final MaterialDialog errorDialog = errorMessageBuilder.build();
+                                errorDialog.getTitleView().setTextSize(preferences.getInt("title_size", 21));
+                                errorDialog.getContentView().setTextSize(preferences.getInt("font_size", 18));
+                                errorDialog.getActionButton(DialogAction.NEGATIVE).setTextSize(preferences.getInt("font_size", 18));
+                                errorDialog.getActionButton(DialogAction.POSITIVE).setTextSize(preferences.getInt("font_size", 18));
+                                errorDialog.show();
+                            }
+
                         }
                     }
 
