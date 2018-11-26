@@ -1,12 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginBottom="10dp"
-    android:paddingLeft="10dp">
-    <TextView
-        android:id="@+id/content_adapter_name"
-        style="@style/MeAcodeTheme.ListItemTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
-</RelativeLayout>
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardBackgroundColor="@color/colorPrimaryLight"
+    app:cardCornerRadius="2dp"
+    android:layout_marginTop="2dp"
+    android:layout_marginBottom="2dp">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:paddingVertical="10dp"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:layout_height="match_parent">
+        <TextView
+            android:id="@+id/content_adapter_name"
+            android:layout_centerVertical="true"
+            style="@style/MeAcodeTheme.ListItemTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </RelativeLayout>
+</android.support.v7.widget.CardView>

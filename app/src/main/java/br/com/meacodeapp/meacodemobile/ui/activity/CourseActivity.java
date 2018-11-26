@@ -53,7 +53,7 @@ public class CourseActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         contents.setLayoutManager(layoutManager);
-        contents.addItemDecoration(new SimpleDividerItemDecoration(this));
+//        contents.addItemDecoration(new SimpleDividerItemDecoration(this));
         contents.setAdapter(contentAdapter);
     }
 
