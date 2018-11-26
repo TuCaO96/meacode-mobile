@@ -6,28 +6,6 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".ui.activity.CourseActivity">
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="10dp"
-        android:background="@color/colorSecondaryLight">
-        <ImageView
-            android:id="@+id/single_course_image"
-            android:layout_width="64dp"
-            android:layout_height="64dp"
-            android:background="@color/colorPrimaryDark"
-            android:src="@drawable/ic_image_white_24dp"/>
-        <TextView
-            android:layout_toRightOf="@id/single_course_image"
-            android:layout_toEndOf="@id/single_course_image"
-            android:id="@+id/single_course_name"
-            android:layout_marginLeft="10dp"
-            android:layout_centerVertical="true"
-            style="@style/MeAcodeTheme.ListItemTitle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-    </RelativeLayout>
-
     <android.support.v7.widget.RecyclerView
         android:layout_margin="4dp"
         android:id="@+id/single_course_contents"
