@@ -95,7 +95,8 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.CourseHold
     public void onBindViewHolder(@NonNull CourseHolder holder, int position) {
         holder.name.setText(courses.get(position).getName());
         holder.course = courses.get(position);
-//        Glide.with(context).load(courses.get(position).getImage().getUrl()).into(holder.image);
+        String url = courses.get(position).getImageUrl();
+        Glide.with(context).load(MeAcodeMobileApplication.getFrontendUrl() + url).into(holder.image);
     }
 
     @Override

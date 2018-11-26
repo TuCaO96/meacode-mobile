@@ -8,8 +8,13 @@ public class Course implements Serializable {
     private String name;
     private Category category;
     private List<Content> contents;
+    private String image_url;
     private String created_at;
     private String updated_at;
+
+    public String getImageUrl() {
+        return image_url;
+    }
 
     public String getName() {
         return name;

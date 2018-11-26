@@ -8,6 +8,7 @@
     <RadioGroup
         android:id="@+id/option_size_group"
         android:layout_marginTop="10dp"
+        android:layout_marginLeft="20dp"
         android:orientation="vertical"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
@@ -15,6 +16,7 @@
             android:id="@+id/option_size_normal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
             android:text="@string/title_size_normal"/>
         <RadioButton
             android:id="@+id/option_size_big"

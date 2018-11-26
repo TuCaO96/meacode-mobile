@@ -33,18 +33,16 @@ public class ContentActivity extends AppCompatActivity {
         getSupportActionBar().setTitle(content.getTitle());
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        content_webview.loadDataWithBaseURL(MeAcodeMobileApplication.getURL(), content.getText(), "text/html", "utf8", null);
         //set the font size for the webview
         final WebSettings webSettings = content_webview.getSettings();
         webSettings.setDefaultFontSize(preferences.getInt("font_size", 18));
         webSettings.setRenderPriority(WebSettings.RenderPriority.HIGH);
-        webSettings.setCacheMode(WebSettings.LOAD_NO_CACHE);
-        webSettings.setAppCacheEnabled(false);
-        webSettings.setBlockNetworkImage(true);
         webSettings.setLoadsImagesAutomatically(true);
-        webSettings.setGeolocationEnabled(false);
         webSettings.setNeedInitialFocus(false);
+        webSettings.setJavaScriptEnabled(true);
+        webSettings.setDomStorageEnabled(true);
         webSettings.setSaveFormData(false);
+        content_webview.loadDataWithBaseURL(MeAcodeMobileApplication.getURL(), content.getText(), "text/html", "utf8", null);
     }
 
     @Override
