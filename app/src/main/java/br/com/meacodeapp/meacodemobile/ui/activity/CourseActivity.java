@@ -8,7 +8,10 @@ import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+
 import br.com.meacodeapp.meacodemobile.R;
+import br.com.meacodeapp.meacodemobile.app.MeAcodeMobileApplication;
 import br.com.meacodeapp.meacodemobile.model.Course;
 import br.com.meacodeapp.meacodemobile.ui.adapter.ContentAdapter;
 import br.com.meacodeapp.meacodemobile.util.JsonConverter;
@@ -37,6 +40,13 @@ public class CourseActivity extends AppCompatActivity {
         course = JsonConverter.fromJson(bundle.getString("course"), Course.class);
         ButterKnife.bind(this);
         name.setText(course.getName());
+
+        String url = course.getImageUrl();
+        if(url != null && !url.isEmpty()){
+            image.setBackgroundColor(getResources().getColor(R.color.colorWhite));
+            Glide.with(this).load(MeAcodeMobileApplication.getFrontendUrl() + url).into(image);
+        }
+
         getSupportActionBar().setTitle(course.getName());
         ContentAdapter contentAdapter = new ContentAdapter(course.getContents());
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);

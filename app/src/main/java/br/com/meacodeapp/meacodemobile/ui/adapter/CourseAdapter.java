@@ -96,7 +96,10 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.CourseHold
         holder.name.setText(courses.get(position).getName());
         holder.course = courses.get(position);
         String url = courses.get(position).getImageUrl();
-        Glide.with(context).load(MeAcodeMobileApplication.getFrontendUrl() + url).into(holder.image);
+        if(url != null && !url.isEmpty()){
+            holder.image.setBackgroundColor(context.getResources().getColor(R.color.colorWhite));
+            Glide.with(context).load(MeAcodeMobileApplication.getFrontendUrl() + url).into(holder.image);
+        }
     }
 
     @Override
