@@ -26,12 +26,6 @@ public class CourseActivity extends AppCompatActivity {
     @BindView(R.id.single_course_contents)
     RecyclerView contents;
 
-    @BindView(R.id.single_course_image)
-    ImageView image;
-
-    @BindView(R.id.single_course_name)
-    TextView name;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,13 +33,6 @@ public class CourseActivity extends AppCompatActivity {
         Bundle bundle = getIntent().getExtras();
         course = JsonConverter.fromJson(bundle.getString("course"), Course.class);
         ButterKnife.bind(this);
-        name.setText(course.getName());
-
-        String url = course.getImageUrl();
-        if(url != null && !url.isEmpty()){
-            image.setBackgroundColor(getResources().getColor(R.color.colorWhite));
-            Glide.with(this).load(MeAcodeMobileApplication.getFrontendUrl() + url).into(image);
-        }
 
         getSupportActionBar().setTitle(course.getName());
         ContentAdapter contentAdapter = new ContentAdapter(course.getContents());
