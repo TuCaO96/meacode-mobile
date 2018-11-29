@@ -61,7 +61,16 @@ public class NewSuggestionFragment extends Fragment {
                              Bundle savedInstanceState) {
 
         ((MainActivity)getActivity()).getSupportActionBar().show();
-        ((MainActivity)getActivity()).getSupportActionBar().setTitle(R.string.title_new_suggestion);
+
+        ((MainActivity)getActivity()).getSupportActionBar().setDisplayShowCustomEnabled(true);
+        ((MainActivity)getActivity()).getSupportActionBar().setDisplayShowTitleEnabled(false);
+
+        LayoutInflater inflator = LayoutInflater.from(((MainActivity)getActivity()));
+        View v = inflator.inflate(R.layout.title_textview, null);
+
+        ((TextView) v.findViewById(R.id.title_textview)).setText(R.string.title_new_suggestion);
+        ((TextView) v.findViewById(R.id.title_textview)).setTextSize(preferences.getInt("title_size",  21));
+        ((MainActivity)getActivity()).getSupportActionBar().setCustomView(v);
 
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_new_suggestion, container, false);

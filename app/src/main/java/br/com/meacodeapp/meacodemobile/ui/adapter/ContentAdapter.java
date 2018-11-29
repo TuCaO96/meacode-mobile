@@ -33,6 +33,8 @@ public class ContentAdapter extends RecyclerView.Adapter<ContentAdapter.ContentH
 
     public static class ContentHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         TextView name;
+        int position;
+        boolean is_last;
         Content content;
         SharedPreferences preferences = MeAcodeMobileApplication.getInstance().getSharedPreferences("session", Context.MODE_PRIVATE);
 
@@ -87,6 +89,8 @@ public class ContentAdapter extends RecyclerView.Adapter<ContentAdapter.ContentH
     public void onBindViewHolder(@NonNull ContentHolder holder, int position) {
         holder.name.setText((position + 1) + " - " + contents.get(position).getTitle());
         holder.content = contents.get(position);
+        holder.position = position;
+        holder.is_last = contents.size() < (position + 1) && position != 0;
     }
 
     @Override

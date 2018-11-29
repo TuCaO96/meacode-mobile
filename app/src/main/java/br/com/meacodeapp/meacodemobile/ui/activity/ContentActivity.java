@@ -4,9 +4,12 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
+import android.view.View;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
+import android.widget.TextView;
 
 import br.com.meacodeapp.meacodemobile.R;
 import br.com.meacodeapp.meacodemobile.app.MeAcodeMobileApplication;
@@ -30,9 +33,21 @@ public class ContentActivity extends AppCompatActivity {
         ButterKnife.bind(this);
         Bundle bundle = getIntent().getExtras();
         content = JsonConverter.fromJson(bundle.getString("content"), Content.class);
+
+        getSupportActionBar().setDisplayShowCustomEnabled(true);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
+
+        LayoutInflater inflator = LayoutInflater.from(this);
+        View v = inflator.inflate(R.layout.title_textview, null);
+
+        ((TextView) v.findViewById(R.id.title_textview)).setText(content.getTitle());
+        ((TextView) v.findViewById(R.id.title_textview)).setTextSize(preferences.getInt("title_size",  21));
+        this.getSupportActionBar().setCustomView(v);
+
         getSupportActionBar().setTitle(content.getTitle());
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         //set the font size for the webview
         final WebSettings webSettings = content_webview.getSettings();
         webSettings.setDefaultFontSize(preferences.getInt("font_size", 18));

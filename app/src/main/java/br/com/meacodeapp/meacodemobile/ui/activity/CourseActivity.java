@@ -1,10 +1,14 @@
 package br.com.meacodeapp.meacodemobile.ui.activity;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -23,6 +27,8 @@ public class CourseActivity extends AppCompatActivity {
 
     Course course;
 
+    SharedPreferences preferences = MeAcodeMobileApplication.getInstance().getSharedPreferences("session", Context.MODE_PRIVATE);
+
     @BindView(R.id.single_course_contents)
     RecyclerView contents;
 
@@ -34,13 +40,24 @@ public class CourseActivity extends AppCompatActivity {
         course = JsonConverter.fromJson(bundle.getString("course"), Course.class);
         ButterKnife.bind(this);
 
-        getSupportActionBar().setTitle(course.getName());
+        getSupportActionBar().setDisplayShowCustomEnabled(true);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
+
+        LayoutInflater inflator = LayoutInflater.from(this);
+        View v = inflator.inflate(R.layout.title_textview, null);
+
+        ((TextView) v.findViewById(R.id.title_textview)).setText(course.getName());
+        ((TextView) v.findViewById(R.id.title_textview)).setTextSize(preferences.getInt("title_size",  21));
+        this.getSupportActionBar().setCustomView(v);
+
         ContentAdapter contentAdapter = new ContentAdapter(course.getContents());
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+
+
         contents.setLayoutManager(layoutManager);
-//        contents.addItemDecoration(new SimpleDividerItemDecoration(this));
         contents.setAdapter(contentAdapter);
     }
 
