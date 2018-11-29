@@ -12,6 +12,9 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.widget.TextView;
 
+import com.afollestad.materialdialogs.DialogAction;
+import com.afollestad.materialdialogs.MaterialDialog;
+
 import br.com.meacodeapp.meacodemobile.R;
 import br.com.meacodeapp.meacodemobile.app.MeAcodeMobileApplication;
 import br.com.meacodeapp.meacodemobile.model.Content;
@@ -30,6 +33,19 @@ public class ContentActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        final MaterialDialog.Builder materialDialog = new MaterialDialog.Builder(this)
+                .title("Carregando")
+                .content("Aguarde mais alguns instantes...")
+                .progress(true,0,false);
+
+        final MaterialDialog dialog = materialDialog.build();
+        dialog.getTitleView().setTextSize(preferences.getInt("title_size", 21));
+        dialog.getContentView().setTextSize(preferences.getInt("font_size", 18));
+        dialog.getActionButton(DialogAction.NEGATIVE).setTextSize(preferences.getInt("font_size", 18));
+        dialog.getActionButton(DialogAction.POSITIVE).setTextSize(preferences.getInt("font_size", 18));
+        dialog.show();
+
         setContentView(R.layout.activity_content);
         ButterKnife.bind(this);
         Bundle bundle = getIntent().getExtras();
@@ -60,6 +76,7 @@ public class ContentActivity extends AppCompatActivity {
         webSettings.setDomStorageEnabled(true);
         webSettings.setSaveFormData(false);
         content_webview.loadDataWithBaseURL(MeAcodeMobileApplication.getURL(), content.getText(), "text/html", "utf8", null);
+        dialog.dismiss();
     }
 
     @Override
