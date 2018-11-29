@@ -4,11 +4,13 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -32,11 +34,17 @@ import retrofit2.Response;
 
 public class NewSuggestionFragment extends Fragment {
 
+    @BindView(R.id.suggestion_mandatory)
+    TextView mandatory;
+
     @BindView(R.id.suggestion_title)
-    TextView title;
+    AutoCompleteTextView title;
+
+    @BindView(R.id.suggestion_email)
+    AutoCompleteTextView email;
 
     @BindView(R.id.suggestion_text)
-    TextView text;
+    AutoCompleteTextView text;
 
     @BindView(R.id.suggestion_send)
     Button send_button;
@@ -77,7 +85,9 @@ public class NewSuggestionFragment extends Fragment {
         ButterKnife.bind(this, view);
         send_button.setTextSize(preferences.getInt("font_size", 18));
         title.setTextSize(preferences.getInt("font_size", 18));
+        email.setTextSize(preferences.getInt("font_size", 18));
         text.setTextSize(preferences.getInt("font_size", 18));
+        mandatory.setTextSize(preferences.getInt("font_size", 18));
         return view;
     }
 
@@ -104,6 +114,7 @@ public class NewSuggestionFragment extends Fragment {
         RestParameters parameters = new RestParameters();
         parameters.setProperty("title", title.getText().toString());
         parameters.setProperty("text", text.getText().toString());
+        parameters.setProperty("email", email.getText().toString());
 //        parameters.setProperty("user_id", Integer.toString(user.getId()));
 
         final Context context = getContext();

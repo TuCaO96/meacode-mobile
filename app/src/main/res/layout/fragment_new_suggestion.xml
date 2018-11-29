@@ -11,6 +11,19 @@
         android:paddingHorizontal="10dp"
         android:orientation="vertical">
 
+        <TextView
+            android:id="@+id/suggestion_mandatory"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorPrimaryText"
+            android:text="@string/prompt_suggestion_mandatory"
+            />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginBottom="10dp"
+            android:background="@android:color/black"/>
+
         <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
@@ -19,9 +32,21 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/prompt_suggestion_title"
-                android:inputType="textEmailAddress"
+                android:inputType="textAutoComplete"
                 android:maxLines="1"
                 android:singleLine="true" />
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <AutoCompleteTextView
+                android:id="@+id/suggestion_email"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/prompt_suggestion_email"
+                android:inputType="textEmailAddress"
+                android:singleLine="false" />
         </android.support.design.widget.TextInputLayout>
 
         <android.support.design.widget.TextInputLayout
@@ -32,7 +57,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/prompt_suggestion_text"
-                android:inputType="textEmailAddress"
+                android:inputType="textLongMessage"
                 android:singleLine="false" />
         </android.support.design.widget.TextInputLayout>
 

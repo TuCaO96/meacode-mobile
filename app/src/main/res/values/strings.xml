@@ -8,8 +8,10 @@
     <!-- Strings related to login -->
     <string name="title_new_suggestion">Nova Sugestão</string>
     <string name="title_login_email">Entrar com email e senha</string>
-    <string name="prompt_suggestion_title">Título da Sugestão</string>
-    <string name="prompt_suggestion_text">Texto</string>
+    <string name="prompt_suggestion_title">Título da Sugestão*</string>
+    <string name="prompt_suggestion_email">Enviar resposta para (email):</string>
+    <string name="prompt_suggestion_text">Texto*</string>
+    <string name="prompt_suggestion_mandatory">Campos com asterisco são obrigatórios</string>
     <string name="action_ok">OK</string>
     <string name="action_cancel">Cancelar</string>
     <string name="action_send">Enviar</string>
