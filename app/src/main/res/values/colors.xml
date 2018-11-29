@@ -12,6 +12,7 @@
     <color name="colorText">#FFFFFF</color>
     <color name="transparent">#00ffffff</color>
     <color name="colorWhite">#ffffff</color>
+    <color name="colorContentBackground">#e7dec7</color>
 
     <color name="primaryColor">#acb9e8</color>
     <color name="primaryLightColor">#deebff</color>
