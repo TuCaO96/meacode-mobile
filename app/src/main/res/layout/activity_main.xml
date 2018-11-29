@@ -32,7 +32,7 @@
             app:fab_colorNormal="@color/colorSecondaryDark"
             app:fab_colorPressed="@color/colorSecondary"
             app:fab_colorRipple="@color/colorSecondaryLight"
-            app:fab_label="@string/action_settings"
+            app:fab_label="@string/action_intro"
             android:layout_height="wrap_content" />
         <com.github.clans.fab.FloatingActionButton
             android:id="@+id/search_option"
