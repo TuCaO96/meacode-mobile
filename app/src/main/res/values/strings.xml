@@ -33,6 +33,7 @@
     <string name="button_font_size_increase_settings">Aumentar</string>
     <string name="button_font_size_decrease_settings">Diminuir</string>
     <string name="title_activity_main">MainActivity</string>
+    <string name="action_intro">Como usar o app</string>
     <string name="action_settings">Ajustar tamanho de fonte</string>
     <string name="action_forgot">Esqueci a senha</string>
     <string name="action_zoom_in">Zoom In</string>

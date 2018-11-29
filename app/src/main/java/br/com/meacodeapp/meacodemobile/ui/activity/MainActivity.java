@@ -48,6 +48,8 @@ public class MainActivity extends AppCompatActivity {
     com.github.clans.fab.FloatingActionButton suggestionMenu;
     @BindView(R.id.settings_option)
     com.github.clans.fab.FloatingActionButton optionsMenu;
+    @BindView(R.id.intro_option)
+    com.github.clans.fab.FloatingActionButton introMenu;
 
     private CallbackManager callbackManager = CallbackManager.Factory.create();
     private GoogleSignInClient mGoogleSignInClient;
@@ -154,6 +156,14 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 setFragment(NewSuggestionFragment.newInstance());
                 floatingActionMenu.close(true);
+            }
+        });
+
+        introMenu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, IntroActivity.class);
+                startActivity(intent);
             }
         });
     }
