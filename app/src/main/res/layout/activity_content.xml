@@ -7,8 +7,38 @@
     android:layout_height="match_parent"
     tools:context=".ui.activity.ContentActivity"
     android:padding="15dp">
-        <WebView
-            android:id="@+id/content_webview"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:orientation="vertical"
+            android:layout_height="match_parent">
+                <WebView
+                    android:id="@+id/content_webview"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+                <LinearLayout
+                    android:layout_marginTop="20dp"
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                        <android.support.v7.widget.AppCompatButton
+                            android:id="@+id/previous_content"
+                            android:layout_width="wrap_content"
+                            android:layout_weight="1"
+                            android:background="@color/colorPrimaryDark"
+                            android:text="@string/action_previous"
+                            android:layout_gravity="start|left|top"
+                            android:layout_marginRight="40dp"
+                            android:layout_height="wrap_content" />
+
+                        <android.support.v7.widget.AppCompatButton
+                            android:id="@+id/next_content"
+                            android:layout_width="wrap_content"
+                            android:layout_weight="1"
+                            android:layout_marginLeft="40dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="end|right|bottom"
+                            android:background="@color/colorPrimaryDark"
+                            android:text="@string/action_next" />
+                </LinearLayout>
+        </LinearLayout>
 </ScrollView>

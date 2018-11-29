@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.AppCompatButton;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -18,9 +19,11 @@ import com.afollestad.materialdialogs.MaterialDialog;
 import br.com.meacodeapp.meacodemobile.R;
 import br.com.meacodeapp.meacodemobile.app.MeAcodeMobileApplication;
 import br.com.meacodeapp.meacodemobile.model.Content;
+import br.com.meacodeapp.meacodemobile.ui.adapter.ContentAdapter;
 import br.com.meacodeapp.meacodemobile.util.JsonConverter;
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 public class ContentActivity extends AppCompatActivity {
 
@@ -28,11 +31,43 @@ public class ContentActivity extends AppCompatActivity {
 
     @BindView(R.id.content_webview)
     WebView content_webview;
+
+    @BindView(R.id.previous_content)
+    AppCompatButton previous_button;
+
+    @BindView(R.id.next_content)
+    AppCompatButton next_button;
+
+    @OnClick(R.id.previous_content)
+    public void goBack(){
+        finish();
+        ContentAdapter.previousContent(this);
+    }
+
+    @OnClick(R.id.next_content)
+    public void goForward(){
+        finish();
+        ContentAdapter.nextContent(this);
+    }
+
     SharedPreferences preferences = MeAcodeMobileApplication.getInstance().getSharedPreferences("session", Context.MODE_PRIVATE);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_content);
+        ButterKnife.bind(this);
+
+        previous_button.setTextSize(preferences.getInt("font_size", 18));
+        next_button.setTextSize(preferences.getInt("font_size", 18));
+
+        if(preferences.getInt("current_content", 0) == 0){
+            previous_button.setVisibility(View.INVISIBLE);
+        }
+
+        if(preferences.getInt("current_content", 0) >= preferences.getInt("last_content", 0)){
+            next_button.setVisibility(View.INVISIBLE);
+        }
 
         final MaterialDialog.Builder materialDialog = new MaterialDialog.Builder(this)
                 .title("Carregando")
@@ -46,8 +81,7 @@ public class ContentActivity extends AppCompatActivity {
         dialog.getActionButton(DialogAction.POSITIVE).setTextSize(preferences.getInt("font_size", 18));
         dialog.show();
 
-        setContentView(R.layout.activity_content);
-        ButterKnife.bind(this);
+
         Bundle bundle = getIntent().getExtras();
         content = JsonConverter.fromJson(bundle.getString("content"), Content.class);
 

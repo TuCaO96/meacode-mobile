@@ -20,6 +20,8 @@
     <string name="action_sign_in">Entrar com email e senha</string>
     <string name="action_sign_up">Cadastrar</string>
     <string name="action_sign_in_short">Entrar</string>
+    <string name="action_previous">Anterior</string>
+    <string name="action_next">Próximo</string>
     <string name="error_invalid_email">Esse email é invaálido</string>
     <string name="error_invalid_password">Senha muito curta</string>
     <string name="error_incorrect_password">Senha está incorreta</string>

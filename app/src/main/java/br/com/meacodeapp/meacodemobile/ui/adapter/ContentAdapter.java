@@ -25,10 +25,34 @@ import br.com.meacodeapp.meacodemobile.util.JsonConverter;
 
 public class ContentAdapter extends RecyclerView.Adapter<ContentAdapter.ContentHolder> implements Filterable {
 
-    List<Content> contents;
 
     public ContentAdapter(List<Content> contents){
-        this.contents = contents;
+        ContentAdapter.contents = contents;
+    }
+
+
+
+    public static List<Content> contents = null;
+
+    public static void nextContent(Context context){
+        Intent intent = new Intent(context, ContentActivity.class);
+        SharedPreferences sharedPreferences = MeAcodeMobileApplication.getInstance().getSharedPreferences("session", Context.MODE_PRIVATE);
+        int counter_added = sharedPreferences.getInt("current_content", 0);
+        counter_added++;
+        Content content = ContentAdapter.contents.get(counter_added);
+        sharedPreferences.edit().putInt("current_content", counter_added).apply();
+        intent.putExtra("content", JsonConverter.toJson(content));
+        context.startActivity(intent);
+    }
+
+    public static void previousContent(Context context){
+        Intent intent = new Intent(context, ContentActivity.class);
+        SharedPreferences sharedPreferences = MeAcodeMobileApplication.getInstance().getSharedPreferences("session", Context.MODE_PRIVATE);
+        int counter_subtracted = sharedPreferences.getInt("current_content", 0) - 1;
+        Content content = ContentAdapter.contents.get(counter_subtracted);
+        sharedPreferences.edit().putInt("current_content", counter_subtracted).apply();
+        intent.putExtra("content", JsonConverter.toJson(content));
+        context.startActivity(intent);
     }
 
     public static class ContentHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
@@ -50,6 +74,7 @@ public class ContentAdapter extends RecyclerView.Adapter<ContentAdapter.ContentH
         public void onClick(View view) {
             Intent intent = new Intent(view.getContext(), ContentActivity.class);
             intent.putExtra("content", JsonConverter.toJson(content));
+            preferences.edit().putInt("current_content", position).apply();
             view.getContext().startActivity(intent);
         }
     }
