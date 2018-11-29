@@ -55,8 +55,6 @@ public class CourseActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-
-
         contents.setLayoutManager(layoutManager);
         contents.setAdapter(contentAdapter);
     }
