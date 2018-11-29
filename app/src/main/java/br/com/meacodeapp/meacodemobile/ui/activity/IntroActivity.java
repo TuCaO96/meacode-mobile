@@ -1,10 +1,9 @@
 package br.com.meacodeapp.meacodemobile.ui.activity;
 
+import android.content.Context;
 import android.content.Intent;
-import android.support.v4.app.Fragment;
+import android.content.SharedPreferences;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
-import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -13,14 +12,15 @@ import android.widget.Button;
 import android.widget.ImageButton;
 
 import br.com.meacodeapp.meacodemobile.R;
+import br.com.meacodeapp.meacodemobile.app.MeAcodeMobileApplication;
 import br.com.meacodeapp.meacodemobile.ui.adapter.IntroStepsAdapter;
-import br.com.meacodeapp.meacodemobile.ui.fragment.intro.StepOneFragment;
-import br.com.meacodeapp.meacodemobile.ui.fragment.intro.StepTwoFragment;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class IntroActivity extends AppCompatActivity {
+
+    SharedPreferences preferences = MeAcodeMobileApplication.getInstance().getSharedPreferences("session", Context.MODE_PRIVATE);
 
     @BindView(R.id.fragment_view_pager)
     ViewPager viewPager;
@@ -41,7 +41,7 @@ public class IntroActivity extends AppCompatActivity {
     }
 
     @OnClick(R.id.button_jump)
-    public void onSkip(){
+    public void skip(){
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
         finish();
@@ -88,6 +88,20 @@ public class IntroActivity extends AppCompatActivity {
             viewPager.setCurrentItem(viewPager.getCurrentItem() - 1);
         }
     }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if(preferences.contains("first_use") &&
+                preferences.getBoolean("first_use", true) == true){
+            preferences.edit().putBoolean("first_use", false).apply();
+            skip();
+        }
+        else{
+            preferences.edit().putBoolean("first_use", true).apply();
+        }
+    }
+
 
     public void nextStep(){
         viewPager.setCurrentItem(viewPager.getCurrentItem() + 1);

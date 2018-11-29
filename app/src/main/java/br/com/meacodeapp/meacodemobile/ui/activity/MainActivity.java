@@ -162,6 +162,7 @@ public class MainActivity extends AppCompatActivity {
         introMenu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                preferences.edit().remove("first_use").apply();
                 Intent intent = new Intent(context, IntroActivity.class);
                 startActivity(intent);
             }
