@@ -107,8 +107,8 @@ public class NewSuggestionFragment extends Fragment {
         final MaterialDialog dialog = materialDialog.build();
         dialog.getTitleView().setTextSize(24);
         dialog.getContentView().setTextSize(21);
-        dialog.getActionButton(DialogAction.NEGATIVE).setTextSize(21);
-        dialog.getActionButton(DialogAction.POSITIVE).setTextSize(21);
+        dialog.getActionButton(DialogAction.NEGATIVE).setTextSize(preferences.getInt("font_size", 18));
+        dialog.getActionButton(DialogAction.POSITIVE).setTextSize(preferences.getInt("font_size", 18));
         dialog.show();
 
         RestParameters parameters = new RestParameters();
@@ -135,8 +135,8 @@ public class NewSuggestionFragment extends Fragment {
                             final MaterialDialog dialog = materialDialog.build();
                             dialog.getTitleView().setTextSize(24);
                             dialog.getContentView().setTextSize(21);
-                            dialog.getActionButton(DialogAction.NEGATIVE).setTextSize(21);
-                            dialog.getActionButton(DialogAction.POSITIVE).setTextSize(21);
+                            dialog.getActionButton(DialogAction.NEGATIVE).setTextSize(preferences.getInt("font_size", 18));
+                            dialog.getActionButton(DialogAction.POSITIVE).setTextSize(preferences.getInt("font_size", 18));
                             dialog.show();
                             ((MainActivity)getActivity()).setFragment(SearchFragment.newInstance());
                         }
@@ -148,10 +148,10 @@ public class NewSuggestionFragment extends Fragment {
                                     .positiveText("OK");
 
                             final MaterialDialog dialog = materialDialog.build();
-                            dialog.getTitleView().setTextSize(24);
-                            dialog.getContentView().setTextSize(21);
-                            dialog.getActionButton(DialogAction.NEGATIVE).setTextSize(21);
-                            dialog.getActionButton(DialogAction.POSITIVE).setTextSize(21);
+                            dialog.getTitleView().setTextSize(preferences.getInt("title_size", 18));
+                            dialog.getContentView().setTextSize(preferences.getInt("font_size", 18));
+                            dialog.getActionButton(DialogAction.NEGATIVE).setTextSize(preferences.getInt("font_size", 18));
+                            dialog.getActionButton(DialogAction.POSITIVE).setTextSize(preferences.getInt("font_size", 18));
                             dialog.show();
                         }
                     }
@@ -165,10 +165,10 @@ public class NewSuggestionFragment extends Fragment {
                                         " novamente mais tarde.");
 
                         final MaterialDialog dialog = materialDialog.build();
-                        dialog.getTitleView().setTextSize(24);
-                        dialog.getContentView().setTextSize(21);
-                        dialog.getActionButton(DialogAction.NEGATIVE).setTextSize(21);
-                        dialog.getActionButton(DialogAction.POSITIVE).setTextSize(21);
+                        dialog.getTitleView().setTextSize(preferences.getInt("title_size", 18));
+                        dialog.getContentView().setTextSize(preferences.getInt("font_size", 18));
+                        dialog.getActionButton(DialogAction.NEGATIVE).setTextSize(preferences.getInt("font_size", 18));
+                        dialog.getActionButton(DialogAction.POSITIVE).setTextSize(preferences.getInt("font_size", 18));
                         dialog.show();
                     }
                 });
