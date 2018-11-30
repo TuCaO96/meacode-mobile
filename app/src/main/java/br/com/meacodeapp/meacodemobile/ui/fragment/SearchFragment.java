@@ -129,7 +129,7 @@ public class SearchFragment extends Fragment {
                         .title("Erro")
                         .content("Ocorreu um erro ao buscar cursos. Por favor, tente" +
                                 " novamente mais tarde")
-                        .positiveText("OK");
+                        .positiveText(R.string.action_ok);
 
                 final MaterialDialog dialog = dialog1.build();
                 dialog.getTitleView().setTextSize(preferences.getInt("title_size", 21));
@@ -179,8 +179,8 @@ public class SearchFragment extends Fragment {
 
                             if(response.body().getCourses().size() < 1){
                                 final MaterialDialog.Builder errorMessageBuilder = new MaterialDialog.Builder(getActivity())
-                                        .title("Isso é constrangedor...")
-                                        .content("Não encontramos nenhum curso que bata com seus termos de pesquisa")
+                                        .title(R.string.title_error)
+                                        .content(R.string.error_404_courses)
                                         .positiveColor(getResources().getColor(R.color.colorPrimaryDark))
                                         .positiveText(R.string.action_ok);
 
@@ -203,7 +203,7 @@ public class SearchFragment extends Fragment {
                                 .title("Erro")
                                 .content("Ocorreu um erro ao buscar cursos. Por favor, tente" +
                                         " novamente mais tarde")
-                                .positiveText("OK");
+                                .positiveText(R.string.action_ok);
 
                         final MaterialDialog dialog = dialog1.build();
                         dialog.getTitleView().setTextSize(preferences.getInt("title_size", 21));

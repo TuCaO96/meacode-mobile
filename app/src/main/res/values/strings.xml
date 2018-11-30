@@ -14,6 +14,7 @@
     <string name="prompt_suggestion_mandatory">Campos com asterisco são obrigatórios</string>
     <string name="action_ok">OK</string>
     <string name="action_cancel">Cancelar</string>
+    <string name="action_finish">Finalizar</string>
     <string name="action_send">Enviar</string>
     <string name="prompt_email">Email</string>
     <string name="prompt_password">Senha</string>
@@ -38,16 +39,22 @@
     <string name="action_forgot">Esqueci a senha</string>
     <string name="action_zoom_in">Zoom In</string>
     <string name="action_zoom_out">Zoom Out</string>
+    <string name="action_close_menu">Fechar menu flutuante</string>
     <string name="action_logout">Sair</string>
     <string name="action_skip">Pular</string>
     <string name="action_restart">Reiniciar</string>
     <string name="title_activity_detail">DetailActivity</string>
     <string name="title_home">Início</string>
-    <string name="title_search">Procurar</string>
+    <string name="title_search">Procurar cursos</string>
     <string name="title_my_courses">Meus Cursos</string>
     <string name="title_my_profile">Meu Perfil</string>
     <string name="title_settings">Configurações</string>
     <string name="title_new_content">Sugerir Conteúdo</string>
+    <string name="title_error">Isso é constrangedor&#8230;</string>
+    <string name="title_finish_course">Parabéns!</string>
+    <string name="message_finish_course">Você acabou de finalizar um curso feito pensando em você. Caso tenha alguma sugestão de como podemos
+    melhorar os cursos, vá em "Nova Sugestão" e deixe-nos uma mensagem :)</string>
+    <string name="error_404_courses">"Não encontramos nenhum curso que bata com seus termos de pesquisa"</string>
     <string name="title_more">Mais</string>
     <string name="action_apply">APLICAR</string>
 

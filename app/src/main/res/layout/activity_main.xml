@@ -24,7 +24,7 @@
         app:menu_labels_colorRipple="@color/colorSecondaryLight"
         app:layout_anchor="@id/main_frame_layout"
         app:layout_anchorGravity="right|bottom|end"
-        app:menu_fab_label="Fechar">
+        app:menu_fab_label="@string/action_close_menu">
         <com.github.clans.fab.FloatingActionButton
             android:id="@+id/intro_option"
             android:src="@drawable/ic_play_circle_outline_white_24dp"

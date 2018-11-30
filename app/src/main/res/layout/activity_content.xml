@@ -48,8 +48,8 @@
                             android:visibility="gone"
                             android:layout_height="wrap_content"
                             android:layout_gravity="end|right|bottom"
-                            android:background="@color/colorPrimaryDark"
-                            android:text="@string/action_next" />
+                            android:background="@color/colorSecondaryDark"
+                            android:text="@string/action_finish" />
                 </LinearLayout>
         </LinearLayout>
 </ScrollView>

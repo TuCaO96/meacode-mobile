@@ -1,8 +1,10 @@
 package br.com.meacodeapp.meacodemobile.ui.activity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.AppCompatButton;
@@ -38,6 +40,9 @@ public class ContentActivity extends AppCompatActivity {
     @BindView(R.id.next_content)
     AppCompatButton next_button;
 
+    @BindView(R.id.go_home)
+    AppCompatButton home_button;
+
     @OnClick(R.id.previous_content)
     public void goBack(){
         finish();
@@ -50,6 +55,35 @@ public class ContentActivity extends AppCompatActivity {
         ContentAdapter.nextContent(this);
     }
 
+    @OnClick(R.id.go_home)
+    public void goHome(){
+
+        final MaterialDialog.Builder errorMessageBuilder = new MaterialDialog.Builder(this)
+                .title(R.string.title_finish_course)
+                .content(R.string.message_finish_course)
+                .positiveColor(getResources().getColor(R.color.colorPrimaryDark))
+                .onAny(new MaterialDialog.SingleButtonCallback() {
+                    @Override
+                    public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                        startHomeActivity();
+                    }
+                })
+                .positiveText(R.string.action_ok);
+
+        final MaterialDialog errorDialog = errorMessageBuilder.build();
+        errorDialog.getTitleView().setTextSize(preferences.getInt("title_size", 21));
+        errorDialog.getContentView().setTextSize(preferences.getInt("font_size", 18));
+        errorDialog.getActionButton(DialogAction.NEGATIVE).setTextSize(preferences.getInt("font_size", 18));
+        errorDialog.getActionButton(DialogAction.POSITIVE).setTextSize(preferences.getInt("font_size", 18));
+        errorDialog.show();
+    }
+
+    public void startHomeActivity(){
+        Intent intent = new Intent(this, MainActivity.class);
+        finish();
+        startActivity(intent);
+    }
+
     SharedPreferences preferences = MeAcodeMobileApplication.getInstance().getSharedPreferences("session", Context.MODE_PRIVATE);
 
     @Override
@@ -60,13 +94,15 @@ public class ContentActivity extends AppCompatActivity {
 
         previous_button.setTextSize(preferences.getInt("font_size", 18));
         next_button.setTextSize(preferences.getInt("font_size", 18));
+        home_button.setTextSize(preferences.getInt("font_size", 18));
 
         if(preferences.getInt("current_content", 0) == 0){
             previous_button.setVisibility(View.INVISIBLE);
         }
 
         if(preferences.getInt("current_content", 0) >= preferences.getInt("last_content", 0)){
-            next_button.setVisibility(View.INVISIBLE);
+            next_button.setVisibility(View.GONE);
+            home_button.setVisibility(View.VISIBLE);
         }
 
         final MaterialDialog.Builder materialDialog = new MaterialDialog.Builder(this)
