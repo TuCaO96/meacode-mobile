@@ -9,14 +9,14 @@ import android.view.ViewGroup;
 import br.com.meacodeapp.meacodemobile.R;
 import butterknife.ButterKnife;
 
-public class StepElevenFragment extends Fragment {
+public class StepFourteenFragment extends Fragment {
 
-    public StepElevenFragment() {
+    public StepFourteenFragment() {
         // Required empty public constructor
     }
 
-    public static StepElevenFragment newInstance() {
-        return new StepElevenFragment();
+    public static StepFourteenFragment newInstance() {
+        return new StepFourteenFragment();
     }
 
     @Override
@@ -28,7 +28,7 @@ public class StepElevenFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_step_eleven, container, false);
+        View view = inflater.inflate(R.layout.fragment_step_fourteen, container, false);
         ButterKnife.bind(this, view);
         // Inflate the layout for this fragment
         return view;

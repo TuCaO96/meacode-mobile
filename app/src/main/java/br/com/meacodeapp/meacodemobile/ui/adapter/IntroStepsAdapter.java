@@ -12,12 +12,19 @@ import android.widget.ImageButton;
 
 import br.com.meacodeapp.meacodemobile.R;
 import br.com.meacodeapp.meacodemobile.ui.fragment.intro.StepEightFragment;
+import br.com.meacodeapp.meacodemobile.ui.fragment.intro.StepElevenFragment;
+import br.com.meacodeapp.meacodemobile.ui.fragment.intro.StepFifteenFragment;
 import br.com.meacodeapp.meacodemobile.ui.fragment.intro.StepFiveFragment;
 import br.com.meacodeapp.meacodemobile.ui.fragment.intro.StepFourFragment;
+import br.com.meacodeapp.meacodemobile.ui.fragment.intro.StepFourteenFragment;
+import br.com.meacodeapp.meacodemobile.ui.fragment.intro.StepNineFragment;
 import br.com.meacodeapp.meacodemobile.ui.fragment.intro.StepOneFragment;
 import br.com.meacodeapp.meacodemobile.ui.fragment.intro.StepSevenFragment;
 import br.com.meacodeapp.meacodemobile.ui.fragment.intro.StepSixFragment;
+import br.com.meacodeapp.meacodemobile.ui.fragment.intro.StepTenFragment;
+import br.com.meacodeapp.meacodemobile.ui.fragment.intro.StepThirteenFragment;
 import br.com.meacodeapp.meacodemobile.ui.fragment.intro.StepThreeFragment;
+import br.com.meacodeapp.meacodemobile.ui.fragment.intro.StepTwelveFragment;
 import br.com.meacodeapp.meacodemobile.ui.fragment.intro.StepTwoFragment;
 import butterknife.BindView;
 
@@ -44,13 +51,29 @@ public class IntroStepsAdapter extends FragmentStatePagerAdapter {
                 return StepSixFragment.newInstance();
             case 6:
                 return StepSevenFragment.newInstance();
-            default:
+            case 7:
                 return StepEightFragment.newInstance();
+            case 8:
+                return StepNineFragment.newInstance();
+            case 9:
+                return StepTenFragment.newInstance();
+            case 10:
+                return StepElevenFragment.newInstance();
+            case 11:
+                return StepTwelveFragment.newInstance();
+            case 12:
+                return StepThirteenFragment.newInstance();
+            case 13:
+                return StepFourteenFragment.newInstance();
+            case 14:
+                return StepFifteenFragment.newInstance();
+            default:
+                return StepFifteenFragment.newInstance();
         }
     }
 
     @Override
     public int getCount() {
-        return 8;
+        return 15;
     }
 }

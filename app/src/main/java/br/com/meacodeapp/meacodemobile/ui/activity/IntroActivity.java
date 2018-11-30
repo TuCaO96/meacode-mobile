@@ -31,6 +31,9 @@ public class IntroActivity extends AppCompatActivity {
     @BindView(R.id.button_finish)
     ImageButton button_finish;
 
+    @BindView(R.id.button_restart)
+    Button button_restart;
+
     IntroStepsAdapter pagerAdapter;
 
     @OnClick(R.id.button_finish)
@@ -65,12 +68,14 @@ public class IntroActivity extends AppCompatActivity {
 
             @Override
             public void onPageSelected(int position) {
-                if(position == 7){
+                if(position == 14){
                     button_finish.setVisibility(View.VISIBLE);
+                    button_restart.setVisibility(View.VISIBLE);
                     button_skip.setVisibility(View.INVISIBLE);
                 }
                 else{
                     button_finish.setVisibility(View.INVISIBLE);
+                    button_restart.setVisibility(View.INVISIBLE);
                     button_skip.setVisibility(View.VISIBLE);
                 }
             }

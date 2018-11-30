@@ -40,6 +40,7 @@
     <string name="action_zoom_out">Zoom Out</string>
     <string name="action_logout">Sair</string>
     <string name="action_skip">Pular</string>
+    <string name="action_restart">Reiniciar</string>
     <string name="title_activity_detail">DetailActivity</string>
     <string name="title_home">Início</string>
     <string name="title_search">Procurar</string>

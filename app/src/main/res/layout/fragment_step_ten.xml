@@ -9,7 +9,7 @@
         android:id="@+id/step_ten_image"
         android:scaleType="fitXY"
         android:foreground="@drawable/overlay_black_50"
-        android:src="@drawable/step6"
+        android:src="@drawable/step9"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 </FrameLayout>

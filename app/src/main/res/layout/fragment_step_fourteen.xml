@@ -3,13 +3,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.fragment.intro.StepTwoFragment">
+    tools:context=".ui.fragment.intro.StepTwoFragment"
+    android:background="@color/colorPrimaryDark">
 
     <ImageView
-        android:id="@+id/step_twelve_image"
+        android:id="@+id/step_three_image"
         android:scaleType="fitXY"
         android:foreground="@drawable/overlay_black_50"
-        android:src="@drawable/step11"
+        android:src="@drawable/step13"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 </FrameLayout>
