@@ -138,6 +138,7 @@ public class NewSuggestionFragment extends Fragment {
                             dialog.getActionButton(DialogAction.NEGATIVE).setTextSize(21);
                             dialog.getActionButton(DialogAction.POSITIVE).setTextSize(21);
                             dialog.show();
+                            ((MainActivity)getActivity()).setFragment(SearchFragment.newInstance());
                         }
                         else{
                             MaterialDialog.Builder materialDialog = new MaterialDialog.Builder(context)
