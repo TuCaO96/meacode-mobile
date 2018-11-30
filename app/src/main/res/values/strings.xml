@@ -29,12 +29,12 @@
     <string name="permission_rationale">"Contacts permissions are needed for providing email
         completions."
     </string>
-    <string name="title_font_size_settings">Tamanho de fonte</string>
+    <string name="title_font_size_settings">Tamanho de letra</string>
     <string name="button_font_size_increase_settings">Aumentar</string>
     <string name="button_font_size_decrease_settings">Diminuir</string>
     <string name="title_activity_main">MainActivity</string>
     <string name="action_intro">Como usar o app</string>
-    <string name="action_settings">Ajustar tamanho de fonte</string>
+    <string name="action_settings">Ajustar tamanho de letra</string>
     <string name="action_forgot">Esqueci a senha</string>
     <string name="action_zoom_in">Zoom In</string>
     <string name="action_zoom_out">Zoom Out</string>
@@ -62,7 +62,7 @@
 
     <string name="step1_title">Olá!</string>
     <string name="step1_text">Seja bem vindo ao Me Acode, seu centro de conteúdos para todas as horas.
-        Deslize para a esquerda para continuar esta introdução.</string>
+        Deslize a tela para a esquerda para continuar esta introdução.</string>
 
     <string name="step_final_title">Agora você está pronto para começar!</string>
     <string name="step_final_text">Clique no botão abaixo para fechar o passo a passo</string>
