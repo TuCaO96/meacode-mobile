@@ -39,6 +39,17 @@
                             android:layout_gravity="end|right|bottom"
                             android:background="@color/colorPrimaryDark"
                             android:text="@string/action_next" />
+
+                        <android.support.v7.widget.AppCompatButton
+                            android:id="@+id/go_home"
+                            android:layout_width="wrap_content"
+                            android:layout_weight="1"
+                            android:layout_marginLeft="40dp"
+                            android:visibility="gone"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="end|right|bottom"
+                            android:background="@color/colorPrimaryDark"
+                            android:text="@string/action_next" />
                 </LinearLayout>
         </LinearLayout>
 </ScrollView>
