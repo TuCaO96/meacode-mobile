@@ -13,6 +13,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
+import android.widget.AutoCompleteTextView;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.afollestad.materialdialogs.DialogAction;
@@ -21,6 +23,7 @@ import com.afollestad.materialdialogs.MaterialDialog;
 import br.com.meacodeapp.meacodemobile.R;
 import br.com.meacodeapp.meacodemobile.app.MeAcodeMobileApplication;
 import br.com.meacodeapp.meacodemobile.model.Content;
+import br.com.meacodeapp.meacodemobile.model.Course;
 import br.com.meacodeapp.meacodemobile.ui.adapter.ContentAdapter;
 import br.com.meacodeapp.meacodemobile.util.JsonConverter;
 import br.com.meacodeapp.meacodemobile.util.RestParameters;
@@ -49,6 +52,8 @@ public class ContentActivity extends AppCompatActivity {
     @BindView(R.id.go_home)
     AppCompatButton home_button;
 
+    RestParameters courseParameters = new RestParameters();
+
     @OnClick(R.id.previous_content)
     public void goBack(){
         finish();
@@ -66,7 +71,7 @@ public class ContentActivity extends AppCompatActivity {
         RestParameters restParameters = new RestParameters();
         restParameters.setProperty("content_id", Integer.toString(content.getId()));
         restParameters.setProperty("user_id", preferences.getString("user_id", null));
-        restParameters.setProperty("score", "1");
+        restParameters.setProperty("liked", "1");
 
         final MaterialDialog.Builder materialDialog = new MaterialDialog.Builder(this)
                 .title("Carregando")
@@ -127,7 +132,7 @@ public class ContentActivity extends AppCompatActivity {
         final Context context = this;
         restParameters.setProperty("content_id", Integer.toString(content.getId()));
         restParameters.setProperty("user_id", preferences.getString("user_id", null));
-        restParameters.setProperty("score", "5");
+        restParameters.setProperty("liked", "5");
 
         final MaterialDialog.Builder materialDialog = new MaterialDialog.Builder(this)
                 .title("Carregando")
@@ -182,25 +187,88 @@ public class ContentActivity extends AppCompatActivity {
 
     @OnClick(R.id.go_home)
     public void goHome(){
+        final Context context = this;
 
         final MaterialDialog.Builder errorMessageBuilder = new MaterialDialog.Builder(this)
                 .title(R.string.title_finish_course)
-                .content(R.string.message_finish_course)
+                .customView(R.layout.dialog_rate_course_view, true)
                 .positiveColor(getResources().getColor(R.color.colorPrimaryDark))
                 .onAny(new MaterialDialog.SingleButtonCallback() {
                     @Override
                     public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
-                        startHomeActivity();
+                        final MaterialDialog.Builder materialDialog = new MaterialDialog.Builder(context)
+                                .title("Carregando")
+                                .content("Aguarde mais alguns instantes...")
+                                .progress(true,0,false);
+                        
+                        final MaterialDialog dlg = materialDialog.build();
+                        dlg.getTitleView().setTextSize(preferences.getInt("title_size", 21));
+                        dlg.getContentView().setTextSize(preferences.getInt("font_size", 18));
+                        dlg.getActionButton(DialogAction.NEGATIVE).setTextSize(preferences.getInt("font_size", 18));
+                        dlg.getActionButton(DialogAction.POSITIVE).setTextSize(preferences.getInt("font_size", 18));
+                        dlg.show();
+                        
+                        MeAcodeMobileApplication.getInstance().getCourseService().postRateCourse(courseParameters)
+                                .enqueue(new Callback<Course>() {
+                                    @Override
+                                    public void onResponse(Call<Course> call, Response<Course> response) {
+                                        dlg.dismiss();
+                                        startHomeActivity();
+                                    }
+
+                                    @Override
+                                    public void onFailure(Call<Course> call, Throwable t) {
+                                        dlg.dismiss();
+                                        final MaterialDialog.Builder errorMessageBuilder = new MaterialDialog.Builder(context)
+                                                .title(R.string.title_error)
+                                                .content(R.string.rate_sent_message_error)
+                                                .positiveColor(getResources().getColor(R.color.colorPrimaryDark))
+                                                .onAny(new MaterialDialog.SingleButtonCallback() {
+                                                    @Override
+                                                    public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                                                        startHomeActivity();
+                                                    }
+                                                })
+                                                .positiveText(R.string.action_ok);
+
+                                        final MaterialDialog dialog = errorMessageBuilder.build();
+                                        dialog.getTitleView().setTextSize(preferences.getInt("title_size", 21));
+                                        dialog.getContentView().setTextSize(preferences.getInt("font_size", 18));
+                                        dialog.getActionButton(DialogAction.NEGATIVE).setTextSize(preferences.getInt("font_size", 18));
+                                        dialog.getActionButton(DialogAction.POSITIVE).setTextSize(preferences.getInt("font_size", 18));
+                                        dialog.show();
+                                    }
+                                });
                     }
                 })
-                .positiveText(R.string.action_ok);
+                .positiveText(R.string.action_send);
 
         final MaterialDialog errorDialog = errorMessageBuilder.build();
         errorDialog.getTitleView().setTextSize(preferences.getInt("title_size", 21));
-        errorDialog.getContentView().setTextSize(preferences.getInt("font_size", 18));
-        errorDialog.getActionButton(DialogAction.NEGATIVE).setTextSize(preferences.getInt("font_size", 18));
         errorDialog.getActionButton(DialogAction.POSITIVE).setTextSize(preferences.getInt("font_size", 18));
+        final ImageButton like = errorDialog.getCustomView().findViewById(R.id.like_course);
+        final ImageButton dislike = errorDialog.getCustomView().findViewById(R.id.dislike_course);
+        final AutoCompleteTextView courseComments = errorDialog.getCustomView().findViewById(R.id.course_rate_comments);
+        like.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dislike.setBackgroundColor(getResources().getColor(R.color.colorWhite));
+                like.setBackgroundColor(getResources().getColor(R.color.colorSecondary));
+                courseParameters.setProperty("liked", "5");
+            }
+        });
+        dislike.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                like.setBackgroundColor(getResources().getColor(R.color.colorWhite));
+                dislike.setBackgroundColor(getResources().getColor(R.color.colorSecondary));
+                courseParameters.setProperty("liked", "1");
+            }
+        });
         errorDialog.show();
+
+        courseParameters.setProperty("comments", courseComments.getText().toString());
+
     }
 
     public void startHomeActivity(){

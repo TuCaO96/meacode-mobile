@@ -45,17 +45,9 @@
         <AutoCompleteTextView
             android:hint="@string/comments"
             android:layout_marginTop="25dp"
+            android:id="@+id/course_rate_comments"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
     </android.support.design.widget.TextInputLayout>
-
-    <android.support.v7.widget.AppCompatButton
-        android:layout_marginTop="25dp"
-        android:id="@+id/send_course_rate"
-        android:background="@color/colorPrimaryDark"
-        android:textSize="18sp"
-        android:text="@string/action_send"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
 
 </LinearLayout>

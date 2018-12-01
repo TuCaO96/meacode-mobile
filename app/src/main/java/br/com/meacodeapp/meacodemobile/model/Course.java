@@ -12,6 +12,10 @@ public class Course implements Serializable {
     private String created_at;
     private String updated_at;
 
+    public int getId() {
+        return id;
+    }
+
     public String getImageUrl() {
         return image_url;
     }
