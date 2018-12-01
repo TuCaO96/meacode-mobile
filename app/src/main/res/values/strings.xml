@@ -68,6 +68,12 @@
     <string name="dislike_course">Não gostou do curso</string>
     <string name="like_course">Gostou do curso</string>
 
+    <string name="rate_sent_title">Avaliação enviada</string>
+    <string name="rate_sent_message">Sua avaliação foi enviada com sucesso, obrigado!</string>
+
+    <string name="rate_sent_title_error">Avaliação enviada</string>
+    <string name="rate_sent_message_error">Não conseguimos enviar sua avaliação :(
+    Tente novamente mais tarde</string>
 
     <string name="dislike_content">Conteúdo não foi útil</string>
     <string name="like_content">Conteúdo foi útil</string>

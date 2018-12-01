@@ -19,6 +19,9 @@ public interface ContentService {
     @GET("contents")
     Call<List<Content>> getContents();
 
+    @POST("contents/rate")
+    Call<Content> postRateContent(@Body RestParameters parameters);
+
     @GET("contents/{content}")
     Call<Content> getContent(@Path("content") int id);
 }

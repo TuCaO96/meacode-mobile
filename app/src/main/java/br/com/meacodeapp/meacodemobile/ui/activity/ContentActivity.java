@@ -23,13 +23,19 @@ import br.com.meacodeapp.meacodemobile.app.MeAcodeMobileApplication;
 import br.com.meacodeapp.meacodemobile.model.Content;
 import br.com.meacodeapp.meacodemobile.ui.adapter.ContentAdapter;
 import br.com.meacodeapp.meacodemobile.util.JsonConverter;
+import br.com.meacodeapp.meacodemobile.util.RestParameters;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class ContentActivity extends AppCompatActivity {
 
     Content content;
+
+    SharedPreferences preferences = MeAcodeMobileApplication.getInstance().getSharedPreferences("session", Context.MODE_PRIVATE);
 
     @BindView(R.id.content_webview)
     WebView content_webview;
@@ -53,6 +59,125 @@ public class ContentActivity extends AppCompatActivity {
     public void goForward(){
         finish();
         ContentAdapter.nextContent(this);
+    }
+
+    @OnClick(R.id.dislike_content)
+    public void dislikeContent(){
+        RestParameters restParameters = new RestParameters();
+        restParameters.setProperty("content_id", Integer.toString(content.getId()));
+        restParameters.setProperty("user_id", preferences.getString("user_id", null));
+        restParameters.setProperty("score", "1");
+
+        final MaterialDialog.Builder materialDialog = new MaterialDialog.Builder(this)
+                .title("Carregando")
+                .content("Aguarde mais alguns instantes...")
+                .progress(true,0,false);
+
+        final Context context = this;
+
+        final MaterialDialog dialog = materialDialog.build();
+        dialog.getTitleView().setTextSize(preferences.getInt("title_size", 21));
+        dialog.getContentView().setTextSize(preferences.getInt("font_size", 18));
+        dialog.getActionButton(DialogAction.NEGATIVE).setTextSize(preferences.getInt("font_size", 18));
+        dialog.getActionButton(DialogAction.POSITIVE).setTextSize(preferences.getInt("font_size", 18));
+        dialog.show();
+
+        MeAcodeMobileApplication.getInstance().getContentService().postRateContent(restParameters)
+                .enqueue(new Callback<Content>() {
+                    @Override
+                    public void onResponse(Call<Content> call, Response<Content> response) {
+                        dialog.dismiss();
+                        final MaterialDialog.Builder errorMessageBuilder = new MaterialDialog.Builder(context)
+                                .title(R.string.rate_sent_title)
+                                .content(R.string.rate_sent_message)
+                                .positiveColor(getResources().getColor(R.color.colorPrimaryDark))
+                                .positiveText(R.string.action_ok);
+
+                        final MaterialDialog dialog = errorMessageBuilder.build();
+                        dialog.getTitleView().setTextSize(preferences.getInt("title_size", 21));
+                        dialog.getContentView().setTextSize(preferences.getInt("font_size", 18));
+                        dialog.getActionButton(DialogAction.NEGATIVE).setTextSize(preferences.getInt("font_size", 18));
+                        dialog.getActionButton(DialogAction.POSITIVE).setTextSize(preferences.getInt("font_size", 18));
+                        dialog.show();
+                    }
+
+                    @Override
+                    public void onFailure(Call<Content> call, Throwable t) {
+                        dialog.dismiss();
+
+                        final MaterialDialog.Builder errorMessageBuilder = new MaterialDialog.Builder(context)
+                                .title(R.string.title_error)
+                                .content(R.string.rate_sent_message_error)
+                                .positiveColor(getResources().getColor(R.color.colorPrimaryDark))
+                                .positiveText(R.string.action_ok);
+
+                        final MaterialDialog dialog = errorMessageBuilder.build();
+                        dialog.getTitleView().setTextSize(preferences.getInt("title_size", 21));
+                        dialog.getContentView().setTextSize(preferences.getInt("font_size", 18));
+                        dialog.getActionButton(DialogAction.NEGATIVE).setTextSize(preferences.getInt("font_size", 18));
+                        dialog.getActionButton(DialogAction.POSITIVE).setTextSize(preferences.getInt("font_size", 18));
+                        dialog.show();
+                    }
+                });
+    }
+
+    @OnClick(R.id.like_content)
+    public void likeContent(){
+        RestParameters restParameters = new RestParameters();
+        final Context context = this;
+        restParameters.setProperty("content_id", Integer.toString(content.getId()));
+        restParameters.setProperty("user_id", preferences.getString("user_id", null));
+        restParameters.setProperty("score", "5");
+
+        final MaterialDialog.Builder materialDialog = new MaterialDialog.Builder(this)
+                .title("Carregando")
+                .content("Aguarde mais alguns instantes...")
+                .progress(true,0,false);
+
+        final MaterialDialog dialog = materialDialog.build();
+        dialog.getTitleView().setTextSize(preferences.getInt("title_size", 21));
+        dialog.getContentView().setTextSize(preferences.getInt("font_size", 18));
+        dialog.getActionButton(DialogAction.NEGATIVE).setTextSize(preferences.getInt("font_size", 18));
+        dialog.getActionButton(DialogAction.POSITIVE).setTextSize(preferences.getInt("font_size", 18));
+        dialog.show();
+
+        MeAcodeMobileApplication.getInstance().getContentService().postRateContent(restParameters)
+                .enqueue(new Callback<Content>() {
+                            @Override
+                            public void onResponse(Call<Content> call, Response<Content> response) {
+                                dialog.dismiss();
+                        final MaterialDialog.Builder errorMessageBuilder = new MaterialDialog.Builder(context)
+                                .title(R.string.rate_sent_title)
+                                .content(R.string.rate_sent_message)
+                                .positiveColor(getResources().getColor(R.color.colorPrimaryDark))
+                                .positiveText(R.string.action_ok);
+
+                        final MaterialDialog dialog = errorMessageBuilder.build();
+                        dialog.getTitleView().setTextSize(preferences.getInt("title_size", 21));
+                        dialog.getContentView().setTextSize(preferences.getInt("font_size", 18));
+                        dialog.getActionButton(DialogAction.NEGATIVE).setTextSize(preferences.getInt("font_size", 18));
+                        dialog.getActionButton(DialogAction.POSITIVE).setTextSize(preferences.getInt("font_size", 18));
+                        dialog.show();
+                    }
+
+                    @Override
+                    public void onFailure(Call<Content> call, Throwable t) {
+                        dialog.dismiss();
+
+                        final MaterialDialog.Builder errorMessageBuilder = new MaterialDialog.Builder(context)
+                                .title(R.string.title_error)
+                                .content(R.string.rate_sent_message_error)
+                                .positiveColor(getResources().getColor(R.color.colorPrimaryDark))
+                                .positiveText(R.string.action_ok);
+
+                        final MaterialDialog dialog = errorMessageBuilder.build();
+                        dialog.getTitleView().setTextSize(preferences.getInt("title_size", 21));
+                        dialog.getContentView().setTextSize(preferences.getInt("font_size", 18));
+                        dialog.getActionButton(DialogAction.NEGATIVE).setTextSize(preferences.getInt("font_size", 18));
+                        dialog.getActionButton(DialogAction.POSITIVE).setTextSize(preferences.getInt("font_size", 18));
+                        dialog.show();
+                    }
+                });
     }
 
     @OnClick(R.id.go_home)
@@ -83,8 +208,6 @@ public class ContentActivity extends AppCompatActivity {
         finish();
         startActivity(intent);
     }
-
-    SharedPreferences preferences = MeAcodeMobileApplication.getInstance().getSharedPreferences("session", Context.MODE_PRIVATE);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
