@@ -9,7 +9,14 @@ import java.util.List;
 public class Category {
     private int id;
     private String name;
-    private List<Attach> attaches;
     private String created_at;
     private String updated_at;
+
+    public int getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
+    }
 }

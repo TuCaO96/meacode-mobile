@@ -11,7 +11,6 @@ public class Content {
     private String title;
     private String text;
     private User user;
-    private List<Attach> attaches;
     private List<ContentRating> ratings;
     private Course course;
     private String created_at;
@@ -31,10 +30,6 @@ public class Content {
 
     public User getUser() {
         return user;
-    }
-
-    public List<Attach> getAttaches() {
-        return attaches;
     }
 
     public List<ContentRating> getRatings() {

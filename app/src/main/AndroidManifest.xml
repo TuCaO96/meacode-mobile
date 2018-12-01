@@ -50,6 +50,7 @@
         </activity>
 
         <activity android:name=".ui.activity.CourseActivity" />
+        <activity android:name=".ui.activity.RelatedCoursesActivity" />
 
         <activity
             android:name=".ui.activity.LoginEmailActivity"

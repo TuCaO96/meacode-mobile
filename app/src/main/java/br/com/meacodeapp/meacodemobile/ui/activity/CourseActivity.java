@@ -1,6 +1,7 @@
 package br.com.meacodeapp.meacodemobile.ui.activity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -22,10 +23,20 @@ import br.com.meacodeapp.meacodemobile.util.JsonConverter;
 import br.com.meacodeapp.meacodemobile.util.SimpleDividerItemDecoration;
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 public class CourseActivity extends AppCompatActivity {
 
     Course course;
+
+    @OnClick(R.id.related_courses)
+    public void relatedCourses(){
+        Intent intent = new Intent(this, RelatedCoursesActivity.class);
+        Bundle bundle = new Bundle();
+        bundle.putString("category_id", Integer.toString(course.getCategory().getId()));
+        intent.putExtras(bundle);
+        startActivity(intent);
+    }
 
     SharedPreferences preferences = MeAcodeMobileApplication.getInstance().getSharedPreferences("session", Context.MODE_PRIVATE);
 

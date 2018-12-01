@@ -11,7 +11,6 @@ public class Suggestion {
     private String title;
     private String text;
     private User user;
-    private List<Attach> attaches;
     private String created_at;
     private String updated_at;
 }
