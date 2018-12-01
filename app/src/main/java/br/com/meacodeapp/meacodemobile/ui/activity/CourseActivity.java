@@ -59,6 +59,7 @@ public class CourseActivity extends AppCompatActivity {
         contents.setAdapter(contentAdapter);
 
         preferences.edit().putInt("current_content", 0).apply();
+        preferences.edit().putInt("current_course", course.getId()).apply();
         preferences.edit().putInt("last_content", course.getContents().size() -1).apply();
     }
 

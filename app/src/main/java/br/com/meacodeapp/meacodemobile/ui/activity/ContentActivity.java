@@ -52,6 +52,12 @@ public class ContentActivity extends AppCompatActivity {
     @BindView(R.id.go_home)
     AppCompatButton home_button;
 
+    @BindView(R.id.like_content)
+    ImageButton likeContent;
+
+    @BindView(R.id.dislike_content)
+    ImageButton dislikeContent;
+
     RestParameters courseParameters = new RestParameters();
 
     @OnClick(R.id.previous_content)
@@ -68,6 +74,8 @@ public class ContentActivity extends AppCompatActivity {
 
     @OnClick(R.id.dislike_content)
     public void dislikeContent(){
+        dislikeContent.setBackgroundColor(getResources().getColor(R.color.colorSecondaryDark));
+        likeContent.setBackgroundColor(getResources().getColor(R.color.colorSecondaryLight));
         RestParameters restParameters = new RestParameters();
         restParameters.setProperty("content_id", Integer.toString(content.getId()));
         restParameters.setProperty("user_id", preferences.getString("user_id", null));
@@ -128,6 +136,8 @@ public class ContentActivity extends AppCompatActivity {
 
     @OnClick(R.id.like_content)
     public void likeContent(){
+        likeContent.setBackgroundColor(getResources().getColor(R.color.colorSecondaryDark));
+        dislikeContent.setBackgroundColor(getResources().getColor(R.color.colorSecondaryLight));
         RestParameters restParameters = new RestParameters();
         final Context context = this;
         restParameters.setProperty("content_id", Integer.toString(content.getId()));
@@ -188,6 +198,9 @@ public class ContentActivity extends AppCompatActivity {
     @OnClick(R.id.go_home)
     public void goHome(){
         final Context context = this;
+
+        courseParameters.setProperty("course_id", Integer.toString(preferences.getInt("current_course", 1)));
+        courseParameters.setProperty("user_id", preferences.getString("user_id", null));
 
         final MaterialDialog.Builder errorMessageBuilder = new MaterialDialog.Builder(this)
                 .title(R.string.title_finish_course)
@@ -255,6 +268,7 @@ public class ContentActivity extends AppCompatActivity {
                 dislike.setBackgroundColor(getResources().getColor(R.color.colorWhite));
                 like.setBackgroundColor(getResources().getColor(R.color.colorSecondary));
                 courseParameters.setProperty("liked", "5");
+                courseParameters.setProperty("comments", courseComments.getText().toString());
             }
         });
         dislike.setOnClickListener(new View.OnClickListener() {
@@ -263,11 +277,10 @@ public class ContentActivity extends AppCompatActivity {
                 like.setBackgroundColor(getResources().getColor(R.color.colorWhite));
                 dislike.setBackgroundColor(getResources().getColor(R.color.colorSecondary));
                 courseParameters.setProperty("liked", "1");
+                courseParameters.setProperty("comments", courseComments.getText().toString());
             }
         });
         errorDialog.show();
-
-        courseParameters.setProperty("comments", courseComments.getText().toString());
 
     }
 
