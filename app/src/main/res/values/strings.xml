@@ -61,6 +61,18 @@
     <string name="title_loading">Carregando</string>
     <string name="message_loading">Aguarde mais alguns instantes&#8230;</string>
 
+    <string name="content_useful">Este conteúdo foi útil?</string>
+    <string name="course_rate">Parabéns por ter concluído este curso! Deixe uma avaliação sobre o que achou dele:</string>
+    <string name="comments">Comentários</string>
+
+    <string name="dislike_course">Não gostou do curso</string>
+    <string name="like_course">Gostou do curso</string>
+
+
+    <string name="dislike_content">Conteúdo não foi útil</string>
+    <string name="like_content">Conteúdo foi útil</string>
+
+
     <string name="title_permission_request">Precisamos de sua atenção</string>
     <string name="text_permission_request">Antes de começar, precisamos que nos dê permissão para salvar um identificador do seu celular
     para guardarmos quais cursos você vai gostar ou não :)</string>

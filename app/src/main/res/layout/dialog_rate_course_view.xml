@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:layout_height="wrap_content"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_margin="15dp"
+    android:padding="10dp"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <TextView
+        android:textSize="18sp"
+        android:text="@string/course_rate"
+        android:id="@+id/course_rate_title"
+        android:layout_width="wrap_content"
+        android:layout_marginBottom="25dp"
+        android:layout_height="wrap_content" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:orientation="horizontal">
+        <ImageButton
+            android:id="@+id/dislike_course"
+            android:layout_width="50dp"
+            android:scaleType="fitCenter"
+            android:contentDescription="@string/dislike_course"
+            android:layout_marginRight="5dp"
+            android:background="@color/colorWhite"
+            android:src="@drawable/ic_thumb_down_red_24dp"
+            android:layout_height="50dp" />
+        <ImageButton
+            android:id="@+id/like_course"
+            android:src="@drawable/ic_thumb_up_green_24dp"
+            android:layout_width="50dp"
+            android:contentDescription="@string/like_course"
+            android:layout_marginLeft="50dp"
+            android:background="@color/colorWhite"
+            android:scaleType="fitCenter"
+            android:layout_height="50dp" />
+    </LinearLayout>
+
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <AutoCompleteTextView
+            android:hint="@string/comments"
+            android:layout_marginTop="25dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.v7.widget.AppCompatButton
+        android:layout_marginTop="25dp"
+        android:id="@+id/send_course_rate"
+        android:background="@color/colorPrimaryDark"
+        android:textSize="18sp"
+        android:text="@string/action_send"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+</LinearLayout>
