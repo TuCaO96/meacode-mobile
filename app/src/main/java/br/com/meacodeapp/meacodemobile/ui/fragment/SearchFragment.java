@@ -1,13 +1,19 @@
 package br.com.meacodeapp.meacodemobile.ui.fragment;
 
+import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -175,7 +181,7 @@ public class SearchFragment extends Fragment {
                             RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
                             coursesRecyclerView.setLayoutManager(layoutManager);
                             coursesRecyclerView.setAdapter(adapter);
-                            coursesRecyclerView.addItemDecoration(new SimpleDividerItemDecoration(context));
+//                            coursesRecyclerView.addItemDecoration(new SimpleDividerItemDecoration(context));
 
                             if(response.body().getCourses().size() < 1){
                                 final MaterialDialog.Builder errorMessageBuilder = new MaterialDialog.Builder(getActivity())

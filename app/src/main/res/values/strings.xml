@@ -58,6 +58,13 @@
     <string name="title_more">Mais</string>
     <string name="action_apply">APLICAR</string>
 
+    <string name="title_loading">Carregando</string>
+    <string name="message_loading">Aguarde mais alguns instantes&#8230;</string>
+
+    <string name="title_permission_request">Precisamos de sua atenção</string>
+    <string name="text_permission_request">Antes de começar, precisamos que nos dê permissão para salvar um identificador do seu celular
+    para guardarmos quais cursos você vai gostar ou não :)</string>
+
     <string name="title_size_option">Ajustar tamanho das letras</string>
     <string-array name="options_font_size">
         <item>Normal</item>

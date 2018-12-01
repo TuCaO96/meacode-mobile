@@ -19,6 +19,7 @@ public class MeAcodeMobileApplication extends Application {
 //    private static final String URL = "http://192.168.137.1/meacode-yii/api/web/";
 //    private static final String URL = "http://192.168.0.19/meacode-yii/api/web/";
 //    private static final String URL = "http://192.168.0.24/meacode-yii/api/web/";
+    private static int MY_PERMISSIONS_REQUEST_READ_PHONE_STATE;
     private static final String URL = "https://meacodeapp.com.br/api/web/";
     private static final String FRONTEND_URL = "https://meacodeapp.com.br/frontend/web/";
 //    private static final String URL = "http://10.0.2.2/meacode-yii/api/web/";
@@ -75,5 +76,14 @@ public class MeAcodeMobileApplication extends Application {
     public UserSearchService getUserSearchService() {
         return userSearchService;
     }
+
     public SuggestionService getSuggestionService() { return suggestionService; }
+
+    public static int getMyPermissionsRequestReadPhoneState() {
+        return MY_PERMISSIONS_REQUEST_READ_PHONE_STATE;
+    }
+
+    public static void setMyPermissionsRequestReadPhoneState(int state){
+        MY_PERMISSIONS_REQUEST_READ_PHONE_STATE = state;
+    }
 }

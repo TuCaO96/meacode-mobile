@@ -14,6 +14,9 @@ public interface AuthService {
     @POST("auth/social_login")
     Call<RestParameters> postSocialSignIn(@Body RestParameters parameters);
 
+    @POST("auth/mobile")
+    Call<RestParameters> postAuthenticateMobile(@Body RestParameters parameters);
+
     @POST("auth/signup")
     Call<RestParameters> postSignUp(@Body RestParameters parameters);
 
