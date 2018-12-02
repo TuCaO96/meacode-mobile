@@ -35,6 +35,8 @@ public class CourseActivity extends AppCompatActivity {
         Bundle bundle = new Bundle();
         bundle.putString("category_id", Integer.toString(course.getCategory().getId()));
         bundle.putString("course_id", Integer.toString(course.getId()));
+        bundle.putString("course_name", course.getName());
+        bundle.putString("course_image", course.getImageUrl());
         intent.putExtras(bundle);
         startActivity(intent);
     }

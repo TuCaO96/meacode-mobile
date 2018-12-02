@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.AppCompatImageView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -13,6 +14,7 @@ import android.widget.TextView;
 
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
+import com.bumptech.glide.Glide;
 
 import java.util.List;
 
@@ -36,14 +38,29 @@ public class RelatedCoursesActivity extends AppCompatActivity {
     @BindView(R.id.courses_related)
     RecyclerView courses_rcv;
 
+    @BindView(R.id.related_course_title)
+    TextView courseName;
+
+    @BindView(R.id.image_related_course)
+    AppCompatImageView courseImage;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_related_courses);
+        ButterKnife.bind(this);
         Bundle bundle = getIntent().getExtras();
         String category_id = bundle.getString("category_id");
         String course_id = bundle.getString("course_id");
-        ButterKnife.bind(this);
+        String course_name = bundle.getString("course_name");
+        String course_image = bundle.getString("course_image");
+        courseName.setText("Relacionado a: " + course_name);
+        courseName.setTextSize(preferences.getInt("font_size",  18));
+        courseImage.setBackgroundColor(getResources().getColor(R.color.colorWhite));
+
+        if(course_image != null){
+            Glide.with(this).load(MeAcodeMobileApplication.getFrontendUrl() + course_image).into(courseImage);
+        }
 
         getSupportActionBar().setDisplayShowCustomEnabled(true);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
