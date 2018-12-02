@@ -77,6 +77,8 @@ public class SearchFragment extends Fragment {
         AutoCompleteTextView autoComplete = (AutoCompleteTextView) linearLayout3.getChildAt(0);
         autoComplete.setTextSize(preferences.getInt("font_size", 18));
 
+        searchView.setIconified(false);
+
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
