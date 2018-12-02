@@ -186,7 +186,7 @@ public class IntroActivity extends AppCompatActivity {
 
                         MaterialDialog.Builder materialDialog1 = new MaterialDialog.Builder(context)
                                 .title("Erro")
-                                .content("Ocorreu um erro ao acessar sua conta. Por favor, verifique sua conexão com a internet")
+                                .content("Ocorreu um erro ao conectar com nossos serviores. Por favor, verifique sua conexão com a internet")
                                 .positiveText(R.string.action_ok);
 
                         final MaterialDialog dialog = materialDialog1.build();
