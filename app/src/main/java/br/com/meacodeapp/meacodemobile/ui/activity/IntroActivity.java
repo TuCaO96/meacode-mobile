@@ -177,10 +177,6 @@ public class IntroActivity extends AppCompatActivity {
                             edit.putString("token",response.body().getProperty("token"));
                             edit.putString("user_id",response.body().getProperty("user_id"));
                             edit.apply();
-
-                            Intent intent = new Intent(context, MainActivity.class);
-                            startActivity(intent);
-                            finish();
                         }
                     }
 
@@ -190,8 +186,7 @@ public class IntroActivity extends AppCompatActivity {
 
                         MaterialDialog.Builder materialDialog1 = new MaterialDialog.Builder(context)
                                 .title("Erro")
-                                .content("Ocorreu um erro ao criar conta. Por favor, verifique" +
-                                        "se o email e senha são válidos.")
+                                .content("Ocorreu um erro ao acessar sua conta. Por favor, verifique sua conexão com a internet")
                                 .positiveText(R.string.action_ok);
 
                         final MaterialDialog dialog = materialDialog1.build();
