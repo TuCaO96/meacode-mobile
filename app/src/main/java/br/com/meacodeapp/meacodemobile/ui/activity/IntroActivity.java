@@ -133,14 +133,14 @@ public class IntroActivity extends AppCompatActivity {
         }
 
 
-        if(preferences.contains("first_use") &&
+        /*if(preferences.contains("first_use") &&
                 preferences.getBoolean("first_use", true) == true){
             preferences.edit().putBoolean("first_use", false).apply();
             skip();
         }
         else{
             preferences.edit().putBoolean("first_use", true).apply();
-        }
+        }*/
     }
 
     public void authenticate(String serial_number){
