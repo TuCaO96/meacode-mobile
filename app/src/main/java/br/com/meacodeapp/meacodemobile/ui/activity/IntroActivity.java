@@ -67,6 +67,11 @@ public class IntroActivity extends AppCompatActivity {
         finish();
     }
 
+    @OnClick(R.id.button_restart)
+    public void restart(){
+        viewPager.setCurrentItem(0);
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
