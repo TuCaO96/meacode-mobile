@@ -20,7 +20,7 @@ public interface CourseService {
     @GET("courses")
     Call<List<Course>> getCourses();
 
-    @GET("courses/{course/}categories/{category}")
+    @GET("courses/{course}/categories/{category}")
     Call<SearchResult> getRelatedCourses(@Path("course")String course_id, @Path("category") String category_id);
 
     @POST("courses/rate")
