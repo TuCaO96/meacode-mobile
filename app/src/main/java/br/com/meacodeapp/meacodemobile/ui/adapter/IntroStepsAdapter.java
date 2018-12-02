@@ -15,11 +15,14 @@ import br.com.meacodeapp.meacodemobile.ui.fragment.intro.StepEightFragment;
 import br.com.meacodeapp.meacodemobile.ui.fragment.intro.StepElevenFragment;
 import br.com.meacodeapp.meacodemobile.ui.fragment.intro.StepFifteenFragment;
 import br.com.meacodeapp.meacodemobile.ui.fragment.intro.StepFiveFragment;
+import br.com.meacodeapp.meacodemobile.ui.fragment.intro.StepFourBFragment;
 import br.com.meacodeapp.meacodemobile.ui.fragment.intro.StepFourFragment;
 import br.com.meacodeapp.meacodemobile.ui.fragment.intro.StepFourteenFragment;
 import br.com.meacodeapp.meacodemobile.ui.fragment.intro.StepNineFragment;
 import br.com.meacodeapp.meacodemobile.ui.fragment.intro.StepOneFragment;
 import br.com.meacodeapp.meacodemobile.ui.fragment.intro.StepSevenFragment;
+import br.com.meacodeapp.meacodemobile.ui.fragment.intro.StepSixBFragment;
+import br.com.meacodeapp.meacodemobile.ui.fragment.intro.StepSixCFragment;
 import br.com.meacodeapp.meacodemobile.ui.fragment.intro.StepSixFragment;
 import br.com.meacodeapp.meacodemobile.ui.fragment.intro.StepTenFragment;
 import br.com.meacodeapp.meacodemobile.ui.fragment.intro.StepThirteenFragment;
@@ -50,22 +53,26 @@ public class IntroStepsAdapter extends FragmentStatePagerAdapter {
             case 5:
                 return StepSixFragment.newInstance();
             case 6:
-                return StepSevenFragment.newInstance();
+                return StepSixBFragment.newInstance();
             case 7:
-                return StepEightFragment.newInstance();
+                return StepSixCFragment.newInstance();
             case 8:
-                return StepNineFragment.newInstance();
+                return StepSevenFragment.newInstance();
             case 9:
-                return StepTenFragment.newInstance();
+                return StepEightFragment.newInstance();
             case 10:
-                return StepElevenFragment.newInstance();
+                return StepNineFragment.newInstance();
             case 11:
-                return StepTwelveFragment.newInstance();
+                return StepTenFragment.newInstance();
             case 12:
-                return StepThirteenFragment.newInstance();
+                return StepElevenFragment.newInstance();
             case 13:
-                return StepFourteenFragment.newInstance();
+                return StepTwelveFragment.newInstance();
             case 14:
+                return StepThirteenFragment.newInstance();
+            case 15:
+                return StepFourteenFragment.newInstance();
+            case 16:
                 return StepFifteenFragment.newInstance();
             default:
                 return StepFifteenFragment.newInstance();
@@ -74,6 +81,6 @@ public class IntroStepsAdapter extends FragmentStatePagerAdapter {
 
     @Override
     public int getCount() {
-        return 15;
+        return 17;
     }
 }
