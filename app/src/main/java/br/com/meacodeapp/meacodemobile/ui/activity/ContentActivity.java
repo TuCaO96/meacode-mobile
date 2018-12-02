@@ -226,6 +226,18 @@ public class ContentActivity extends AppCompatActivity {
                                     @Override
                                     public void onResponse(Call<Course> call, Response<Course> response) {
                                         dlg.dismiss();
+                                        final MaterialDialog.Builder errorMessageBuilder = new MaterialDialog.Builder(context)
+                                                .title(R.string.rate_sent_title)
+                                                .content(R.string.rate_sent_message)
+                                                .positiveColor(getResources().getColor(R.color.colorPrimaryDark))
+                                                .positiveText(R.string.action_ok);
+
+                                        final MaterialDialog dialog = errorMessageBuilder.build();
+                                        dialog.getTitleView().setTextSize(preferences.getInt("title_size", 21));
+                                        dialog.getContentView().setTextSize(preferences.getInt("font_size", 18));
+                                        dialog.getActionButton(DialogAction.NEGATIVE).setTextSize(preferences.getInt("font_size", 18));
+                                        dialog.getActionButton(DialogAction.POSITIVE).setTextSize(preferences.getInt("font_size", 18));
+                                        dialog.show();
                                         startHomeActivity();
                                     }
 
