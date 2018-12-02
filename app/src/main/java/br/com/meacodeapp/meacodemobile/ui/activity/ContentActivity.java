@@ -79,7 +79,7 @@ public class ContentActivity extends AppCompatActivity {
         RestParameters restParameters = new RestParameters();
         restParameters.setProperty("content_id", Integer.toString(content.getId()));
         restParameters.setProperty("user_id", preferences.getString("user_id", null));
-        restParameters.setProperty("liked", "1");
+        restParameters.setProperty("liked", "0");
 
         final MaterialDialog.Builder materialDialog = new MaterialDialog.Builder(this)
                 .title("Carregando")
@@ -276,7 +276,7 @@ public class ContentActivity extends AppCompatActivity {
             public void onClick(View v) {
                 like.setBackgroundColor(getResources().getColor(R.color.colorWhite));
                 dislike.setBackgroundColor(getResources().getColor(R.color.colorSecondary));
-                courseParameters.setProperty("liked", "1");
+                courseParameters.setProperty("liked", "0");
                 courseParameters.setProperty("comments", courseComments.getText().toString());
             }
         });
