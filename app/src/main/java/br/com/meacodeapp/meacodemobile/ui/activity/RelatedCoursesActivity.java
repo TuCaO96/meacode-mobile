@@ -42,6 +42,7 @@ public class RelatedCoursesActivity extends AppCompatActivity {
         setContentView(R.layout.activity_related_courses);
         Bundle bundle = getIntent().getExtras();
         String category_id = bundle.getString("category_id");
+        String course_id = bundle.getString("course_id");
         ButterKnife.bind(this);
 
         getSupportActionBar().setDisplayShowCustomEnabled(true);
@@ -71,7 +72,7 @@ public class RelatedCoursesActivity extends AppCompatActivity {
         dlg.getActionButton(DialogAction.POSITIVE).setTextSize(preferences.getInt("font_size", 18));
         dlg.show();
 
-        MeAcodeMobileApplication.getInstance().getCourseService().getRelatedCourses(category_id)
+        MeAcodeMobileApplication.getInstance().getCourseService().getRelatedCourses(course_id, category_id)
                 .enqueue(new Callback<SearchResult>() {
                     @Override
                     public void onResponse(Call<SearchResult> call, Response<SearchResult> response) {
