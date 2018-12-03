@@ -60,7 +60,7 @@ public class StepThirteenFragment extends Fragment {
                 float x = touchCoordinates[0];
                 float y = touchCoordinates[1];
 
-                if(x < 154 && y < 177){
+                if((x >= 706 && y >= 1039) && (x <= 932 && y <= 1089)){
                     ((IntroActivity)getActivity()).nextStep();
                 }
 
