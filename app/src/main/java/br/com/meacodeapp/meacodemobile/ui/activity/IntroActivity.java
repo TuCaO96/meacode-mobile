@@ -284,6 +284,14 @@ public class IntroActivity extends AppCompatActivity {
         viewPager.setCurrentItem(viewPager.getCurrentItem() + 1);
     }
 
+    public void goRelatedCourses(){
+        viewPager.setCurrentItem(17);
+    }
+
+    public void goCourseDetails(){
+        viewPager.setCurrentItem(4);
+    }
+
     public IntroStepsAdapter getPagerAdapter() {
         return pagerAdapter;
     }

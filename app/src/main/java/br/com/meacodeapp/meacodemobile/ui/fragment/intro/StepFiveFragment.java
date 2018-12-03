@@ -60,8 +60,12 @@ public class StepFiveFragment extends Fragment {
                 float x = touchCoordinates[0];
                 float y = touchCoordinates[1];
 
-                if(x < 154 && y < 177){
+                if((x >= 32 && y >= 177) && (x <= 1058 && y <= 346)){
                     ((IntroActivity)getActivity()).nextStep();
+                }
+
+                if(y > 1600){
+                    ((IntroActivity)getActivity()).goCourseDetails();
                 }
 
                 // use the coordinates for whatever

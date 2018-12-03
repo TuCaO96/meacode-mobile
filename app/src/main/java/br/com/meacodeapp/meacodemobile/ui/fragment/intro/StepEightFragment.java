@@ -16,7 +16,7 @@ import butterknife.ButterKnife;
 
 public class StepEightFragment extends Fragment {
 
-    @BindView(R.id.step_seven_image)
+    @BindView(R.id.step_eight_image)
     ImageView imageView;
 
     float[] touchCoordinates = new float[2];
