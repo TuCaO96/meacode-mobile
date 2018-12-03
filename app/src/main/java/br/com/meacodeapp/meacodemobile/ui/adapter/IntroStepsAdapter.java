@@ -20,6 +20,7 @@ import br.com.meacodeapp.meacodemobile.ui.fragment.intro.StepFourFragment;
 import br.com.meacodeapp.meacodemobile.ui.fragment.intro.StepFourteenFragment;
 import br.com.meacodeapp.meacodemobile.ui.fragment.intro.StepNineFragment;
 import br.com.meacodeapp.meacodemobile.ui.fragment.intro.StepOneFragment;
+import br.com.meacodeapp.meacodemobile.ui.fragment.intro.StepRelatedCoursesFragment;
 import br.com.meacodeapp.meacodemobile.ui.fragment.intro.StepSevenFragment;
 import br.com.meacodeapp.meacodemobile.ui.fragment.intro.StepSixBFragment;
 import br.com.meacodeapp.meacodemobile.ui.fragment.intro.StepSixCFragment;
@@ -74,6 +75,8 @@ public class IntroStepsAdapter extends FragmentStatePagerAdapter {
                 return StepFourteenFragment.newInstance();
             case 16:
                 return StepFifteenFragment.newInstance();
+            case 17:
+                return StepRelatedCoursesFragment.newInstance();
             default:
                 return StepFifteenFragment.newInstance();
         }
