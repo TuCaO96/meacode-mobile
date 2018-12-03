@@ -1,21 +1,13 @@
 package br.com.meacodeapp.meacodemobile.ui.adapter;
 
-import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.app.FragmentStatePagerAdapter;
-import android.support.v4.view.PagerAdapter;
-import android.view.View;
-import android.widget.Button;
-import android.widget.ImageButton;
 
-import br.com.meacodeapp.meacodemobile.R;
 import br.com.meacodeapp.meacodemobile.ui.fragment.intro.StepEightFragment;
 import br.com.meacodeapp.meacodemobile.ui.fragment.intro.StepElevenFragment;
 import br.com.meacodeapp.meacodemobile.ui.fragment.intro.StepFifteenFragment;
 import br.com.meacodeapp.meacodemobile.ui.fragment.intro.StepFiveFragment;
-import br.com.meacodeapp.meacodemobile.ui.fragment.intro.StepFourBFragment;
 import br.com.meacodeapp.meacodemobile.ui.fragment.intro.StepFourFragment;
 import br.com.meacodeapp.meacodemobile.ui.fragment.intro.StepFourteenFragment;
 import br.com.meacodeapp.meacodemobile.ui.fragment.intro.StepNineFragment;
@@ -30,7 +22,6 @@ import br.com.meacodeapp.meacodemobile.ui.fragment.intro.StepThirteenFragment;
 import br.com.meacodeapp.meacodemobile.ui.fragment.intro.StepThreeFragment;
 import br.com.meacodeapp.meacodemobile.ui.fragment.intro.StepTwelveFragment;
 import br.com.meacodeapp.meacodemobile.ui.fragment.intro.StepTwoFragment;
-import butterknife.BindView;
 
 public class IntroStepsAdapter extends FragmentStatePagerAdapter {
 

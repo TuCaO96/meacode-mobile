@@ -67,9 +67,6 @@ public class StepTwoFragment extends Fragment {
                 if(x < 154 && y < 177){
                     ((IntroActivity)getActivity()).nextStep();
                 }
-
-                // use the coordinates for whatever
-                Log.i("TAG", "onLongClick: x = " + x + ", y = " + y);
             }
         });
 

@@ -6,7 +6,7 @@
     tools:context=".ui.fragment.intro.StepSixCFragment">
 
     <ImageView
-        android:id="@+id/step_four_image"
+        android:id="@+id/step_six_b_image"
         android:scaleType="fitXY"
 
         android:src="@drawable/step6c"
