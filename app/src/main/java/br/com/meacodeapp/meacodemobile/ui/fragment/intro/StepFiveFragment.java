@@ -59,13 +59,22 @@ public class StepFiveFragment extends Fragment {
                 // retrieve the stored coordinates
                 float x = touchCoordinates[0];
                 float y = touchCoordinates[1];
+                float density = getContext().getResources().getDisplayMetrics().density;
 
-                if((x >= 32 && y >= 177) && (x <= 1058 && y <= 346)){
+                /*if(x >= (409 * density) && y >= (699 * density)){
                     ((IntroActivity)getActivity()).nextStep();
                 }
 
-                if(y > 1600){
-                    ((IntroActivity)getActivity()).goCourseDetails();
+                if((x >= (14 * density) && y >= (196 * density)) && (x <= (466 * density) && y <= (291 * density))){
+                    ((IntroActivity)getActivity()).nextStep();
+                }*/
+
+                if((x >= (8 * density) && y >= (75 * density)) && (x <= (465 * density) && y <= (162 * density))){
+                    ((IntroActivity)getActivity()).nextStep();
+                }
+
+                if(y >= (770 * density)){
+                    ((IntroActivity)getActivity()).goRelatedCourses();
                 }
 
                 // use the coordinates for whatever

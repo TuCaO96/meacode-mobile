@@ -61,7 +61,7 @@ public class StepRelatedCoursesFragment extends Fragment {
                 float y = touchCoordinates[1];
 
                 if(x < 154 && y < 177){
-                    ((IntroActivity)getActivity()).nextStep();
+                    ((IntroActivity)getActivity()).goMenuOptions();
                 }
 
                 // use the coordinates for whatever

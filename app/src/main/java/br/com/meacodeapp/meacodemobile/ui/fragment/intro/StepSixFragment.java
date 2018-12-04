@@ -59,8 +59,16 @@ public class StepSixFragment extends Fragment {
                 // retrieve the stored coordinates
                 float x = touchCoordinates[0];
                 float y = touchCoordinates[1];
+                float density = getContext().getResources().getDisplayMetrics().density;
 
-                if((x >= 648 && y >= 1575) && (x <= 1046 && y <= 1680)){
+                /*if(x >= (409 * density) && y >= (699 * density)){
+                    ((IntroActivity)getActivity()).nextStep();
+                }
+
+                if((x >= (14 * density) && y >= (196 * density)) && (x <= (466 * density) && y <= (291 * density))){
+                    ((IntroActivity)getActivity()).nextStep();
+                }*/
+                if((x >= (284 * density) && y >= (699 * density)) && (x <= (459 * density) && y <= (753 * density))){
                     ((IntroActivity)getActivity()).nextStep();
                 }
 

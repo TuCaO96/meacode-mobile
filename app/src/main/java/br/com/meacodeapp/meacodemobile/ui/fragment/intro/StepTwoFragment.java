@@ -64,7 +64,9 @@ public class StepTwoFragment extends Fragment {
                 float x = touchCoordinates[0];
                 float y = touchCoordinates[1];
 
-                if(x < 154 && y < 138){
+                float density = getContext().getResources().getDisplayMetrics().density;
+
+                if(x < (154 * density) && y < (138 * density)){
                     ((IntroActivity)getActivity()).nextStep();
                 }
             }

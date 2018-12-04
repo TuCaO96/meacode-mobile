@@ -60,11 +60,11 @@ public class StepThreeFragment extends Fragment {
                 float x = touchCoordinates[0];
                 float y = touchCoordinates[1];
 
-                if(x >= 928 && y >= 1571){
+                float density = getContext().getResources().getDisplayMetrics().density;
+
+                if(x >= (409 * density) && y >= (699 * density)){
                     ((IntroActivity)getActivity()).nextStep();
                 }
-
-
 
                 // use the coordinates for whatever
                 Log.i("TAG", "onLongClick: x = " + x + ", y = " + y);

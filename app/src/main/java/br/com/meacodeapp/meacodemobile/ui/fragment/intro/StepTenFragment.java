@@ -59,8 +59,9 @@ public class StepTenFragment extends Fragment {
                 // retrieve the stored coordinates
                 float x = touchCoordinates[0];
                 float y = touchCoordinates[1];
+                float density = getContext().getResources().getDisplayMetrics().density;
 
-                if(x < 154 && y < 177){
+                if((x >= (245 * density) && y >= (533 * density)) && (x <= (466 * density) && y <= (586 * density))){
                     ((IntroActivity)getActivity()).nextStep();
                 }
 

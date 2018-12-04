@@ -292,6 +292,10 @@ public class IntroActivity extends AppCompatActivity {
         viewPager.setCurrentItem(4);
     }
 
+    public void goMenuOptions(){
+        viewPager.setCurrentItem(8);
+    }
+
     public IntroStepsAdapter getPagerAdapter() {
         return pagerAdapter;
     }
