@@ -1,8 +1,10 @@
 package br.com.meacodeapp.meacodemobile.ui.fragment.intro;
 
+import android.graphics.Point;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
+import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -60,14 +62,26 @@ public class StepThreeFragment extends Fragment {
                 float x = touchCoordinates[0];
                 float y = touchCoordinates[1];
 
+                int width = getContext().getResources().getDisplayMetrics().widthPixels;
+                int height = getContext().getResources().getDisplayMetrics().heightPixels;
                 float density = getContext().getResources().getDisplayMetrics().density;
+                int p_x = (int)(409 * density);
+                int p_y = (int)(699 * density);
 
-                if(x >= (409 * density) && y >= (699 * density)){
-                    ((IntroActivity)getActivity()).nextStep();
-                }
+                float f_x = (409 * density);
+                float f_y = (699 * density);
 
                 // use the coordinates for whatever
                 Log.i("TAG", "onLongClick: x = " + x + ", y = " + y);
+                Log.i("TAG", "screenSizeWidth: x = " + getContext().getResources().getDisplayMetrics().widthPixels);
+                Log.i("TAG", "screenSizeHeight: x = " + getContext().getResources().getDisplayMetrics().heightPixels);
+                Log.i("TAG", "scaledDensity: x = " + getContext().getResources().getDisplayMetrics().scaledDensity);
+
+                if(x >= (272 * density) && y >= (412 * density)){
+                    ((IntroActivity)getActivity()).nextStep();
+                }
+
+
             }
         });
 

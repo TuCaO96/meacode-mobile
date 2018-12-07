@@ -61,19 +61,12 @@ public class StepFiveFragment extends Fragment {
                 float y = touchCoordinates[1];
                 float density = getContext().getResources().getDisplayMetrics().density;
 
-                /*if(x >= (409 * density) && y >= (699 * density)){
+                if((x >= (6 * density) && y >= (46 * density)) &&
+                        (x <= (311 * density) && y <= (97 * density))){
                     ((IntroActivity)getActivity()).nextStep();
                 }
 
-                if((x >= (14 * density) && y >= (196 * density)) && (x <= (466 * density) && y <= (291 * density))){
-                    ((IntroActivity)getActivity()).nextStep();
-                }*/
-
-                if((x >= (8 * density) && y >= (75 * density)) && (x <= (465 * density) && y <= (162 * density))){
-                    ((IntroActivity)getActivity()).nextStep();
-                }
-
-                if(y >= (770 * density)){
+                if(y >= (716 * density)){
                     ((IntroActivity)getActivity()).goRelatedCourses();
                 }
 

@@ -62,7 +62,7 @@ public class StepFourFragment extends Fragment {
 
                 float density = getContext().getResources().getDisplayMetrics().density;
 
-                if((x >= (14 * density) && y >= (196 * density)) && (x <= (466 * density) && y <= (291 * density))){
+                if((x >= (10 * density) && y >= (119 * density)) && (x <= (311 * density) && y <= (173 * density))){
                     ((IntroActivity)getActivity()).nextStep();
                 }
 

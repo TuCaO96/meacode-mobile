@@ -38,7 +38,7 @@ public class StepRelatedCoursesFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_step_five, container, false);
+        View view = inflater.inflate(R.layout.fragment_step_five_b, container, false);
         ButterKnife.bind(this, view);
 
         imageView.setOnTouchListener(new View.OnTouchListener() {
@@ -59,10 +59,15 @@ public class StepRelatedCoursesFragment extends Fragment {
                 // retrieve the stored coordinates
                 float x = touchCoordinates[0];
                 float y = touchCoordinates[1];
+                float density = getContext().getResources().getDisplayMetrics().density;
 
-                if(x < 154 && y < 177){
-                    ((IntroActivity)getActivity()).goMenuOptions();
+                /*if(x >= (409 * density) && y >= (699 * density)){
+                    ((IntroActivity)getActivity()).nextStep();
                 }
+
+                if((x >= (14 * density) && y >= (196 * density)) && (x <= (466 * density) && y <= (291 * density))){
+                    ((IntroActivity)getActivity()).nextStep();
+                }*/
 
                 // use the coordinates for whatever
                 Log.i("TAG", "onLongClick: x = " + x + ", y = " + y);
