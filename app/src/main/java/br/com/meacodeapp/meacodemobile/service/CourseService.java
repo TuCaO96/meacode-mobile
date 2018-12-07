@@ -3,7 +3,9 @@ package br.com.meacodeapp.meacodemobile.service;
 import java.util.List;
 
 import br.com.meacodeapp.meacodemobile.model.Content;
+import br.com.meacodeapp.meacodemobile.model.ContentRating;
 import br.com.meacodeapp.meacodemobile.model.Course;
+import br.com.meacodeapp.meacodemobile.model.CourseRating;
 import br.com.meacodeapp.meacodemobile.model.SearchResult;
 import br.com.meacodeapp.meacodemobile.util.RestParameters;
 import retrofit2.Call;
@@ -25,6 +27,9 @@ public interface CourseService {
 
     @POST("courses/rate")
     Call<Course> postRateCourse(@Body RestParameters parameters);
+
+    @GET("courses/{course}/rating/{user}")
+    Call<CourseRating> getCourseUserRating(@Path("course") int id, @Path("user") int user_id);
 
     @GET("courses/{course}")
     Call<Course> getCourse(@Path("course") int id);
