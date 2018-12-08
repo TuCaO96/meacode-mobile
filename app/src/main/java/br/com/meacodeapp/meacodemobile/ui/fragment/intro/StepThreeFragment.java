@@ -58,30 +58,7 @@ public class StepThreeFragment extends Fragment {
         imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // retrieve the stored coordinates
-                float x = touchCoordinates[0];
-                float y = touchCoordinates[1];
-
-                int width = getContext().getResources().getDisplayMetrics().widthPixels;
-                int height = getContext().getResources().getDisplayMetrics().heightPixels;
-                float density = getContext().getResources().getDisplayMetrics().density;
-                int p_x = (int)(409 * density);
-                int p_y = (int)(699 * density);
-
-                float f_x = (409 * density);
-                float f_y = (699 * density);
-
-                // use the coordinates for whatever
-                Log.i("TAG", "onLongClick: x = " + x + ", y = " + y);
-                Log.i("TAG", "screenSizeWidth: x = " + getContext().getResources().getDisplayMetrics().widthPixels);
-                Log.i("TAG", "screenSizeHeight: x = " + getContext().getResources().getDisplayMetrics().heightPixels);
-                Log.i("TAG", "scaledDensity: x = " + getContext().getResources().getDisplayMetrics().scaledDensity);
-
-                if(x >= (272 * density) && y >= (412 * density)){
-                    ((IntroActivity)getActivity()).nextStep();
-                }
-
-
+            ((IntroActivity)getActivity()).nextStep();
             }
         });
 

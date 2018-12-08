@@ -60,15 +60,7 @@ public class StepTwoFragment extends Fragment {
         imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // retrieve the stored coordinates
-                float x = touchCoordinates[0];
-                float y = touchCoordinates[1];
-
-                float density = getContext().getResources().getDisplayMetrics().density;
-
-                if(x < (154 * density) && y < (138 * density)){
-                    ((IntroActivity)getActivity()).nextStep();
-                }
+                ((IntroActivity)getActivity()).nextStep();
             }
         });
 

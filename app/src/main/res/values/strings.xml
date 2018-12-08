@@ -42,7 +42,7 @@
     <string name="action_close_menu">Fechar menu flutuante</string>
     <string name="action_logout">Sair</string>
     <string name="action_skip">Pular</string>
-    <string name="action_restart">Reiniciar</string>
+    <string name="action_restart">Início</string>
     <string name="title_activity_detail">DetailActivity</string>
     <string name="title_home">Início</string>
     <string name="title_search">Procurar cursos</string>
@@ -97,7 +97,7 @@
         Deslize a tela para a esquerda ou toque nela para continuar esta introdução.</string>
 
     <string name="step_final_title">Agora você está pronto para começar!</string>
-    <string name="step_final_text">Se desejar reiniciar o passo a passo, toque em "REINCIIAR".
+    <string name="step_final_text">Se desejar reiniciar o passo a passo, toque em "INÍCIO".
         Toque no botão da seta se desejar fechar o passo a passo.</string>
 
     <!-- TODO: Remove or change this placeholder text -->

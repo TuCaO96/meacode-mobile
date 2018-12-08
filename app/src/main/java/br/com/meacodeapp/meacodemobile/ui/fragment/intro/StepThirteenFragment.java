@@ -56,17 +56,7 @@ public class StepThirteenFragment extends Fragment {
         imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // retrieve the stored coordinates
-                float x = touchCoordinates[0];
-                float y = touchCoordinates[1];
-                float density = getContext().getResources().getDisplayMetrics().density;
-
-                if((x >= (300 * density) && y >= (466 * density)) && (x <= (414 * density) && y <= (485 * density))){
-                    ((IntroActivity)getActivity()).nextStep();
-                }
-
-                // use the coordinates for whatever
-                Log.i("TAG", "onLongClick: x = " + x + ", y = " + y);
+                ((IntroActivity)getActivity()).nextStep();
             }
         });
 
