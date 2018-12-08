@@ -341,13 +341,15 @@ public class ContentActivity extends AppCompatActivity {
                         if(response.code() == 200){
                             contentRating = response.body().getContentRating();
                             courseRating = response.body().getCourseRating();
-                            if(contentRating.getScore() == 5){
-                                likeContent.setBackgroundColor(getResources().getColor(R.color.colorSecondaryDark));
-                                dislikeContent.setBackgroundColor(getResources().getColor(R.color.colorSecondaryLight));
-                            }
-                            else{
-                                likeContent.setBackgroundColor(getResources().getColor(R.color.colorSecondaryLight));
-                                dislikeContent.setBackgroundColor(getResources().getColor(R.color.colorSecondaryDark));
+                            if(contentRating != null){
+                                if(contentRating.getScore() == 5){
+                                    likeContent.setBackgroundColor(getResources().getColor(R.color.colorSecondaryDark));
+                                    dislikeContent.setBackgroundColor(getResources().getColor(R.color.colorSecondaryLight));
+                                }
+                                else{
+                                    likeContent.setBackgroundColor(getResources().getColor(R.color.colorSecondaryLight));
+                                    dislikeContent.setBackgroundColor(getResources().getColor(R.color.colorSecondaryDark));
+                                }
                             }
                         }
                     }
