@@ -143,59 +143,62 @@ public class IntroActivity extends AppCompatActivity {
     }
 
     public void authenticate(){
-        RestParameters parameters = new RestParameters();
-        final Context context = this;
-        parameters.setProperty("sn", Long.toString(System.currentTimeMillis()));
 
-        final MaterialDialog.Builder materialDialog = new MaterialDialog.Builder(this)
-                .title(R.string.title_loading)
-                .content(R.string.message_loading)
-                .progress(true,0,false);
+        if(preferences.getString("user_id", null) == null){
+            RestParameters parameters = new RestParameters();
+            final Context context = this;
+            parameters.setProperty("sn", Long.toString(System.currentTimeMillis()));
 
-        final MaterialDialog dialog = materialDialog.build();
-        dialog.getTitleView().setTextSize(preferences.getInt("title_size", 21));
-        dialog.getContentView().setTextSize(preferences.getInt("font_size", 18));
-        dialog.getActionButton(DialogAction.NEGATIVE).setTextSize(preferences.getInt("font_size", 18));
-        dialog.getActionButton(DialogAction.POSITIVE).setTextSize(preferences.getInt("font_size", 18));
-        dialog.show();
+            final MaterialDialog.Builder materialDialog = new MaterialDialog.Builder(this)
+                    .title(R.string.title_loading)
+                    .content(R.string.message_loading)
+                    .progress(true,0,false);
 
-        MeAcodeMobileApplication.getInstance().getAuthService().postAuthenticateMobile(parameters)
-                .enqueue(new Callback<RestParameters>() {
-                    @Override
-                    public void onResponse(Call<RestParameters> call, Response<RestParameters> response) {
-                        dialog.dismiss();
+            final MaterialDialog dialog = materialDialog.build();
+            dialog.getTitleView().setTextSize(preferences.getInt("title_size", 21));
+            dialog.getContentView().setTextSize(preferences.getInt("font_size", 18));
+            dialog.getActionButton(DialogAction.NEGATIVE).setTextSize(preferences.getInt("font_size", 18));
+            dialog.getActionButton(DialogAction.POSITIVE).setTextSize(preferences.getInt("font_size", 18));
+            dialog.show();
 
-                        if (response.code() == 200){
-                            final SharedPreferences sharedPreferences = MeAcodeMobileApplication
-                                    .getInstance()
-                                    .getSharedPreferences("session", Context.MODE_PRIVATE);
-                            final SharedPreferences.Editor edit = sharedPreferences.edit();
+            MeAcodeMobileApplication.getInstance().getAuthService().postAuthenticateMobile(parameters)
+                    .enqueue(new Callback<RestParameters>() {
+                        @Override
+                        public void onResponse(Call<RestParameters> call, Response<RestParameters> response) {
+                            dialog.dismiss();
 
-                            edit.remove("token");
-                            edit.remove("user_id");
-                            edit.putString("token",response.body().getProperty("token"));
-                            edit.putString("user_id",response.body().getProperty("user_id"));
-                            edit.apply();
+                            if (response.code() == 200){
+                                final SharedPreferences sharedPreferences = MeAcodeMobileApplication
+                                        .getInstance()
+                                        .getSharedPreferences("session", Context.MODE_PRIVATE);
+                                final SharedPreferences.Editor edit = sharedPreferences.edit();
+
+                                edit.remove("token");
+                                edit.remove("user_id");
+                                edit.putString("token",response.body().getProperty("token"));
+                                edit.putString("user_id",response.body().getProperty("user_id"));
+                                edit.apply();
+                            }
                         }
-                    }
 
-                    @Override
-                    public void onFailure(Call<RestParameters> call, Throwable t) {
-                        dialog.dismiss();
+                        @Override
+                        public void onFailure(Call<RestParameters> call, Throwable t) {
+                            dialog.dismiss();
 
-                        MaterialDialog.Builder materialDialog1 = new MaterialDialog.Builder(context)
-                                .title("Erro")
-                                .content("Ocorreu um erro ao conectar com nossos serviores. Por favor, verifique sua conexão com a internet")
-                                .positiveText(R.string.action_ok);
+                            MaterialDialog.Builder materialDialog1 = new MaterialDialog.Builder(context)
+                                    .title("Erro")
+                                    .content("Ocorreu um erro ao conectar com nossos serviores. Por favor, verifique sua conexão com a internet")
+                                    .positiveText(R.string.action_ok);
 
-                        final MaterialDialog dialog = materialDialog1.build();
-                        dialog.getTitleView().setTextSize(preferences.getInt("title_size", 21));
-                        dialog.getContentView().setTextSize(preferences.getInt("font_size", 18));
-                        dialog.getActionButton(DialogAction.NEGATIVE).setTextSize(preferences.getInt("font_size", 18));
-                        dialog.getActionButton(DialogAction.POSITIVE).setTextSize(preferences.getInt("font_size", 18));
-                        dialog.show();
-                    }
-                });
+                            final MaterialDialog dialog = materialDialog1.build();
+                            dialog.getTitleView().setTextSize(preferences.getInt("title_size", 21));
+                            dialog.getContentView().setTextSize(preferences.getInt("font_size", 18));
+                            dialog.getActionButton(DialogAction.NEGATIVE).setTextSize(preferences.getInt("font_size", 18));
+                            dialog.getActionButton(DialogAction.POSITIVE).setTextSize(preferences.getInt("font_size", 18));
+                            dialog.show();
+                        }
+                    });
+        }
     }
 
     public void nextStep(){
