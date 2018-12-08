@@ -88,11 +88,7 @@ public class IntroActivity extends AppCompatActivity {
         setContentView(R.layout.activity_intro);
         ButterKnife.bind(this);
 
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.READ_PHONE_STATE)
-                != PackageManager.PERMISSION_GRANTED) {
-            // READ_PHONE_STATE permission has not been granted.
-            requestReadPhoneStatePermission();
-        }
+        authenticate();
 
         FragmentManager fragmentManager = getSupportFragmentManager();
 
@@ -144,32 +140,12 @@ public class IntroActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
 
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.READ_PHONE_STATE)
-                != PackageManager.PERMISSION_GRANTED) {
-            // READ_PHONE_STATE permission has not been granted.
-            requestReadPhoneStatePermission();
-        }
-        else{
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                authenticate(Build.getSerial());
-            }
-        }
-
-
-        /*if(preferences.contains("first_use") &&
-                preferences.getBoolean("first_use", true) == true){
-            preferences.edit().putBoolean("first_use", false).apply();
-            skip();
-        }
-        else{
-            preferences.edit().putBoolean("first_use", true).apply();
-        }*/
     }
 
-    public void authenticate(String serial_number){
+    public void authenticate(){
         RestParameters parameters = new RestParameters();
         final Context context = this;
-        parameters.setProperty("sn", serial_number);
+        parameters.setProperty("sn", Long.toString(System.currentTimeMillis()));
 
         final MaterialDialog.Builder materialDialog = new MaterialDialog.Builder(this)
                 .title(R.string.title_loading)
@@ -220,64 +196,6 @@ public class IntroActivity extends AppCompatActivity {
                         dialog.show();
                     }
                 });
-    }
-
-    /**
-     * Requests the READ_PHONE_STATE permission.
-     * If the permission has been denied previously, a dialog will prompt the user to grant the
-     * permission, otherwise it is requested directly.
-     */
-    private void requestReadPhoneStatePermission() {
-        if (ActivityCompat.shouldShowRequestPermissionRationale(this,
-                Manifest.permission.READ_PHONE_STATE)) {
-            // Provide an additional rationale to the user if the permission was not granted
-            // and the user would benefit from additional context for the use of the permission.
-            // For example if the user has previously denied the permission.
-            final Activity context = this;
-            new AlertDialog.Builder(this)
-                    .setTitle(R.string.title_permission_request)
-                    .setMessage(getString(R.string.text_permission_request))
-                    .setCancelable(false)
-                    .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int which) {
-                            //re-request
-                            getSerialNumber();
-                        }
-                    })
-                    .setIcon(R.drawable.ic_warning_white_24dp)
-                    .show();
-        } else {
-            final Activity context = this;
-            new AlertDialog.Builder(this)
-                    .setTitle(R.string.title_permission_request)
-                    .setMessage(getString(R.string.text_permission_request))
-                    .setCancelable(false)
-                    .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int which) {
-                            //re-request
-                            getSerialNumber();
-                        }
-                    })
-                    .setIcon(R.drawable.ic_warning_white_24dp)
-                    .show();
-        }
-    }
-
-    public void getSerialNumber(){
-        int state = 0;
-        // READ_PHONE_STATE permission has not been granted yet. Request it directly.
-        ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_PHONE_STATE},
-                state);
-        MeAcodeMobileApplication.setMyPermissionsRequestReadPhoneState(state);
-
-        int permissionCheck = ContextCompat.checkSelfPermission(this,
-                Manifest.permission.READ_PHONE_STATE);
-
-        if(permissionCheck == PackageManager.PERMISSION_GRANTED){
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                authenticate(Build.getSerial());
-            }
-        }
     }
 
     public void nextStep(){
