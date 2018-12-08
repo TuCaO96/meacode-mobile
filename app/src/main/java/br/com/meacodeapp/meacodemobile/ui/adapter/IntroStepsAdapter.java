@@ -7,6 +7,7 @@ import android.support.v4.app.FragmentStatePagerAdapter;
 import br.com.meacodeapp.meacodemobile.ui.fragment.intro.StepEightFragment;
 import br.com.meacodeapp.meacodemobile.ui.fragment.intro.StepElevenFragment;
 import br.com.meacodeapp.meacodemobile.ui.fragment.intro.StepFifteenFragment;
+import br.com.meacodeapp.meacodemobile.ui.fragment.intro.StepFiveBFragment;
 import br.com.meacodeapp.meacodemobile.ui.fragment.intro.StepFiveFragment;
 import br.com.meacodeapp.meacodemobile.ui.fragment.intro.StepFourFragment;
 import br.com.meacodeapp.meacodemobile.ui.fragment.intro.StepFourteenFragment;
@@ -49,25 +50,27 @@ public class IntroStepsAdapter extends FragmentStatePagerAdapter {
             case 7:
                 return StepSixCFragment.newInstance();
             case 8:
-                return StepSevenFragment.newInstance();
+                return StepFiveBFragment.newInstance();
             case 9:
-                return StepEightFragment.newInstance();
-            case 10:
-                return StepNineFragment.newInstance();
-            case 11:
-                return StepTenFragment.newInstance();
-            case 12:
-                return StepElevenFragment.newInstance();
-            case 13:
-                return StepTwelveFragment.newInstance();
-            case 14:
-                return StepThirteenFragment.newInstance();
-            case 15:
-                return StepFourteenFragment.newInstance();
-            case 16:
-                return StepFifteenFragment.newInstance();
-            case 17:
                 return StepRelatedCoursesFragment.newInstance();
+            case 10:
+                return StepSevenFragment.newInstance();
+            case 11:
+                return StepEightFragment.newInstance();
+            case 12:
+                return StepNineFragment.newInstance();
+            case 13:
+                return StepTenFragment.newInstance();
+            case 14:
+                return StepElevenFragment.newInstance();
+            case 15:
+                return StepTwelveFragment.newInstance();
+            case 16:
+                return StepThirteenFragment.newInstance();
+            case 17:
+                return StepFourteenFragment.newInstance();
+            case 18:
+                return StepFifteenFragment.newInstance();
             default:
                 return StepFifteenFragment.newInstance();
         }

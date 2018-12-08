@@ -56,7 +56,7 @@ public class StepSixCFragment extends Fragment {
         imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ((IntroActivity)getActivity()).goCourseDetails();
+                ((IntroActivity)getActivity()).nextStep();
             }
         });
 

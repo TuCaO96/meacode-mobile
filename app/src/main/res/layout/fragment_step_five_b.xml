@@ -8,7 +8,7 @@
     <ImageView
         android:id="@+id/step_five_b_image"
         android:scaleType="fitXY"
-        android:src="@drawable/step_courses_related"
+        android:src="@drawable/step4b"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 </FrameLayout>

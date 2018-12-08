@@ -14,19 +14,19 @@ import br.com.meacodeapp.meacodemobile.ui.activity.IntroActivity;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class StepFiveFragment extends Fragment {
+public class StepFiveBFragment extends Fragment {
 
-    @BindView(R.id.step_five_image)
+    @BindView(R.id.step_five_b_image)
     ImageView imageView;
 
     float[] touchCoordinates = new float[2];
 
-    public StepFiveFragment() {
+    public StepFiveBFragment() {
         // Required empty public constructor
     }
 
-    public static StepFiveFragment newInstance() {
-        return new StepFiveFragment();
+    public static StepFiveBFragment newInstance() {
+        return new StepFiveBFragment();
     }
 
     @Override
@@ -38,7 +38,7 @@ public class StepFiveFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_step_five, container, false);
+        View view = inflater.inflate(R.layout.fragment_step_five_b, container, false);
         ButterKnife.bind(this, view);
 
         imageView.setOnTouchListener(new View.OnTouchListener() {

@@ -108,7 +108,7 @@ public class IntroActivity extends AppCompatActivity {
                     button_skip.setVisibility(View.INVISIBLE);
                 }
                 else{
-                    if(position > 3 && position < 7){
+                    if(position > 3 && position < 8){
                         button_skip.setVisibility(View.INVISIBLE);
                         button_skip2.setVisibility(View.VISIBLE);
                     }
@@ -203,18 +203,6 @@ public class IntroActivity extends AppCompatActivity {
 
     public void nextStep(){
         viewPager.setCurrentItem(viewPager.getCurrentItem() + 1);
-    }
-
-    public void goRelatedCourses(){
-        viewPager.setCurrentItem(17);
-    }
-
-    public void goCourseDetails(){
-        viewPager.setCurrentItem(4);
-    }
-
-    public void goMenuOptions(){
-        viewPager.setCurrentItem(8);
     }
 
     public IntroStepsAdapter getPagerAdapter() {

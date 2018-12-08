@@ -16,7 +16,7 @@ import butterknife.ButterKnife;
 
 public class StepRelatedCoursesFragment extends Fragment {
 
-    @BindView(R.id.step_five_b_image)
+    @BindView(R.id.step_five_c_image)
     ImageView imageView;
 
     float[] touchCoordinates = new float[2];
@@ -38,7 +38,7 @@ public class StepRelatedCoursesFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_step_five_b, container, false);
+        View view = inflater.inflate(R.layout.fragment_step_five_c, container, false);
         ButterKnife.bind(this, view);
 
         imageView.setOnTouchListener(new View.OnTouchListener() {
@@ -56,7 +56,7 @@ public class StepRelatedCoursesFragment extends Fragment {
         imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ((IntroActivity)getActivity()).goMenuOptions();
+                ((IntroActivity)getActivity()).nextStep();
             }
         });
 
