@@ -43,6 +43,8 @@ public class ContentActivity extends AppCompatActivity {
 
     ContentRating contentRating = null;
 
+    boolean isLoading = false;
+
     CourseRating courseRating = null;
 
     SharedPreferences preferences = MeAcodeMobileApplication.getInstance().getSharedPreferences("session", Context.MODE_PRIVATE);
@@ -69,14 +71,20 @@ public class ContentActivity extends AppCompatActivity {
 
     @OnClick(R.id.previous_content)
     public void goBack(){
-        finish();
-        ContentAdapter.previousContent(this);
+        if (!isLoading) {
+            isLoading = true;
+            finish();
+            ContentAdapter.previousContent(this);
+        }
     }
 
     @OnClick(R.id.next_content)
     public void goForward(){
-        finish();
-        ContentAdapter.nextContent(this);
+        if(!isLoading){
+            isLoading = true;
+            finish();
+            ContentAdapter.nextContent(this);
+        }
     }
 
     @OnClick(R.id.dislike_content)
