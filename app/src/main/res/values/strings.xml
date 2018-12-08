@@ -94,7 +94,7 @@
 
     <string name="step1_title">Olá!</string>
     <string name="step1_text">Seja bem vindo ao Me Acode, seu centro de conteúdos para todas as horas.
-        Deslize a tela para a esquerda para continuar esta introdução.</string>
+        Deslize a tela para a esquerda ou toque nela para continuar esta introdução.</string>
 
     <string name="step_final_title">Agora você está pronto para começar!</string>
     <string name="step_final_text">Se desejar reiniciar o passo a passo, toque em "REINCIIAR".

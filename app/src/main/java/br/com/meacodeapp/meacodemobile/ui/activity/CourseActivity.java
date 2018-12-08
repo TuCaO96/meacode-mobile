@@ -21,6 +21,7 @@ import br.com.meacodeapp.meacodemobile.model.Course;
 import br.com.meacodeapp.meacodemobile.ui.adapter.ContentAdapter;
 import br.com.meacodeapp.meacodemobile.util.JsonConverter;
 import br.com.meacodeapp.meacodemobile.util.SimpleDividerItemDecoration;
+import butterknife.BindInt;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -43,6 +44,9 @@ public class CourseActivity extends AppCompatActivity {
 
     SharedPreferences preferences = MeAcodeMobileApplication.getInstance().getSharedPreferences("session", Context.MODE_PRIVATE);
 
+    @BindView(R.id.title_related_courses)
+    TextView related_courses;
+
     @BindView(R.id.single_course_contents)
     RecyclerView contents;
 
@@ -53,6 +57,8 @@ public class CourseActivity extends AppCompatActivity {
         Bundle bundle = getIntent().getExtras();
         course = JsonConverter.fromJson(bundle.getString("course"), Course.class);
         ButterKnife.bind(this);
+
+        related_courses.setTextSize(preferences.getInt("font_size",  18));
 
         getSupportActionBar().setDisplayShowCustomEnabled(true);
         getSupportActionBar().setDisplayShowTitleEnabled(false);

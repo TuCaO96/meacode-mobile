@@ -222,8 +222,8 @@ public class ContentActivity extends AppCompatActivity {
                         @Override
                         public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
                             final MaterialDialog.Builder materialDialog = new MaterialDialog.Builder(context)
-                                    .title("Carregando")
-                                    .content("Aguarde mais alguns instantes...")
+                                    .title(R.string.title_loading)
+                                    .content(R.string.message_loading)
                                     .progress(true,0,false);
 
                             final MaterialDialog dlg = materialDialog.build();
