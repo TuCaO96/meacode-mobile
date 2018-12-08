@@ -4,6 +4,7 @@ import java.util.List;
 
 import br.com.meacodeapp.meacodemobile.model.Content;
 import br.com.meacodeapp.meacodemobile.model.ContentRating;
+import br.com.meacodeapp.meacodemobile.model.Rating;
 import br.com.meacodeapp.meacodemobile.model.Suggestion;
 import br.com.meacodeapp.meacodemobile.util.RestParameters;
 import retrofit2.Call;
@@ -25,7 +26,7 @@ public interface ContentService {
     Call<Content> postRateContent(@Body RestParameters parameters);
 
     @GET("contents/{content}/rating/{user}")
-    Call<ContentRating> getContentUserRating(@Path("content") int id, @Path("user") int user_id);
+    Call<Rating> getContentUserRating(@Path("content") int id, @Path("user") int user_id);
 
     @GET("contents/{content}")
     Call<Content> getContent(@Path("content") int id);
