@@ -108,7 +108,7 @@ public class IntroActivity extends AppCompatActivity {
                     button_skip.setVisibility(View.INVISIBLE);
                 }
                 else{
-                    if(position > 3 && position < 8){
+                    if((position > 3 && position < 7) || (position == 8 || position == 9)){
                         button_skip.setVisibility(View.INVISIBLE);
                         button_skip2.setVisibility(View.VISIBLE);
                     }
