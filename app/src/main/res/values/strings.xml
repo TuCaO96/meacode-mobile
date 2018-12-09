@@ -54,6 +54,7 @@
     <string name="title_settings">Configurações</string>
     <string name="title_new_content">Sugerir Conteúdo</string>
     <string name="title_error">Isso é constrangedor&#8230;</string>
+    <string name="title_error_user">Ops&#8230;</string>
     <string name="title_success">Sucesso</string>
     <string name="send_suggestion_success">Sua sugestão foi enviada aos devidos responsáveis. Caso seja aprovada, o curso será disponibilizado em nossa plataforma! :)</string>
     <string name="title_finish_course">Parabéns!</string>

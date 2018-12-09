@@ -93,6 +93,12 @@ public class NewSuggestionFragment extends Fragment {
 
     @OnClick(R.id.suggestion_send)
     public void sendSuggestionClick(){
+
+        if(text.getText().length() < 1 || title.getText().length() < 1){
+            showError();
+            return;
+        }
+
         final MaterialDialog.Builder materialDialog = new MaterialDialog.Builder(getActivity())
                 .title(R.string.title_loading)
                 .content(R.string.message_loading)
@@ -111,11 +117,6 @@ public class NewSuggestionFragment extends Fragment {
         parameters.setProperty("email", email.getText().toString());
 
         final Context context = getContext();
-
-        if(text.getText().length() < 1 || title.getText().length() < 1){
-            showError();
-            return;
-        }
 
         MeAcodeMobileApplication.getInstance().getSuggestionService().postSuggestion(parameters)
                 .enqueue(new Callback<Suggestion>() {
@@ -162,7 +163,7 @@ public class NewSuggestionFragment extends Fragment {
         }
 
         MaterialDialog.Builder materialDialog = new MaterialDialog.Builder(context)
-                .title(R.string.title_error)
+                .title(R.string.title_error_user)
                 .content(error)
                 .positiveText(R.string.action_ok);
 
