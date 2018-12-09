@@ -23,6 +23,9 @@
     <string name="action_sign_in_short">Entrar</string>
     <string name="action_previous">Anterior</string>
     <string name="action_next">Próximo</string>
+    <string name="error_no_title">É necessários escrever o título de sua sugestão.</string>
+    <string name="error_no_message">É necessário escrever a mensagem de sua sugestão.</string>
+    <string name="error_send_suggestion">Ocorreu um erro ao enviar sua sugestão. Por favor, tente novamente mais tarde.</string>
     <string name="error_invalid_email">Esse email é invaálido</string>
     <string name="error_invalid_password">Senha muito curta</string>
     <string name="error_incorrect_password">Senha está incorreta</string>
@@ -51,6 +54,8 @@
     <string name="title_settings">Configurações</string>
     <string name="title_new_content">Sugerir Conteúdo</string>
     <string name="title_error">Isso é constrangedor&#8230;</string>
+    <string name="title_success">Sucesso</string>
+    <string name="send_suggestion_success">Sua sugestão foi enviada aos devidos responsáveis. Caso seja aprovada, o curso será disponibilizado em nossa plataforma! :)</string>
     <string name="title_finish_course">Parabéns!</string>
     <string name="message_finish_course">Você acabou de finalizar um curso feito pensando em você. Caso tenha alguma sugestão de como podemos
     melhorar os cursos, vá em "Nova Sugestão" e deixe-nos uma mensagem :)</string>

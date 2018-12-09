@@ -93,15 +93,9 @@ public class NewSuggestionFragment extends Fragment {
 
     @OnClick(R.id.suggestion_send)
     public void sendSuggestionClick(){
-        final SharedPreferences sharedPreferences = MeAcodeMobileApplication
-                .getInstance()
-                .getSharedPreferences("session", Context.MODE_PRIVATE);
-
-        User user = JsonConverter.fromJson(sharedPreferences.getString("user", null), User.class);
-
         final MaterialDialog.Builder materialDialog = new MaterialDialog.Builder(getActivity())
-                .title("Carregando")
-                .content("Aguarde mais alguns instantes...")
+                .title(R.string.title_loading)
+                .content(R.string.message_loading)
                 .progress(true,0,false);
 
         final MaterialDialog dialog = materialDialog.build();
@@ -115,9 +109,13 @@ public class NewSuggestionFragment extends Fragment {
         parameters.setProperty("title", title.getText().toString());
         parameters.setProperty("text", text.getText().toString());
         parameters.setProperty("email", email.getText().toString());
-//        parameters.setProperty("user_id", Integer.toString(user.getId()));
 
         final Context context = getContext();
+
+        if(text.getText().length() < 1 || title.getText().length() < 1){
+            showError();
+            return;
+        }
 
         MeAcodeMobileApplication.getInstance().getSuggestionService().postSuggestion(parameters)
                 .enqueue(new Callback<Suggestion>() {
@@ -126,11 +124,9 @@ public class NewSuggestionFragment extends Fragment {
                         dialog.dismiss();
                         if(response.code() == 201){
                             MaterialDialog.Builder materialDialog = new MaterialDialog.Builder(context)
-                                    .title("Sucesso")
-                                    .content("Sua sugestão foi enviada aos devidos responsáveis." +
-                                            " Caso seja aprovada, o curso será disponibilizado em " +
-                                            "nossa plataforma! :)")
-                                    .positiveText("OK");
+                                    .title(R.string.title_success)
+                                    .content(R.string.send_suggestion_success)
+                                    .positiveText(R.string.action_ok);
 
                             final MaterialDialog dialog = materialDialog.build();
                             dialog.getTitleView().setTextSize(24);
@@ -141,36 +137,44 @@ public class NewSuggestionFragment extends Fragment {
                             ((MainActivity)getActivity()).setFragment(SearchFragment.newInstance());
                         }
                         else{
-                            MaterialDialog.Builder materialDialog = new MaterialDialog.Builder(context)
-                                    .title("Erro")
-                                    .content("Ocorreu um erro ao enviar sua sugestão. Por favor, tente" +
-                                            " novamente mais tarde.")
-                                    .positiveText("OK");
-
-                            final MaterialDialog dialog = materialDialog.build();
-                            dialog.getTitleView().setTextSize(preferences.getInt("title_size", 18));
-                            dialog.getContentView().setTextSize(preferences.getInt("font_size", 18));
-                            dialog.getActionButton(DialogAction.NEGATIVE).setTextSize(preferences.getInt("font_size", 18));
-                            dialog.getActionButton(DialogAction.POSITIVE).setTextSize(preferences.getInt("font_size", 18));
-                            dialog.show();
+                           showError();
                         }
                     }
 
                     @Override
                     public void onFailure(Call<Suggestion> call, Throwable t) {
                         dialog.dismiss();
-                        MaterialDialog.Builder materialDialog = new MaterialDialog.Builder(context)
-                                .title("Erro")
-                                .content("Ocorreu um erro ao enviar sua sugestão. Por favor, tente" +
-                                        " novamente mais tarde.");
-
-                        final MaterialDialog dialog = materialDialog.build();
-                        dialog.getTitleView().setTextSize(preferences.getInt("title_size", 18));
-                        dialog.getContentView().setTextSize(preferences.getInt("font_size", 18));
-                        dialog.getActionButton(DialogAction.NEGATIVE).setTextSize(preferences.getInt("font_size", 18));
-                        dialog.getActionButton(DialogAction.POSITIVE).setTextSize(preferences.getInt("font_size", 18));
-                        dialog.show();
+                        showError();
                     }
                 });
+    }
+
+    public void showError(){
+        final Context context = getContext();
+        String error = getResources().getString(R.string.error_send_suggestion);
+
+        if(title.getText().length() < 1){
+            error = getResources().getString(R.string.error_no_title);
+        }
+
+        if(text.getText().length() < 1){
+            error = getResources().getString(R.string.error_no_message);
+        }
+
+        MaterialDialog.Builder materialDialog = new MaterialDialog.Builder(context)
+                .title(R.string.title_error)
+                .content(error)
+                .positiveText(R.string.action_ok);
+
+        final MaterialDialog dialog = materialDialog.build();
+        dialog.getTitleView().setTextSize(preferences.getInt("title_size", 18));
+        dialog.getContentView().setTextSize(preferences.getInt("font_size", 18));
+        dialog.getActionButton(DialogAction.NEGATIVE).setTextSize(preferences.getInt("font_size", 18));
+        dialog.getActionButton(DialogAction.POSITIVE).setTextSize(preferences.getInt("font_size", 18));
+        dialog.show();
+    }
+
+    public void errorNoTitle(){
+
     }
 }
