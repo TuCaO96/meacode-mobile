@@ -174,8 +174,4 @@ public class NewSuggestionFragment extends Fragment {
         dialog.getActionButton(DialogAction.POSITIVE).setTextSize(preferences.getInt("font_size", 18));
         dialog.show();
     }
-
-    public void errorNoTitle(){
-
-    }
 }
