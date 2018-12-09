@@ -331,6 +331,28 @@ public class ContentActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    public void getCourseRating(){
+        
+        if(preferences.getInt("current_course", 0) != 0){
+            MeAcodeMobileApplication.getInstance()
+                    .getCourseService()
+                    .getCourseUserRating(preferences.getInt("current_course", 0), Integer.parseInt(preferences.getString("user_id", "-1")))
+                    .enqueue(new Callback<CourseRating>() {
+                        @Override
+                        public void onResponse(Call<CourseRating> call, Response<CourseRating> response) {
+                            if(response.code() == 200){
+                                courseRating = response.body();
+                            }
+                        }
+
+                        @Override
+                        public void onFailure(Call<CourseRating> call, Throwable t) {
+                            // do nothing
+                        }
+                    });
+        }
+    }
+    
     public void getContentRating(){
         MeAcodeMobileApplication.getInstance()
                 .getContentService()
@@ -351,12 +373,16 @@ public class ContentActivity extends AppCompatActivity {
                                     dislikeContent.setBackgroundColor(getResources().getColor(R.color.colorSecondaryDark));
                                 }
                             }
+
+                            if(courseRating == null){
+                                getCourseRating();
+                            }
                         }
                     }
 
                     @Override
                     public void onFailure(Call<Rating> call, Throwable t) {
-
+                        getCourseRating();
                     }
                 });
     }
