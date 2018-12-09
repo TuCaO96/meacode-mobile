@@ -78,6 +78,6 @@ public class IntroStepsAdapter extends FragmentStatePagerAdapter {
 
     @Override
     public int getCount() {
-        return 18;
+        return 20;
     }
 }
