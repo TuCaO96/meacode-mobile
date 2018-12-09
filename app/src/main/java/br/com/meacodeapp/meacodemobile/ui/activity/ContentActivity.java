@@ -15,6 +15,8 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.widget.AutoCompleteTextView;
 import android.widget.ImageButton;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import com.afollestad.materialdialogs.DialogAction;
@@ -76,6 +78,62 @@ public class ContentActivity extends AppCompatActivity {
             finish();
             ContentAdapter.previousContent(this);
         }
+    }
+
+    @OnClick(R.id.adjust_font)
+    public void openAdjustFontSize(){
+        final MaterialDialog.Builder materialDialog = new MaterialDialog.Builder(this)
+                .title(R.string.title_size_option)
+                .customView(R.layout.dialog_single_choice_view, false)
+                .positiveColor(getResources().getColor(R.color.colorSecondaryDark))
+                .positiveText(R.string.action_apply)
+                .onPositive(new MaterialDialog.SingleButtonCallback() {
+                    @Override
+                    public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                        recreate();
+                    }
+                });
+
+        final MaterialDialog dialog = materialDialog.build();
+        dialog.getTitleView().setTextSize(preferences.getInt("title_size", 21));
+        dialog.getActionButton(DialogAction.NEGATIVE).setTextSize(preferences.getInt("font_size", 18));
+        dialog.getActionButton(DialogAction.POSITIVE).setTextSize(preferences.getInt("font_size", 18));
+        dialog.show();
+
+        RadioGroup dialog_selected = dialog.getCustomView().findViewById(R.id.option_size_group);
+        RadioButton big = dialog.getCustomView().findViewById(R.id.option_size_big);
+        RadioButton normal = dialog.getCustomView().findViewById(R.id.option_size_normal);
+        big.setTextSize(preferences.getInt("font_size", 18));
+        normal.setTextSize(preferences.getInt("font_size", 18));
+        int font_size  = preferences.getInt("title_size", 21);
+        dialog_selected.check(font_size == 21 ? R.id.option_size_normal : R.id.option_size_big);
+        dialog_selected.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                SharedPreferences.Editor edit = preferences.edit();
+
+                switch (checkedId){
+                    case R.id.option_size_normal:
+                        edit.remove("size_selected_index");
+                        edit.remove("title_size");
+                        edit.remove("font_size");
+                        edit.putInt("size_selected_index", 0);
+                        edit.putInt("title_size", 21);
+                        edit.putInt("font_size", 18);
+                        break;
+                    case R.id.option_size_big:
+                        edit.remove("size_selected_index");
+                        edit.remove("title_size");
+                        edit.remove("font_size");
+                        edit.putInt("size_selected_index", 1);
+                        edit.putInt("title_size", 24);
+                        edit.putInt("font_size", 21);
+                        break;
+                }
+
+                edit.apply();
+            }
+        });
     }
 
     @OnClick(R.id.next_content)
