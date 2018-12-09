@@ -24,6 +24,8 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.Task;
 
+import java.util.List;
+
 import br.com.meacodeapp.meacodemobile.R;
 import br.com.meacodeapp.meacodemobile.app.MeAcodeMobileApplication;
 import br.com.meacodeapp.meacodemobile.ui.fragment.NewSuggestionFragment;
@@ -180,6 +182,19 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
+    public void onBackPressed() {
+
+        List<Fragment> fragments = getSupportFragmentManager().getFragments();
+
+        if(fragments.size() <=  3){
+            finish();
+        }
+        else{
+            super.onBackPressed();
+        }
+    }
+
+    @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         callbackManager.onActivityResult(requestCode, resultCode,  data);
@@ -283,7 +298,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void setFragment(Fragment fragment){
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction()
-                .addToBackStack(Long.toString(System.currentTimeMillis()));
+                .add(fragment, Integer.toString(fragment.getId()));
         fragmentTransaction.replace(R.id.main_frame_layout, fragment);
         fragmentTransaction.commit();
     }
