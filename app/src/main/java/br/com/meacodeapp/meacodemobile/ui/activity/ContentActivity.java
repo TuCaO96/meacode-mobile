@@ -216,8 +216,8 @@ public class ContentActivity extends AppCompatActivity {
 
     @OnClick(R.id.go_home)
     public void goHome(){
-        if(courseRating == null && preferences.getInt("current_course", 0)!= 0 ||
-                preferences.getString("user_id", null) != null){
+        if(courseRating == null && (preferences.getInt("current_course", 0)!= 0 &&
+                preferences.getString("user_id", null) != null)){
             final Context context = this;
             courseParameters.setProperty("course_id", Integer.toString(preferences.getInt("current_course", 1)));
             courseParameters.setProperty("user_id", preferences.getString("user_id", null));
