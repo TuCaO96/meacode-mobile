@@ -15,6 +15,26 @@ import butterknife.OnClick;
 
 public class StepOneFragment extends Fragment {
 
+    @OnClick(R.id.step1_text)
+    public void textClick(){
+        ((IntroActivity)getActivity()).nextStep();
+    }
+
+    @OnClick(R.id.step1_title)
+    public void titleClick(){
+        ((IntroActivity)getActivity()).nextStep();
+    }
+
+    @OnClick(R.id.step1_rlt_layout)
+    public void rltLayoutClick(){
+        ((IntroActivity)getActivity()).nextStep();
+    }
+
+    @OnClick(R.id.step1_frm_layout)
+    public void frmLayoutClick(){
+        ((IntroActivity)getActivity()).nextStep();
+    }
+
     public StepOneFragment() {
         // Required empty public constructor
     }
