@@ -99,6 +99,12 @@ public class NewSuggestionFragment extends Fragment {
             return;
         }
 
+        if(email.getText().length() > 1 && (email.getText().toString().indexOf('@') == -1
+                || email.getText().toString().indexOf('.') == -1)){
+            showError();
+            return;
+        }
+
         final MaterialDialog.Builder materialDialog = new MaterialDialog.Builder(getActivity())
                 .title(R.string.title_loading)
                 .content(R.string.message_loading)
@@ -160,6 +166,11 @@ public class NewSuggestionFragment extends Fragment {
 
         if(text.getText().length() < 1){
             error = getResources().getString(R.string.error_no_message);
+        }
+
+        if(email.getText().length() > 1 && (email.getText().toString().indexOf('@') == -1
+                || email.getText().toString().indexOf('.') == -1)){
+            error = getResources().getString(R.string.error_invalid_email_user);
         }
 
         MaterialDialog.Builder materialDialog = new MaterialDialog.Builder(context)

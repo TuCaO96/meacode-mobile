@@ -25,6 +25,7 @@
     <string name="action_next">Próximo</string>
     <string name="error_no_title">É necessários escrever o título de sua sugestão.</string>
     <string name="error_no_message">É necessário escrever a mensagem de sua sugestão.</string>
+    <string name="error_invalid_email_user">Endereço de email inválido</string>
     <string name="error_send_suggestion">Ocorreu um erro ao enviar sua sugestão. Por favor, tente novamente mais tarde.</string>
     <string name="error_invalid_email">Esse email é invaálido</string>
     <string name="error_invalid_password">Senha muito curta</string>
