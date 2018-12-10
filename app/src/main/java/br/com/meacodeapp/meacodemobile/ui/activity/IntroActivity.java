@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.os.Build;
+import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentManager;
@@ -145,9 +146,10 @@ public class IntroActivity extends AppCompatActivity {
     public void authenticate(){
 
         if(preferences.getString("user_id", null) == null){
+            String androidId = Settings.Secure.getString(getContentResolver(), Settings.Secure.ANDROID_ID);
             RestParameters parameters = new RestParameters();
             final Context context = this;
-            parameters.setProperty("sn", Long.toString(System.currentTimeMillis()));
+            parameters.setProperty("sn", androidId);
 
             final MaterialDialog.Builder materialDialog = new MaterialDialog.Builder(this)
                     .title(R.string.title_loading)
