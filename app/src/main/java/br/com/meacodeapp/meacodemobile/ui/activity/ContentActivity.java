@@ -436,6 +436,9 @@ public class ContentActivity extends AppCompatActivity {
                                 getCourseRating();
                             }
                         }
+                        else{
+                            getCourseRating();
+                        }
                     }
 
                     @Override
