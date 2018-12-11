@@ -49,6 +49,9 @@ public class IntroActivity extends AppCompatActivity {
     @BindView(R.id.button_jump2)
     Button button_skip2;
 
+    @BindView(R.id.button_jump3)
+    Button button_skip3;
+
     @BindView(R.id.button_finish)
     ImageButton button_finish;
 
@@ -73,6 +76,13 @@ public class IntroActivity extends AppCompatActivity {
 
     @OnClick(R.id.button_jump2)
     public void skip2(){
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
+        finish();
+    }
+
+    @OnClick(R.id.button_jump3)
+    public void skip3(){
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
         finish();
@@ -109,13 +119,21 @@ public class IntroActivity extends AppCompatActivity {
                     button_skip.setVisibility(View.INVISIBLE);
                 }
                 else{
-                    if((position > 3 && position < 7) || (position == 8 || position == 9)){
+                    if((position > 4 && position < 7) || position == 9){
                         button_skip.setVisibility(View.INVISIBLE);
+                        button_skip3.setVisibility(View.INVISIBLE);
                         button_skip2.setVisibility(View.VISIBLE);
+                    }
+                    else if(position == 4 || position == 8){
+
+                        button_skip.setVisibility(View.INVISIBLE);
+                        button_skip2.setVisibility(View.INVISIBLE);
+                        button_skip3.setVisibility(View.VISIBLE);
                     }
                     else{
                         button_skip.setVisibility(View.VISIBLE);
                         button_skip2.setVisibility(View.INVISIBLE);
+                        button_skip3.setVisibility(View.INVISIBLE);
                     }
 
                     button_finish.setVisibility(View.INVISIBLE);
