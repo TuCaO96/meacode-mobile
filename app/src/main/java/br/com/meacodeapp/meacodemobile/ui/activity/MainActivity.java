@@ -164,7 +164,7 @@ public class MainActivity extends AppCompatActivity {
         introMenu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                preferences.edit().remove("first_use").apply();
+                preferences.edit().putBoolean("from_home", true).apply();
                 Intent intent = new Intent(context, IntroActivity.class);
                 startActivity(intent);
             }

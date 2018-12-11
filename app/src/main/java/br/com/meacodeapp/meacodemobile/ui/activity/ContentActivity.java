@@ -47,6 +47,15 @@ public class ContentActivity extends AppCompatActivity {
 
     boolean isLoading = false;
 
+    final MaterialDialog.Builder screenDialog = new MaterialDialog.Builder(this)
+            .title(R.string.title_loading)
+            .content(R.string.message_loading)
+            .progress(true,0,false);
+
+    final Context context = this;
+
+    final MaterialDialog screenBuiltDialog = screenDialog.build();
+
     CourseRating courseRating = null;
 
     SharedPreferences preferences = MeAcodeMobileApplication.getInstance().getSharedPreferences("session", Context.MODE_PRIVATE);
@@ -159,8 +168,8 @@ public class ContentActivity extends AppCompatActivity {
             restParameters.setProperty("liked", "0");
 
             final MaterialDialog.Builder materialDialog = new MaterialDialog.Builder(this)
-                    .title("Carregando")
-                    .content("Aguarde mais alguns instantes...")
+                    .title(R.string.title_loading)
+                    .content(R.string.message_loading)
                     .progress(true,0,false);
 
             final Context context = this;
@@ -405,11 +414,12 @@ public class ContentActivity extends AppCompatActivity {
                             if(response.code() == 200){
                                 courseRating = response.body();
                             }
+                            screenBuiltDialog.dismiss();
                         }
 
                         @Override
                         public void onFailure(Call<CourseRating> call, Throwable t) {
-                            // do nothing
+                            screenBuiltDialog.dismiss();
                         }
                     });
         }
@@ -438,6 +448,9 @@ public class ContentActivity extends AppCompatActivity {
                                 if(courseRating == null){
                                     getCourseRating();
                                 }
+                                else{
+                                    screenBuiltDialog.dismiss();
+                                }
                             }
                             else{
                                 getCourseRating();
@@ -461,6 +474,12 @@ public class ContentActivity extends AppCompatActivity {
         setContentView(R.layout.activity_content);
         ButterKnife.bind(this);
 
+        screenBuiltDialog.getTitleView().setTextSize(preferences.getInt("title_size", 21));
+        screenBuiltDialog.getContentView().setTextSize(preferences.getInt("font_size", 18));
+        screenBuiltDialog.getActionButton(DialogAction.NEGATIVE).setTextSize(preferences.getInt("font_size", 18));
+        screenBuiltDialog.getActionButton(DialogAction.POSITIVE).setTextSize(preferences.getInt("font_size", 18));
+        screenBuiltDialog.show();
+
         Bundle bundle = getIntent().getExtras();
         content = JsonConverter.fromJson(bundle.getString("content"), Content.class);
 
@@ -481,8 +500,8 @@ public class ContentActivity extends AppCompatActivity {
         }
 
         final MaterialDialog.Builder materialDialog = new MaterialDialog.Builder(this)
-                .title("Carregando")
-                .content("Aguarde mais alguns instantes...")
+                .title(R.string.title_loading)
+                .content(R.string.message_loading)
                 .progress(true,0,false);
 
         final MaterialDialog dialog = materialDialog.build();
