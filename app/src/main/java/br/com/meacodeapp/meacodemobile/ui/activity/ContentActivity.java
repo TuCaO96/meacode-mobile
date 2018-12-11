@@ -51,6 +51,9 @@ public class ContentActivity extends AppCompatActivity {
 
     SharedPreferences preferences = MeAcodeMobileApplication.getInstance().getSharedPreferences("session", Context.MODE_PRIVATE);
 
+    @BindView(R.id.useful_content)
+    TextView usefulContentTextView;
+
     @BindView(R.id.content_webview)
     WebView content_webview;
 
@@ -430,9 +433,12 @@ public class ContentActivity extends AppCompatActivity {
                                     likeContent.setBackgroundColor(getResources().getColor(R.color.colorSecondaryLight));
                                     dislikeContent.setBackgroundColor(getResources().getColor(R.color.colorSecondaryDark));
                                 }
-                            }
 
-                            if(courseRating == null){
+                                if(courseRating == null){
+                                    getCourseRating();
+                                }
+                            }
+                            else{
                                 getCourseRating();
                             }
                         }
@@ -462,6 +468,7 @@ public class ContentActivity extends AppCompatActivity {
         previous_button.setTextSize(preferences.getInt("font_size", 18));
         next_button.setTextSize(preferences.getInt("font_size", 18));
         home_button.setTextSize(preferences.getInt("font_size", 18));
+        usefulContentTextView.setTextSize(preferences.getInt("font_size", 18));
 
         if(preferences.getInt("current_content", 0) == 0){
             previous_button.setVisibility(View.INVISIBLE);
