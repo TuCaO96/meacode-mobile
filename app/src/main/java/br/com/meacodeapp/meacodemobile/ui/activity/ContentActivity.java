@@ -47,14 +47,11 @@ public class ContentActivity extends AppCompatActivity {
 
     boolean isLoading = false;
 
-    final MaterialDialog.Builder screenDialog = new MaterialDialog.Builder(this)
-            .title(R.string.title_loading)
-            .content(R.string.message_loading)
-            .progress(true,0,false);
+    MaterialDialog.Builder screenDialog = null;
 
-    final Context context = this;
+    Context context = this;
 
-    final MaterialDialog screenBuiltDialog = screenDialog.build();
+    MaterialDialog screenBuiltDialog = null;
 
     CourseRating courseRating = null;
 
@@ -474,6 +471,12 @@ public class ContentActivity extends AppCompatActivity {
         setContentView(R.layout.activity_content);
         ButterKnife.bind(this);
 
+        screenDialog = new MaterialDialog.Builder(this)
+                .title(R.string.title_loading)
+                .content(R.string.message_loading)
+                .progress(true,0,false);
+
+        screenBuiltDialog = screenDialog.build();
         screenBuiltDialog.getTitleView().setTextSize(preferences.getInt("title_size", 21));
         screenBuiltDialog.getContentView().setTextSize(preferences.getInt("font_size", 18));
         screenBuiltDialog.getActionButton(DialogAction.NEGATIVE).setTextSize(preferences.getInt("font_size", 18));
