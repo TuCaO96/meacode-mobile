@@ -480,8 +480,8 @@ public class ContentActivity extends AppCompatActivity {
         }
 
         final MaterialDialog.Builder materialDialog = new MaterialDialog.Builder(this)
-                .title("Carregando")
-                .content("Aguarde mais alguns instantes...")
+                .title(R.string.title_loading)
+                .content(R.string.message_loading)
                 .progress(true,0,false);
 
         final MaterialDialog dialog = materialDialog.build();
