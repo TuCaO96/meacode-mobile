@@ -202,9 +202,14 @@ public class IntroActivity extends AppCompatActivity {
                     });
         }
         else{
-            Intent intent = new Intent(this, MainActivity.class);
-            finish();
-            startActivity(intent);
+            if (!preferences.contains("from_home") || preferences.getBoolean("from_home", false) == false){
+                Intent intent = new Intent(this, MainActivity.class);
+                finish();
+                startActivity(intent);
+            }
+            else{
+                preferences.edit().putBoolean("from_home", false).apply();
+            }
 
         }
     }
