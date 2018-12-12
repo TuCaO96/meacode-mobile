@@ -535,6 +535,7 @@ public class ContentActivity extends AppCompatActivity {
         webSettings.setLoadsImagesAutomatically(true);
         webSettings.setNeedInitialFocus(false);
         webSettings.setBuiltInZoomControls(true);
+        webSettings.setUseWideViewPort(true);
         content_webview.setBackgroundColor(Color.TRANSPARENT);
         webSettings.setJavaScriptEnabled(true);
         webSettings.setDomStorageEnabled(true);
