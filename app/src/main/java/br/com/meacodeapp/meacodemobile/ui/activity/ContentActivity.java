@@ -534,13 +534,15 @@ public class ContentActivity extends AppCompatActivity {
         webSettings.setRenderPriority(WebSettings.RenderPriority.HIGH);
         webSettings.setLoadsImagesAutomatically(true);
         webSettings.setNeedInitialFocus(false);
-        webSettings.setBuiltInZoomControls(true);
         webSettings.setUseWideViewPort(true);
         content_webview.setBackgroundColor(Color.TRANSPARENT);
         webSettings.setJavaScriptEnabled(true);
         webSettings.setDomStorageEnabled(true);
         webSettings.setSaveFormData(false);
-        content_webview.loadDataWithBaseURL(MeAcodeMobileApplication.getURL(), content.getText(), "text/html", "utf8", null);
+        String head = "<head><meta name=\"viewport\" content=\"width=device-width, user-scalable=yes\" /></head><body>";
+        String closedTag = "</body></html>";
+        String changeFontHtml = head + content.getText() + closedTag;
+        content_webview.loadDataWithBaseURL(MeAcodeMobileApplication.getURL(), changeFontHtml, "text/html", "utf8", null);
         dialog.dismiss();
     }
 
